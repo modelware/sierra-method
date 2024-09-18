@@ -1,0 +1,8 @@
+PREFIX owl:        <http://www.w3.org/2002/07/owl#>
+PREFIX oml:        <http://opencaesar.io/oml#>
+
+SELECT DISTINCT	 *
+WHERE {
+	?concept a owl:Class ;
+		oml:type oml:Concept .
+}

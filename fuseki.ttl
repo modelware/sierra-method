@@ -1,0 +1,83 @@
+PREFIX :        <#>
+PREFIX fuseki:  <http://jena.apache.org/fuseki#>
+PREFIX ja:      <http://jena.hpl.hp.com/2005/11/Assembler#>
+PREFIX tdb:     <http://jena.hpl.hp.com/2008/tdb#>
+
+#############################################################################
+# Main Dataset
+
+:main a		               		  		fuseki:Service ;
+    fuseki:name                   		"sierra" ;
+    fuseki:dataset                		:main.inferences ;
+    fuseki:serviceQuery           		"" , "query", "sparql" ;
+    fuseki:serviceUpdate          		"" , "update" ;
+    fuseki:serviceReadWriteGraphStore 	"data" ;
+    fuseki:serviceReadGraphStore  		"get" ;
+	.
+
+# Service 2: Assertions endpoint
+:main.tdb a               		  		fuseki:Service ;
+    fuseki:name                   		"sierra.tdb" ;
+    fuseki:dataset                		:main.assertions ;
+    fuseki:serviceQuery           		"" , "query", "sparql" ;
+    fuseki:serviceUpdate          		"" , "update" ;
+    fuseki:serviceReadWriteGraphStore 	"data" ;
+	.
+		   
+:main.inferences a ja:RDFDataset ;
+	ja:defaultGraph [ a ja:InfModel ;
+		ja:baseModel [ a tdb:GraphTDB ;
+			tdb:graphName <urn:x-arq:DefaultGraph> ;
+			tdb:dataset :main.assertions ;
+		] ;
+		ja:reasoner [
+			ja:reasonerURL <http://jena.hpl.hp.com/2003/GenericRuleReasoner> ;
+			ja:rulesFrom <build/owl/modelware.io/sierra/bundle.rules> ;
+		]
+	]
+	.
+
+:main.assertions a tdb:DatasetTDB ;
+	tdb:location  "main" ; # relative to the .fuseki folder
+	tdb:context [ ja:cxtName "arq:queryTimeout" ; ja:cxtValue "1000" ] ;
+	.
+
+#############################################################################
+# Test Dataset
+
+:test a		               		  		fuseki:Service ;
+    fuseki:name                   		"trailpower" ;
+    fuseki:dataset                		:test.inferences ;
+    fuseki:serviceQuery           		"" , "query", "sparql" ;
+    fuseki:serviceUpdate          		"" , "update" ;
+    fuseki:serviceReadWriteGraphStore 	"data" ;
+    fuseki:serviceReadGraphStore  		"get" ;
+	.
+
+# Service 2: Assertions endpoint
+:test.tdb a               		  		fuseki:Service ;
+    fuseki:name                   		"trailpower.tdb" ;
+    fuseki:dataset                		:test.assertions ;
+    fuseki:serviceQuery           		"" , "query", "sparql" ;
+    fuseki:serviceUpdate          		"" , "update" ;
+    fuseki:serviceReadWriteGraphStore 	"data" ;
+	.
+		   
+:test.inferences a ja:RDFDataset ;
+	ja:defaultGraph [ a ja:InfModel ;
+		ja:baseModel [ a tdb:GraphTDB ;
+			tdb:graphName <urn:x-arq:DefaultGraph> ;
+			tdb:dataset :test.assertions ;
+		] ;
+		ja:reasoner [
+			ja:reasonerURL <http://jena.hpl.hp.com/2003/GenericRuleReasoner> ;
+			ja:rulesFrom <build/owl/modelware.io/sierra/bundle.rules> ;
+		]
+	]
+	.
+
+:test.assertions a tdb:DatasetTDB ;
+	tdb:location  "test" ; # relative to the .fuseki folder
+	tdb:context [ ja:cxtName "arq:queryTimeout" ; ja:cxtValue "1000" ] ;
+	.
+	

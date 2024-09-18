@@ -1,0 +1,468 @@
+description <http://modelware.io/trailpower/logical/functions#> as functions {
+	
+	uses <http://modelware.io/sierra/function#> as function
+
+	uses <http://modelware.io/sierra/base#> as base
+
+	extends <http://modelware.io/trailpower/logical/capabilities#> as capabilities
+
+	extends <http://modelware.io/trailpower/logical/structure#> as ^structure
+
+	instance Locate_Charger : function:Function [
+		function:isPerformedBy capabilities:User
+		function:hasInput Locate_Charger.in
+		function:hasInput Locate_Charger.in2
+	]
+	instance Locate_Charger.in : function:Input
+	instance Locate_Charger.in2 : function:Input
+
+	instance Comprend_State : function:Function [
+		function:isPerformedBy capabilities:User
+		function:hasInput Comprend_State.in
+		function:hasOutput Comprend_State.out
+		function:hasOutput Comprend_State.out2
+	]
+	instance Comprend_State.in : function:Input
+	instance Comprend_State.out : function:Output
+	instance Comprend_State.out2 : function:Output
+
+	instance Connect_Device : function:Function [
+		function:isPerformedBy capabilities:User
+		function:hasInput Connect_Device.in
+		function:hasOutput Connect_Device.out
+		function:hasOutput Connect_Device.out2
+	]
+	instance Connect_Device.in : function:Input
+	instance Connect_Device.out : function:Output
+	instance Connect_Device.out2 : function:Output
+
+	instance Disconnect_Device : function:Function [
+		function:isPerformedBy capabilities:User
+		function:hasOutput Disconnect_Device.out
+		function:hasOutput Disconnect_Device.out2
+	]
+	instance Disconnect_Device.out : function:Output
+	instance Disconnect_Device.out2 : function:Output
+
+	instance Receive_Connection : function:Function [
+		function:isPerformedBy capabilities:USB_Device
+		function:hasInput Receive_Connection.in
+	]
+	instance Receive_Connection.in : function:Input
+
+	instance Accept_Charger : function:Function [
+		function:isPerformedBy capabilities:USB_Device
+		function:hasInput Accept_Charger.in
+	]
+	instance Accept_Charger.in : function:Input
+
+	instance Disconnect : function:Function [
+		function:isPerformedBy capabilities:USB_Device
+		function:hasInput Disconnect.in
+	]
+	instance Disconnect.in : function:Input
+
+	instance Evaluate_Performance : function:Function [
+		function:isPerformedBy capabilities:Developer
+		function:hasInput Evaluate_Performance.in
+	]
+	instance Evaluate_Performance.in : function:Input
+
+	instance Produce_Light : function:Function [
+		function:isPerformedBy capabilities:Sun
+		function:hasOutput Produce_Light.out
+	]
+	instance Produce_Light.out : function:Output
+
+	instance Provide_Performance_Information : function:Function [
+		function:isPerformedBy ^structure:Telemetry_System
+		function:hasInput Provide_Performance_Information.in
+		function:hasOutput Provide_Performance_Information.out
+	]
+	instance Provide_Performance_Information.in : function:Input
+	instance Provide_Performance_Information.out : function:Output
+
+	instance Convert_Light_to_Power : function:Function [
+		function:isPerformedBy ^structure:Solar_Panel
+		function:hasInput Convert_Light_to_Power.in
+		function:hasOutput Convert_Light_to_Power.out
+		function:hasOutput Convert_Light_to_Power.out2
+	]
+	instance Convert_Light_to_Power.in : function:Input
+	instance Convert_Light_to_Power.out : function:Output
+	instance Convert_Light_to_Power.out2 : function:Output
+
+	instance Store_Energy : function:Function [
+		function:isPerformedBy ^structure:Battery
+		function:hasInput Store_Energy.in
+		function:hasOutput Store_Energy.out
+		function:hasOutput Store_Energy.out2
+	]
+	instance Store_Energy.in : function:Input
+	instance Store_Energy.out : function:Output
+	instance Store_Energy.out2 : function:Output
+
+	instance Power_Lights : function:Function [
+		function:isPerformedBy ^structure:Light_System
+		function:hasInput Power_Lights.in
+		function:hasOutput Power_Lights.out
+	]
+	instance Power_Lights.in : function:Input
+	instance Power_Lights.out : function:Output
+
+	instance Boost_Voltage_to_USB : function:Function [
+		function:isPerformedBy ^structure:Boost
+		function:hasInput Boost_Voltage_to_USB.in
+		function:hasOutput Boost_Voltage_to_USB.out
+		function:hasOutput Boost_Voltage_to_USB.out2
+		function:hasOutput Boost_Voltage_to_USB.out3
+	]
+	instance Boost_Voltage_to_USB.in : function:Input
+	instance Boost_Voltage_to_USB.out : function:Output
+	instance Boost_Voltage_to_USB.out2 : function:Output
+	instance Boost_Voltage_to_USB.out3 : function:Output
+
+	instance Receive_Connection2 : function:Function [
+		function:isPerformedBy ^structure:Boost
+		function:hasInput Receive_Connection2.in
+	]
+	instance Receive_Connection2.in : function:Input
+
+	instance Disconnect2 : function:Function [
+		function:isPerformedBy ^structure:Boost
+		function:hasInput Disconnect2.in
+	]
+	instance Disconnect2.in : function:Input
+
+	instance Charge_Storage_Device : function:Function [
+		function:isPerformedBy ^structure:Charger
+		function:hasInput Charge_Storage_Device.in
+		function:hasOutput Charge_Storage_Device.out
+		function:hasOutput Charge_Storage_Device.out2
+		function:hasOutput Charge_Storage_Device.out3
+	]
+	instance Charge_Storage_Device.in : function:Input
+	instance Charge_Storage_Device.out : function:Output
+	instance Charge_Storage_Device.out2 : function:Output
+	instance Charge_Storage_Device.out3 : function:Output
+
+	instance Supply_Power_When_No_Light : function:Function [
+		function:isPerformedBy ^structure:Charger
+		function:hasInput Supply_Power_When_No_Light.in
+		function:hasInput Supply_Power_When_No_Light.in2
+		function:hasOutput Supply_Power_When_No_Light.out
+	]
+	instance Supply_Power_When_No_Light.in : function:Input
+	instance Supply_Power_When_No_Light.in2 : function:Input
+	instance Supply_Power_When_No_Light.out : function:Output
+
+	instance Provide_State : function:Function [
+		function:isPerformedBy ^structure:Charger
+		function:hasInput Provide_State.in
+		function:hasOutput Provide_State.out
+	]
+	instance Provide_State.in : function:Input
+	instance Provide_State.out : function:Output
+
+	instance Voltage_Gather : function:Function [
+		function:isPerformedBy ^structure:Charger
+		function:hasInput Voltage_Gather.in
+		function:hasInput Voltage_Gather.in2
+		function:hasInput Voltage_Gather.in3
+		function:hasOutput Voltage_Gather.out
+	]
+	instance Voltage_Gather.in : function:Input
+	instance Voltage_Gather.in2 : function:Input
+	instance Voltage_Gather.in3 : function:Input
+	instance Voltage_Gather.out : function:Output
+
+	instance Illuminate : function:Item
+
+	relation instance Exchange1 : function:Exchange[
+		from Boost_Voltage_to_USB.out
+		to Supply_Power_When_No_Light.in
+		function:conveys Illuminate
+	]
+	
+	relation instance Exchange1a : function:Exchange[
+		from Supply_Power_When_No_Light.in
+		to Supply_Power_When_No_Light.out
+	]
+
+	instance Light_Power : function:Item
+
+	relation instance Exchange2 : function:Exchange[
+		from Charge_Storage_Device.out
+		to Supply_Power_When_No_Light.in2
+		function:conveys Light_Power
+	]
+	
+	relation instance Exchange2a : function:Exchange[
+		from Supply_Power_When_No_Light.in2
+		to Supply_Power_When_No_Light.out
+	]
+
+	instance Power : function:Item
+
+	relation instance Exchange3 : function:Exchange[
+		from Supply_Power_When_No_Light.out
+		to Power_Lights.in
+		function:conveys Power
+	]
+
+	instance Charger_Light : function:Item
+
+	relation instance Exchange4 : function:Exchange[
+		from Power_Lights.out
+		to Locate_Charger.in
+		function:conveys Charger_Light
+	]
+
+	instance Provide_24h_Visibility : function:Chain [
+		function:implements capabilities:Provide_24h_Visibility
+		base:contains Exchange1
+		base:contains Exchange1a
+		base:contains Exchange2
+		base:contains Exchange2a
+		base:contains Exchange3
+		base:contains Exchange4
+	]
+
+	instance State : function:Item
+
+	relation instance Exchange5 : function:Exchange[
+		from Boost_Voltage_to_USB.out2
+		to Provide_State.in
+		function:conveys State
+	]
+
+	relation instance Exchange5a : function:Exchange[
+		from Provide_State.in
+		to Provide_State.out
+	]
+
+	instance Charger_State : function:Item
+
+	relation instance Exchange6 : function:Exchange[
+		from Provide_State.out
+		to Comprend_State.in
+		function:conveys Charger_State
+	]
+
+	relation instance Exchange6a : function:Exchange[
+		from Comprend_State.in
+		to Comprend_State.out
+	]
+
+	relation instance Exchange7 : function:Exchange[
+		from Comprend_State.out
+		to Connect_Device.in
+		function:conveys State
+	]
+
+	relation instance Exchange7a : function:Exchange[
+		from Connect_Device.in
+		to Connect_Device.out
+	]
+
+	relation instance Exchange7b : function:Exchange[
+		from Connect_Device.in
+		to Connect_Device.out2
+	]
+
+	instance Device_Connection : function:Item
+
+	relation instance Exchange8 : function:Exchange[
+		from Connect_Device.out
+		to Receive_Connection.in
+		function:conveys Device_Connection
+	]
+
+	instance Charger_Connection : function:Item
+
+	relation instance Exchange9 : function:Exchange[
+		from Connect_Device.out2
+		to Receive_Connection2.in
+		function:conveys Charger_Connection
+	]
+
+	instance Connect_USB_Device : function:Chain [
+		function:implements capabilities:Connect_to_USB_Device_Cable
+		base:contains Exchange5
+		base:contains Exchange5a
+		base:contains Exchange6
+		base:contains Exchange6a
+		base:contains Exchange7
+		base:contains Exchange7a
+		base:contains Exchange7b
+		base:contains Exchange8
+		base:contains Exchange9
+	]
+
+	instance Light : function:Item
+
+	relation instance Exchange10 : function:Exchange[
+		from Produce_Light.out
+		to Convert_Light_to_Power.in
+		function:conveys Light
+	]
+
+	relation instance Exchange10a : function:Exchange[
+		from Convert_Light_to_Power.in
+		to Convert_Light_to_Power.out
+	]
+
+	relation instance Exchange11 : function:Exchange[
+		from Convert_Light_to_Power.out
+		to Charge_Storage_Device.in
+		function:conveys Power
+	]
+
+	relation instance Exchange11a : function:Exchange[
+		from Charge_Storage_Device.in
+		to Charge_Storage_Device.out2
+	]
+
+	instance Charger_Power : function:Item
+
+	relation instance Exchange12 : function:Exchange[
+		from Charge_Storage_Device.out2
+		to Store_Energy.in
+		function:conveys Charger_Power
+	]
+
+	relation instance Exchange12a : function:Exchange[
+		from Store_Energy.in
+		to Store_Energy.out
+	]
+
+	instance Stored_Energy : function:Item
+
+	relation instance Exchange13 : function:Exchange[
+		from Store_Energy.out
+		to Boost_Voltage_to_USB.in
+		function:conveys Stored_Energy
+	]
+
+	relation instance Exchange13a : function:Exchange[
+		from Boost_Voltage_to_USB.in
+		to Boost_Voltage_to_USB.out3
+	]
+
+	instance Energy : function:Item
+
+	relation instance Exchange14 : function:Exchange[
+		from Boost_Voltage_to_USB.out3
+		to Accept_Charger.in
+		function:conveys Energy
+	]
+
+	instance Charge_USB_Device : function:Chain [
+		function:implements capabilities:Disconnect_USB_Device_Cable
+		base:contains Exchange10
+		base:contains Exchange10a
+		base:contains Exchange11
+		base:contains Exchange11a
+		base:contains Exchange12
+		base:contains Exchange12a
+		base:contains Exchange13
+		base:contains Exchange13a
+		base:contains Exchange14
+	]
+
+	instance Device_Disconnect : function:Item
+
+	relation instance Exchange15 : function:Exchange[
+		from Disconnect_Device.out
+		to Disconnect.in
+		function:conveys Device_Disconnect
+	]
+
+	instance Charger_Disconnect : function:Item
+
+	relation instance Exchange16 : function:Exchange[
+		from Disconnect_Device.out2
+		to Disconnect2.in
+		function:conveys Charger_Disconnect
+	]
+
+	instance Disconnect_USB_Device : function:Chain [
+		function:implements capabilities:Charge_USB_Device
+		base:contains Exchange15
+		base:contains Exchange16
+	]
+
+	instance Panel_Voltage : function:Item
+
+	relation instance Exchange17 : function:Exchange[
+		from Convert_Light_to_Power.out2
+		to Voltage_Gather.in
+		function:conveys Panel_Voltage
+	]
+
+	relation instance Exchange17a : function:Exchange[
+		from Voltage_Gather.in
+		to Voltage_Gather.out
+	]
+
+	instance Charge_Voltage : function:Item
+
+	relation instance Exchange18 : function:Exchange[
+		from Charge_Storage_Device.out3
+		to Voltage_Gather.in2
+		function:conveys Charge_Voltage
+	]
+
+	relation instance Exchange18a : function:Exchange[
+		from Voltage_Gather.in2
+		to Voltage_Gather.out
+	]
+
+	instance Store_Voltage : function:Item
+
+	relation instance Exchange19 : function:Exchange[
+		from Store_Energy.out2
+		to Voltage_Gather.in3
+		function:conveys Store_Voltage
+	]
+
+	relation instance Exchange19a : function:Exchange[
+		from Voltage_Gather.in3
+		to Voltage_Gather.out
+	]
+
+	instance Conversion_Performance : function:Item
+
+	relation instance Exchange20 : function:Exchange[
+		from Voltage_Gather.out
+		to Provide_Performance_Information.in
+		function:conveys Conversion_Performance
+	]
+
+	relation instance Exchange20a : function:Exchange[
+		from Provide_Performance_Information.in
+		to Provide_Performance_Information.out
+	]
+
+	instance Performance : function:Item
+
+	relation instance Exchange21 : function:Exchange[
+		from Provide_Performance_Information.out
+		to Evaluate_Performance.in
+		function:conveys Performance
+	]
+
+	instance Monitor_Operation_Remotely : function:Chain [
+		function:implements capabilities:Monitor_Operation_Remotey
+		base:contains Exchange17
+		base:contains Exchange17a
+		base:contains Exchange18
+		base:contains Exchange18a
+		base:contains Exchange19
+		base:contains Exchange19a
+		base:contains Exchange20
+		base:contains Exchange20a
+		base:contains Exchange21
+	]
+
+}

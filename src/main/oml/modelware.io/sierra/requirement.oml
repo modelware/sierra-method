@@ -1,0 +1,54 @@
+vocabulary <http://modelware.io/sierra/requirement#> as requirement {
+	
+	extends <http://www.w3.org/2001/XMLSchema#> as xsd
+
+	extends <http://modelware.io/sierra/base#> as base
+
+	concept Requirement < base:ContainableElement [
+		restricts all base:contains to Requirement
+		restricts all base:isContainedIn to Requirement
+	]
+	
+	aspect DesignElement
+	
+	scalar property hasRationale [
+		domain Requirement
+		range xsd:string
+	]
+
+	relation hasConstraint [
+		from Requirement
+		to base:Constraint
+		inverse functional
+	]
+
+	relation derives [
+		from Requirement
+		to Requirement
+		reverse isDerivedFrom
+		irreflexive
+		asymmetric
+	]
+
+	relation refines [
+		from Requirement
+		to Requirement
+		reverse isRefinedBy
+		irreflexive
+		asymmetric
+	]
+
+	relation specifies [
+		from Requirement
+		to DesignElement
+		reverse isSpecificedBy
+		inverse functional
+	]
+
+	relation justifies [
+		from Requirement
+		to DesignElement
+		reverse isJustifiedBy
+	]
+
+}

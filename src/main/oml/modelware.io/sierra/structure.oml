@@ -1,0 +1,16 @@
+vocabulary <http://modelware.io/sierra/structure#> as ^structure {
+	
+	extends <http://modelware.io/sierra/base#> as base
+
+	extends <http://www.w3.org/2002/07/owl#> as owl
+
+	concept Component < base:ContainableElement [
+		restricts all base:contains to Component
+		restricts all base:isContainedIn to Component
+	]
+
+	concept System < Component [
+		restricts all base:isContainedIn to owl:Nothing
+	]
+	
+}

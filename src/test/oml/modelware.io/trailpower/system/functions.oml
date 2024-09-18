@@ -1,0 +1,302 @@
+description <http://modelware.io/trailpower/system/functions#> as functions {
+	
+	uses <http://modelware.io/sierra/function#> as function
+
+	extends <http://modelware.io/trailpower/system/capabilities#> as capabilities
+
+	uses <http://modelware.io/sierra/base#> as base
+
+	extends <http://modelware.io/trailpower/system/structure#> as ^structure
+
+	instance Locate_Charger : function:Function [
+		function:isPerformedBy capabilities:User
+		function:hasInput Locate_Charger.in
+	]
+	instance Locate_Charger.in : function:Input
+
+	instance Comprend_State : function:Function [
+		function:isPerformedBy capabilities:User
+		function:hasInput Comprend_State.in
+		function:hasOutput Comprend_State.out
+	]
+	instance Comprend_State.in : function:Input
+	instance Comprend_State.out : function:Output
+
+	instance Connect_Device : function:Function [
+		function:isPerformedBy capabilities:User
+		function:hasInput Connect_Device.in
+		function:hasOutput Connect_Device.out
+		function:hasOutput Connect_Device.out2
+	]
+	instance Connect_Device.in : function:Input
+	instance Connect_Device.out : function:Output
+	instance Connect_Device.out2 : function:Output
+
+	instance Disconnect_Device : function:Function [
+		function:isPerformedBy capabilities:User
+		function:hasOutput Disconnect_Device.out
+		function:hasOutput Disconnect_Device.out2
+	]
+	instance Disconnect_Device.out : function:Output
+	instance Disconnect_Device.out2 : function:Output
+
+	instance Receive_Connection : function:Function [
+		function:isPerformedBy capabilities:USB_Device
+		function:hasInput Receive_Connection.in
+	]
+	instance Receive_Connection.in : function:Input
+
+	instance Accept_Charger : function:Function [
+		function:isPerformedBy capabilities:USB_Device
+		function:hasInput Accept_Charger.in
+	]
+	instance Accept_Charger.in : function:Input
+
+	instance Disconnect : function:Function [
+		function:isPerformedBy capabilities:USB_Device
+		function:hasInput Disconnect.in
+	]
+	instance Disconnect.in : function:Input
+
+	instance Evaluate_Performance : function:Function [
+		function:isPerformedBy capabilities:Developer
+		function:hasInput Evaluate_Performance.in
+	]
+	instance Evaluate_Performance.in : function:Input
+
+	instance Produce_Light : function:Function [
+		function:isPerformedBy capabilities:Sun
+		function:hasOutput Produce_Light.out
+	]
+	instance Produce_Light.out : function:Output
+
+	instance Illuminate_At_Night : function:Function [
+		function:isPerformedBy ^structure:Trail_Power
+		function:hasInput Illuminate_At_Night.in
+		function:hasOutput Illuminate_At_Night.out
+	]
+	instance Illuminate_At_Night.in : function:Input
+	instance Illuminate_At_Night.out : function:Output
+	
+	instance Provide_State : function:Function [
+		function:isPerformedBy ^structure:Trail_Power
+		function:hasInput Provide_State.in
+		function:hasOutput Provide_State.out
+	]
+	instance Provide_State.in : function:Input
+	instance Provide_State.out : function:Output
+
+	instance Receive_Connection2 : function:Function [
+		function:isPerformedBy ^structure:Trail_Power
+		function:hasInput Receive_Connection2.in
+	]
+	instance Receive_Connection2.in : function:Input
+
+	instance Charge_Device : function:Function [
+		function:isPerformedBy ^structure:Trail_Power
+		function:hasInput Charge_Device.in
+		function:hasOutput Charge_Device.out
+		function:hasOutput Charge_Device.out2
+	]
+	instance Charge_Device.in : function:Input
+	instance Charge_Device.out : function:Output
+	instance Charge_Device.out2 : function:Output
+
+	instance Disconnect2 : function:Function [
+		function:isPerformedBy ^structure:Trail_Power
+		function:hasInput Disconnect2.in
+	]
+	instance Disconnect2.in : function:Input
+
+	instance Provide_Performance_Information : function:Function [
+		function:isPerformedBy ^structure:Trail_Power
+		function:hasInput Provide_Performance_Information.in
+		function:hasOutput Provide_Performance_Information.out
+	]
+	instance Provide_Performance_Information.in : function:Input
+	instance Provide_Performance_Information.out : function:Output
+	
+	instance Convert_Light_to_Electrical_Energy : function:Function [
+		function:isPerformedBy ^structure:Trail_Power
+		function:hasInput Convert_Light_to_Electrical_Energy.in
+		function:hasOutput Convert_Light_to_Electrical_Energy.out
+		function:hasOutput Convert_Light_to_Electrical_Energy.out2
+		function:hasOutput Convert_Light_to_Electrical_Energy.out3
+	]
+	instance Convert_Light_to_Electrical_Energy.in : function:Input
+	instance Convert_Light_to_Electrical_Energy.out : function:Output
+	instance Convert_Light_to_Electrical_Energy.out2 : function:Output
+	instance Convert_Light_to_Electrical_Energy.out3 : function:Output
+
+	instance Charger_Light : function:Item
+
+	relation instance Exchange1 : function:Exchange[
+		from Illuminate_At_Night.out
+		to Locate_Charger.in
+		function:conveys Charger_Light
+	]
+	
+	instance Charger_State : function:Item
+
+	instance Provide_24h_Visibility : function:Chain [
+		function:implements capabilities:Provide_24h_Visibility
+		base:contains Exchange1
+	]
+
+	relation instance Exchange2 : function:Exchange [
+		from Provide_State.out
+		to Comprend_State.in
+		function:conveys Charger_State
+	]
+	
+	relation instance Exchange2a : function:Exchange [
+		from Comprend_State.in
+		to Comprend_State.out
+	]
+
+	instance State : function:Item
+
+	relation instance Exchange3 : function:Exchange [
+		from Comprend_State.out
+		to Connect_Device.in
+		function:conveys State
+	]
+
+	relation instance Exchange3a : function:Exchange [
+		from Connect_Device.in
+		to Connect_Device.out
+	]
+	
+	relation instance Exchange3b : function:Exchange [
+		from Connect_Device.in
+		to Connect_Device.out2
+	]
+
+	instance Device_Connection : function:Item
+
+	relation instance Exchange4 : function:Exchange [
+		from Connect_Device.out
+		to Receive_Connection.in
+		function:conveys Device_Connection
+	]
+
+	instance Charger_Connection : function:Item
+
+	relation instance Exchange5 : function:Exchange [
+		from Connect_Device.out2
+		to Receive_Connection2.in
+		function:conveys Charger_Connection
+	]
+
+	instance Power : function:Item
+
+	instance Connect_USB_Device : function:Chain [
+		function:implements capabilities:Connect_to_USB_Device_Cable
+		base:contains Exchange2
+		base:contains Exchange2a
+		base:contains Exchange3
+		base:contains Exchange3a
+		base:contains Exchange3b
+		base:contains Exchange4
+		base:contains Exchange5
+	]
+
+	relation instance Exchange6 : function:Exchange [
+		from Convert_Light_to_Electrical_Energy.out
+		to Charge_Device.in
+		function:conveys Power
+	]
+
+	relation instance Exchange6a : function:Exchange [
+		from Charge_Device.in
+		to Charge_Device.out
+	]
+	
+	instance Energy : function:Item
+
+	relation instance Exchange7 : function:Exchange [
+		from Charge_Device.out
+		to Accept_Charger.in
+		function:conveys Energy
+	]
+
+	instance Charge_USB_Device : function:Chain [
+		function:implements capabilities:Disconnect_USB_Device_Cable
+		base:contains Exchange6
+		base:contains Exchange6a
+		base:contains Exchange7
+	]
+
+	instance Device_Disconnect : function:Item
+
+	relation instance Exchange8 : function:Exchange [
+		from Disconnect_Device.out
+		to Disconnect.in
+		function:conveys Device_Disconnect
+	]
+
+	instance Charger_Disconnect : function:Item
+
+	relation instance Exchange9 : function:Exchange [
+		from Disconnect_Device.out2
+		to Disconnect2.in
+		function:conveys Charger_Disconnect
+	]
+
+	instance Disconnect_USB_Device : function:Chain [
+		function:implements capabilities:Charge_USB_Device
+		base:contains Exchange8
+		base:contains Exchange9
+	]
+
+	instance Convergence_Performance : function:Item
+
+	relation instance Exchange10 : function:Exchange [
+		from Convert_Light_to_Electrical_Energy.out3
+		to Provide_Performance_Information.in
+		function:conveys Convergence_Performance
+	]
+
+	relation instance Exchange10a : function:Exchange [
+		from Provide_Performance_Information.in
+		to Provide_Performance_Information.out
+	]
+	
+	instance Performance : function:Item
+
+	relation instance Exchange11 : function:Exchange [
+		from Provide_Performance_Information.out
+		to Evaluate_Performance.in
+		function:conveys Performance
+	]
+
+	instance Monitor_Operation_Remotely : function:Chain [
+		function:implements capabilities:Monitor_Operation_Remotey
+		base:contains Exchange10
+		base:contains Exchange10a
+		base:contains Exchange11
+	]
+
+	instance Light : function:Item
+
+	relation instance Exchange12 : function:Exchange [
+		from Produce_Light.out
+		to Convert_Light_to_Electrical_Energy.in
+		function:conveys Light
+	]
+
+	instance Illuminate : function:Item
+
+	relation instance Exchange13 : function:Exchange [
+		from Convert_Light_to_Electrical_Energy.out2
+		to Illuminate_At_Night.in
+		function:conveys Illuminate
+	]
+
+	relation instance Exchange14 : function:Exchange [
+		from Charge_Device.out2
+		to Provide_State.in
+		function:conveys State
+	]
+
+}

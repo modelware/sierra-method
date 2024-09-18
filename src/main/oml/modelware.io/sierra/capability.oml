@@ -1,0 +1,51 @@
+vocabulary <http://modelware.io/sierra/capability#> as capability {
+	
+	extends <http://modelware.io/sierra/base#> as base
+
+	extends <http://modelware.io/sierra/structure#> as ^structure
+
+	concept Capability < base:SpecializableElement [
+		restricts all base:specializes to Capability
+		restricts all base:isSpecializedBy to Capability
+	]
+	
+	aspect InvolvableElement < base:SpecializableElement
+	
+	concept Actor < InvolvableElement [
+		restricts all base:specializes to Actor
+		restricts all base:isSpecializedBy to Actor
+	]
+	
+	concept Entity < InvolvableElement [
+		restricts all base:specializes to Entity
+		restricts all base:isSpecializedBy to Entity
+	]
+
+	relation involves [
+		from Capability
+		to InvolvableElement
+		reverse inInvolvedIn
+	]
+	
+	relation ^includes [
+		from Capability
+		to Capability
+		reverse isIncludedIn
+		irreflexive
+		asymmetric
+	]
+
+	relation ^extends [
+		from Capability
+		to Capability
+		reverse isExtendedBy
+		irreflexive
+		asymmetric
+	]
+
+	relation supports [
+		from ^structure:System
+		to Capability
+		reverse isSuportedBy
+	]
+}

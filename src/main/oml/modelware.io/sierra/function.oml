@@ -1,0 +1,79 @@
+vocabulary <http://modelware.io/sierra/function#> as function {
+
+	extends <http://modelware.io/sierra/base#> as base
+
+	extends <http://modelware.io/sierra/capability#> as capability
+
+	extends <http://modelware.io/sierra/structure#> as ^structure
+
+	aspect PerformingElement
+
+	aspect ExchangingElement
+
+	concept Function < ExchangingElement
+	
+	concept Item
+	
+	concept Chain < base:ContainableElement [
+		restricts all base:contains to Exchange
+	]
+	
+	concept Port < ExchangingElement
+	
+	concept Input < Port
+		
+	concept Output < Port
+
+	relation hasPort [
+		from Function
+		to Port
+		reverse isPortOf
+		inverse functional
+	]
+
+	relation hasInput [
+		from Function
+		to Input
+		reverse isInputOf
+	] < hasPort
+
+	relation hasOutput [
+		from Function
+		to Output
+		reverse isOutputOf
+	] < hasPort
+
+	relation entity Exchange [
+		from ExchangingElement
+		to ExchangingElement
+		forward sendsTo
+		reverse receivesFrom
+	] < base:ContainableElement [
+		restricts all base:isContainedIn to Chain
+	]
+	
+	relation conveys [
+		from Exchange
+		to Item
+		reverse isConveyedBy
+		functional
+	]
+	
+	relation implements [
+		from Chain
+		to capability:Capability
+		reverse isImplementedBy
+		functional
+		inverse functional
+	]
+	
+	relation performs [
+		from PerformingElement
+		to Function
+		reverse isPerformedBy
+	]
+	
+	ref aspect capability:InvolvableElement < PerformingElement
+	
+	ref concept ^structure:Component < PerformingElement
+}

@@ -1,0 +1,34 @@
+project:
+   name: Sierra Method
+   description: This is the Sierra Method vocabularies project
+   
+maven:
+   group: io.modelware
+   artifact: sierra-method
+   version: 1.0.0
+
+dependencies:
+   - io.opencaesar.ontologies:core-vocabularies:5.+
+     
+datasets:
+
+   main:
+      url: http://localhost:3030/sierra
+      iri: http://modelware.io/sierra/bundle
+      entailments:
+         classes: ALL_SUBCLASS
+         properties: INVERSE_PROPERTY | ALL_SUBPROPERTY
+      queries: src/main/sparql
+      
+   test:
+      url: http://localhost:3030/trailpower
+      iri: http://modelware.io/trailpower/bundle
+      entailments:
+         classes: ALL_SUBCLASS
+         properties: INVERSE_PROPERTY | ALL_SUBPROPERTY
+      queries: src/test/sparql
+      vision:
+         doNotUpdate:
+            - src/main/oml
+            - build/oml
+      

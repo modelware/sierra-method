@@ -1,0 +1,16 @@
+description bundle <http://modelware.io/trailpower/bundle#> as ^bundle {
+
+	uses <http://modelware.io/sierra/bundle#>
+
+	includes <http://modelware.io/trailpower/operational/capabilities#>
+	includes <http://modelware.io/trailpower/operational/functions#>
+
+	includes <http://modelware.io/trailpower/system/capabilities#>
+	includes <http://modelware.io/trailpower/system/functions#>
+	includes <http://modelware.io/trailpower/system/structure#>
+
+	includes <http://modelware.io/trailpower/logical/capabilities#>
+	includes <http://modelware.io/trailpower/logical/functions#>
+	includes <http://modelware.io/trailpower/logical/structure#>
+
+}

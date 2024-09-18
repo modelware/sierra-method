@@ -1,0 +1,14 @@
+vocabulary bundle <http://modelware.io/sierra/bundle#> as ^bundle {
+	
+	includes <http://modelware.io/sierra/requirement#>
+
+	includes <http://modelware.io/sierra/capability#>
+
+	includes <http://modelware.io/sierra/function#>
+
+	includes <http://modelware.io/sierra/scenario#>
+
+	includes <http://modelware.io/sierra/structure#>
+
+	includes <http://modelware.io/sierra/behavior#>
+}

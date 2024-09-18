@@ -1,0 +1,41 @@
+vocabulary <http://modelware.io/sierra/base#> as base {
+	
+	extends <http://www.w3.org/2001/XMLSchema#> as xsd
+
+	aspect SpecializableElement
+	
+	relation specializes [
+		from SpecializableElement
+		to SpecializableElement
+		reverse isSpecializedBy
+		transitive
+	]
+
+	aspect ContainableElement
+	
+	relation contains [
+		from ContainableElement
+		to ContainableElement
+		reverse isContainedIn
+		irreflexive
+		asymmetric
+		inverse functional
+		//transitive
+	]
+
+	concept Constraint
+
+	scalar property hasExpression [
+		domain Constraint
+		range xsd:string
+	]
+
+	scalar property isExpressedIn [
+		domain Constraint
+		range xsd:string
+	]
+
+	annotation property label
+	
+	annotation property ^description
+}

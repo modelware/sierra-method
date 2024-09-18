@@ -1,0 +1,6 @@
+description <http://modelware.io/trailpower/system/structure#> as ^structure {
+	
+	uses <http://modelware.io/sierra/structure#> as ^structure
+
+	instance Trail_Power : ^structure:System
+}

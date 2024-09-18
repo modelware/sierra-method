@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public">
+	<rewriteURI uriStartString="http://modelware.io/sierra" rewritePrefix="src/main/oml/modelware.io/sierra"/>
+	<rewriteURI uriStartString="http://modelware.io/trailpower" rewritePrefix="src/test/oml/modelware.io/trailpower"/>
+	<rewriteURI uriStartString="http://" rewritePrefix="build/oml/"/>
+</catalog>
