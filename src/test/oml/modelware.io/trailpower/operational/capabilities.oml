@@ -2,14 +2,20 @@ description <http://modelware.io/trailpower/operational/capabilities#> as capabi
 	
 	uses <http://modelware.io/sierra/capability#> as capability
 
+	// Actors
+
 	instance User : capability:Actor
-	
-	instance USB_Device : capability:Entity
 	
 	instance Developer : capability:Actor
 	
-	instance Charger : capability:Actor
-	
+	// Entities
+
+	instance Charger : capability:Entity
+
+	instance USB_Device : capability:Entity
+		
+	// Capabilities
+
 	instance Provide_24h_Visibility : capability:Capability [
 		capability:involves User
 		capability:involves Charger

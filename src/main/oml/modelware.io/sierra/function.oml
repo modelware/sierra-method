@@ -4,25 +4,26 @@ vocabulary <http://modelware.io/sierra/function#> as function {
 
 	extends <http://modelware.io/sierra/capability#> as capability
 
-	extends <http://modelware.io/sierra/structure#> as ^structure
+	extends <http://modelware.io/sierra/component#> as component
 
-	aspect PerformingElement
+	aspect ExchangeElement
 
-	aspect ExchangingElement
+	relation entity Exchange [
+		from ExchangeElement
+		to ExchangeElement
+		forward sendsTo
+		reverse receivesFrom
+	] < base:ContainableElement [
+		restricts all base:isContainedIn to Chain
+	]
 
-	concept Function < ExchangingElement
-	
-	concept Item
-	
 	concept Chain < base:ContainableElement [
 		restricts all base:contains to Exchange
 	]
-	
-	concept Port < ExchangingElement
-	
-	concept Input < Port
-		
-	concept Output < Port
+
+	concept Function < ExchangeElement
+
+	concept Port < ExchangeElement
 
 	relation hasPort [
 		from Function
@@ -31,11 +32,15 @@ vocabulary <http://modelware.io/sierra/function#> as function {
 		inverse functional
 	]
 
+	concept Input < Port
+
 	relation hasInput [
 		from Function
 		to Input
 		reverse isInputOf
 	] < hasPort
+
+	concept Output < Port
 
 	relation hasOutput [
 		from Function
@@ -43,22 +48,15 @@ vocabulary <http://modelware.io/sierra/function#> as function {
 		reverse isOutputOf
 	] < hasPort
 
-	relation entity Exchange [
-		from ExchangingElement
-		to ExchangingElement
-		forward sendsTo
-		reverse receivesFrom
-	] < base:ContainableElement [
-		restricts all base:isContainedIn to Chain
-	]
-	
+	concept Item
+
 	relation conveys [
 		from Exchange
 		to Item
 		reverse isConveyedBy
 		functional
 	]
-	
+
 	relation implements [
 		from Chain
 		to capability:Capability
@@ -66,14 +64,18 @@ vocabulary <http://modelware.io/sierra/function#> as function {
 		functional
 		inverse functional
 	]
-	
+
+	aspect PerformingElement
+
 	relation performs [
 		from PerformingElement
 		to Function
 		reverse isPerformedBy
 	]
-	
-	ref aspect capability:InvolvableElement < PerformingElement
-	
-	ref concept ^structure:Component < PerformingElement
+
+	ref concept capability:Actor < PerformingElement
+
+	ref concept capability:Entity < PerformingElement
+
+	ref concept component:Component < PerformingElement
 }

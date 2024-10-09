@@ -1,9 +1,9 @@
 vocabulary <http://modelware.io/sierra/base#> as base {
-	
+
 	extends <http://www.w3.org/2001/XMLSchema#> as xsd
 
 	aspect SpecializableElement
-	
+
 	relation specializes [
 		from SpecializableElement
 		to SpecializableElement
@@ -12,7 +12,7 @@ vocabulary <http://modelware.io/sierra/base#> as base {
 	]
 
 	aspect ContainableElement
-	
+
 	relation contains [
 		from ContainableElement
 		to ContainableElement
@@ -20,7 +20,7 @@ vocabulary <http://modelware.io/sierra/base#> as base {
 		irreflexive
 		asymmetric
 		inverse functional
-		//transitive
+	// transitive
 	]
 
 	concept Constraint
@@ -36,6 +36,10 @@ vocabulary <http://modelware.io/sierra/base#> as base {
 	]
 
 	annotation property label
-	
+
 	annotation property ^description
+
+	concept ^concept3 < ^aspect2
+
+	aspect ^aspect2
 }

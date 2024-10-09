@@ -1,2 +1,139 @@
 description <http://modelware.io/trailpower/physical/functions#> as functions {
+
+	uses <http://modelware.io/sierra/function#> as function
+
+	extends <http://modelware.io/trailpower/physical/capabilities#> as capabilities
+
+	extends <http://modelware.io/trailpower/physical/components#> as components
+
+	// Functions
+
+	instance Locate_Charger : function:Function [
+		function:isPerformedBy capabilities:User
+	]
+
+	instance Comprend_State : function:Function [
+		function:isPerformedBy capabilities:User
+	]
+
+	instance Connect_Device : function:Function [
+		function:isPerformedBy capabilities:User
+	]
+
+	instance Disconnect_Device : function:Function [
+		function:isPerformedBy capabilities:User
+	]
+
+	instance Receive_Connection : function:Function [
+		function:isPerformedBy capabilities:USB_Device
+	]
+
+	instance Accept_Charger : function:Function [
+		function:isPerformedBy capabilities:USB_Device
+	]
+
+	instance Disconnect : function:Function [
+		function:isPerformedBy capabilities:USB_Device
+	]
+
+	instance Analyze_Telemetry_Data : function:Function [
+		function:isPerformedBy capabilities:Developer
+	]
+
+	instance Save_Telemetry_Data_to_CSV : function:Function [
+		function:isPerformedBy capabilities:Thing_Speak_Cloud
+	]
+
+	instance Present_Telemetry_Data_on_Web_Page : function:Function [
+		function:isPerformedBy capabilities:Thing_Speak_Cloud
+	]
+
+	instance Produce_Light : function:Function [
+		function:isPerformedBy capabilities:Sun
+	]
+
+	instance Sample_Voltages : function:Function [
+		function:isPerformedBy components:Photon_Particle
+	]
+
+	instance Send_Telemetry_Data : function:Function [
+		function:isPerformedBy components:Photon_Particle
+	]
+
+	instance Collect_and_Condition_Signals : function:Function [
+		function:isPerformedBy components:Telemetry_PCBA
+	]
+
+	instance Convert_Light_to_Power : function:Function [
+		function:isPerformedBy components:Solar_Cell
+	]
+	
+	instance Provide_Light : function:Function [
+		function:isPerformedBy components:Lights_and_Harness
+	]
+	
+	instance Convert_Voltage_Levels : function:Function [
+		function:isPerformedBy components:Charger_Indication_Board
+	]
+
+	instance Turn_On_Light_Power : function:Function [
+		function:isPerformedBy components:Charger_Indication_Board
+	]
+
+	instance Distribute_Bat_Power : function:Function [
+		function:isPerformedBy components:Charger_Indication_Board
+	]
+
+	instance Duplicate_1 : function:Function [
+		function:isPerformedBy components:Charger_Indication_Board
+	]
+
+	instance Provide_State : function:Function [
+		function:isPerformedBy components:Charger_Indication_Board
+	]
+
+	instance Split_18 : function:Function [
+		function:isPerformedBy components:Charger_Indication_Board
+	]
+
+	instance Boost_Li_Voltage_to_USB : function:Function [
+		function:isPerformedBy components:Boost
+	]
+
+	instance Receive_Connection2 : function:Function [
+		function:isPerformedBy components:Boost
+	]
+
+	instance Disconnect_2 : function:Function [
+		function:isPerformedBy components:Boost
+	]
+
+	instance Duplicate_3 : function:Function [
+		function:isPerformedBy components:Boost
+	]
+
+	instance Shut_Down_for_Low_Voltage : function:Function [
+		function:isPerformedBy components:Boost
+	]
+
+	instance Protect_Drain_Overcurrent_1 : function:Function [
+		function:isPerformedBy components:Fuse
+	]
+
+	instance Protect_Drain_Overcurrent_2 : function:Function [
+		function:isPerformedBy components:Fuse
+	]
+
+	instance Store_Energy_1 : function:Function [
+		function:isPerformedBy components:LI_18650_1
+	]
+
+	instance Store_Energy_2 : function:Function [
+		function:isPerformedBy components:LI_18650_2
+	]
+
+	// Exchanges
+	
+	
+
 }

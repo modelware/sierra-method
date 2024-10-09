@@ -1,5 +1,5 @@
 vocabulary <http://modelware.io/sierra/requirement#> as requirement {
-	
+
 	extends <http://www.w3.org/2001/XMLSchema#> as xsd
 
 	extends <http://modelware.io/sierra/base#> as base
@@ -8,9 +8,9 @@ vocabulary <http://modelware.io/sierra/requirement#> as requirement {
 		restricts all base:contains to Requirement
 		restricts all base:isContainedIn to Requirement
 	]
-	
+
 	aspect DesignElement
-	
+
 	scalar property hasRationale [
 		domain Requirement
 		range xsd:string
@@ -50,5 +50,4 @@ vocabulary <http://modelware.io/sierra/requirement#> as requirement {
 		to DesignElement
 		reverse isJustifiedBy
 	]
-
 }

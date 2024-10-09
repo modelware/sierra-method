@@ -2,31 +2,35 @@ description <http://modelware.io/trailpower/system/capabilities#> as capabilitie
 	
 	uses <http://modelware.io/sierra/capability#> as capability
 
+	// Actors
+
 	instance User : capability:Actor
 	
+	instance Developer : capability:Actor
+
+	// Entities
+		
 	instance USB_Device : capability:Entity
 	
-	instance Developer : capability:Actor
-	
 	instance Sun : capability:Entity
+
+	// Capabilities
 
 	instance Provide_24h_Visibility : capability:Capability [
 		capability:involves User
 	]
 
 	instance Connect_to_USB_Device_Cable : capability:Capability [
-		capability:involves User
-		capability:involves USB_Device
+		capability:involves User, USB_Device
 	]
 
 	instance Disconnect_USB_Device_Cable : capability:Capability [
-		capability:involves User
-		capability:involves USB_Device
+		capability:involves User, USB_Device
 	]
 
 	instance Charge_USB_Device : capability:Capability [
-		capability:includes Generate_Power
 		capability:involves USB_Device
+		capability:includes Generate_Power
 	]
 
 	instance Generate_Power : capability:Capability [

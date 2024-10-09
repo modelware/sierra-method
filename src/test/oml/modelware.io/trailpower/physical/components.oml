@@ -1,0 +1,314 @@
+description <http://modelware.io/trailpower/physical/components#> as components {
+
+	uses <http://modelware.io/sierra/component#> as component
+
+	uses <http://modelware.io/sierra/base#> as base
+
+	extends <http://modelware.io/trailpower/physical/capabilities#> as capabilities
+
+	// Components and their ports
+	instance Wifi_Router : component:System [
+		component:hasPort Wifi_Router.port1, Wifi_Router.port2
+	]
+
+	instance Wifi_Router.port1 : component:Port
+
+	instance Wifi_Router.port2 : component:Port
+
+	instance Internet : component:System [
+		component:hasPort Internet.port1, Internet.port2
+	]
+
+	instance Internet.port1 : component:Port
+
+	instance Internet.port2 : component:Port
+
+	instance Trail_Power : component:System
+
+	instance Telemetry_Box : component:Component [
+		base:isContainedIn Trail_Power
+	]
+
+	instance Antenna : component:Component [
+		base:isContainedIn Telemetry_Box
+		component:hasPort Antenna.port1, Antenna.port2
+	]
+
+	instance Antenna.port1 : component:Port
+
+	instance Antenna.port2 : component:Port
+
+	instance Photon_Particle : component:Component [
+		base:isContainedIn Telemetry_Box
+		component:hasPort Photon_Particle.port1, Photon_Particle.port2
+	]
+
+	instance Photon_Particle.port1 : component:Port
+
+	instance Photon_Particle.port2 : component:Port
+
+	instance Telemetry_PCBA : component:Component [
+		base:isContainedIn Telemetry_Box
+		component:hasPort Telemetry_PCBA.port1, Telemetry_PCBA.port2
+	]
+
+	instance Telemetry_PCBA.port1 : component:Port
+
+	instance Telemetry_PCBA.port2 : component:Port
+
+	instance Solar_Cell : component:Component [
+		base:isContainedIn Trail_Power
+		component:hasPort Solar_Cell.port1, Solar_Cell.port2
+	]
+
+	instance Solar_Cell.port1 : component:Port
+
+	instance Solar_Cell.port2 : component:Port
+
+	instance USB_Cable : component:Component [
+		base:isContainedIn Trail_Power
+		component:hasPort USB_Cable.port1, USB_Cable.port2
+	]
+
+	instance USB_Cable.port1 : component:Port
+
+	instance USB_Cable.port2 : component:Port
+
+	instance Lights_and_Harness : component:Component [
+		base:isContainedIn Trail_Power
+		component:hasPort Lights_and_Harness.port1, Lights_and_Harness.port2
+	]
+
+	instance Lights_and_Harness.port1 : component:Port
+
+	instance Lights_and_Harness.port2 : component:Port
+
+	instance Charge_Box : component:Component [
+		base:isContainedIn Trail_Power
+		component:hasPort Charge_Box.port1
+	]
+
+	instance Charge_Box.port1 : component:Port
+
+	instance Charger_Indication_Board : component:Component [
+		base:isContainedIn Charge_Box
+		component:hasPort Charger_Indication_Board.port1, Charger_Indication_Board.port2, Charger_Indication_Board.port3, Charger_Indication_Board.port4
+	]
+
+	instance Charger_Indication_Board.port1 : component:Port
+
+	instance Charger_Indication_Board.port2 : component:Port
+
+	instance Charger_Indication_Board.port3 : component:Port
+
+	instance Charger_Indication_Board.port4 : component:Port
+
+	instance Boost : component:Component [
+		base:isContainedIn Charge_Box
+		component:hasPort Boost.port1, Boost.port2
+	]
+
+	instance Boost.port1 : component:Port
+
+	instance Boost.port2 : component:Port
+
+	instance Battery_Holder : component:Component [
+		base:isContainedIn Charge_Box
+	]
+
+	instance Fuse : component:Component [
+		base:isContainedIn Battery_Holder
+		component:hasPort Fuse.port1, Fuse.port2, Fuse.port3
+	]
+
+	instance Fuse.port1 : component:Port
+
+	instance Fuse.port2 : component:Port
+
+	instance Fuse.port3 : component:Port
+
+	instance LI_18650_1 : component:Component [
+		base:isContainedIn Battery_Holder
+		component:hasPort LI_18650_1.port1
+	]
+
+	instance LI_18650_1.port1 : component:Port
+
+	instance LI_18650_2 : component:Component [
+		base:isContainedIn Battery_Holder
+		component:hasPort LI_18650_2.port1
+	]
+
+	instance LI_18650_2.port1 : component:Port
+
+	ref instance capabilities:Sun [
+		component:hasPort Sun.port1
+	]
+
+	instance Sun.port1 : component:Port
+
+	ref instance capabilities:Thing_Speak_Cloud [
+		component:hasPort Thing_Speak_Cloud.port1, Thing_Speak_Cloud.port2
+	]
+
+	instance Thing_Speak_Cloud.port1 : component:Port
+
+	instance Thing_Speak_Cloud.port2 : component:Port
+
+	ref instance capabilities:Developer [
+		component:hasPort Developer.port1
+	]
+
+	instance Developer.port1 : component:Port
+
+	ref instance capabilities:USB_Device [
+		component:hasPort USB_Device.port1
+	]
+
+	instance USB_Device.port1 : component:Port
+
+	ref instance capabilities:User [
+		component:hasPort User.port1, User.port2
+	]
+
+	instance User.port1 : component:Port
+
+	instance User.port2 : component:Port
+
+	// Links
+	relation instance S-SC : component:Link [
+		from Sun.port1
+		to Solar_Cell.port1
+	]
+
+	relation instance A-WR : component:Link [
+		from Antenna.port2
+		to Wifi_Router.port1
+	]
+
+	relation instance WR-WR : component:Link [
+		from Wifi_Router.port1
+		to Wifi_Router.port2
+	]
+
+	relation instance WR-I : component:Link [
+		from Wifi_Router.port2
+		to Internet.port1
+	]
+
+	relation instance I-I : component:Link [
+		from Internet.port1
+		to Internet.port2
+	]
+
+	relation instance I-TK : component:Link [
+		from Internet.port2
+		to Thing_Speak_Cloud.port1
+	]
+
+	relation instance TSP-D : component:Link [
+		from Thing_Speak_Cloud.port2
+		to Developer.port1
+	]
+
+	relation instance CBL0UD : component:Link [
+		from USB_Cable.port1
+		to USB_Device.port1
+	]
+
+	relation instance CIB-U : component:Link [
+		from Charger_Indication_Board.port3
+		to User.port1
+	]
+
+	relation instance LH-U : component:Link [
+		from Lights_and_Harness.port1
+		to User.port2
+	]
+
+	relation instance BP-CB : component:Link [
+		from Solar_Cell.port2
+		to Charge_Box.port1
+	]
+
+	relation instance Ph-A : component:Link [
+		from Photon_Particle.port1
+		to Antenna.port1
+	]
+
+	relation instance A-A : component:Link [
+		from Antenna.port1
+		to Antenna.port2
+	]
+
+	relation instance PP-TPCBA : component:Link [
+		from Photon_Particle.port2
+		to Telemetry_PCBA.port1
+	]
+
+	relation instance TPCBA-CB : component:Link [
+		from Telemetry_PCBA.port2
+		to Charge_Box.port1
+	]
+
+	relation instance CB-LH : component:Link [
+		from Charge_Box.port1
+		to Lights_and_Harness.port2
+	]
+
+	relation instance CBL-CBL : component:Link [
+		from USB_Cable.port1
+		to USB_Cable.port2
+	]
+
+	relation instance B-CBL : component:Link [
+		from USB_Cable.port2
+		to Boost.port1
+	]
+
+	relation instance CB-CIB : component:Link [
+		from Charge_Box.port1
+		to Charger_Indication_Board.port1
+	]
+
+	relation instance F-CIB : component:Link [
+		from Fuse.port1
+		to Charger_Indication_Board.port2
+	]
+
+	relation instance CIB-B : component:Link [
+		from Charger_Indication_Board.port4
+		to Boost.port2
+	]
+
+	relation instance BAT1-Fuse : component:Link [
+		from LI_18650_1.port1
+		to Fuse.port2
+	]
+
+	relation instance BAT2-Fuse : component:Link [
+		from LI_18650_2.port1
+		to Fuse.port3
+	]
+
+	// Paths
+	instance Cable : component:Path [
+		base:contains CBL0UD, CBL-CBL, B-CBL
+	]
+
+	instance Telemetry : component:Path [
+		base:contains Ph-A, A-A, A-WR, WR-WR, WR-I, I-I, I-TK
+	]
+
+	instance SC-CIB : component:Path [
+		base:contains BP-CB, CB-CIB
+	]
+
+	instance CIB-TPCBA : component:Path [
+		base:contains TPCBA-CB, CB-CIB
+	]
+
+	instance LH : component:Path [
+		base:contains CB-LH, CB-CIB
+	]
+}

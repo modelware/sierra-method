@@ -1,0 +1,45 @@
+vocabulary <http://modelware.io/sierra/component#> as component {
+
+	extends <http://modelware.io/sierra/base#> as base
+
+	extends <http://www.w3.org/2002/07/owl#> as owl
+
+	extends <http://modelware.io/sierra/capability#> as capability
+
+	concept Port
+
+	relation entity Link [
+		from Port
+		to Port
+		forward sendsTo
+		reverse receivesFrom
+	] < base:ContainableElement [
+		restricts all base:isContainedIn to Path
+	]
+
+	concept Path < base:ContainableElement [
+		restricts all base:contains to Link
+	]
+
+	aspect PortedElement
+
+	relation hasPort [
+		from PortedElement
+		to Port
+		reverse isPortOf
+		inverse functional
+	]
+
+	concept Component < base:ContainableElement, PortedElement [
+		restricts all base:contains to Component
+		restricts all base:isContainedIn to Component
+	]
+
+	concept System < Component [
+		restricts all base:isContainedIn to owl:Nothing
+	]
+
+	ref concept capability:Actor < PortedElement
+
+	ref concept capability:Entity < PortedElement
+}

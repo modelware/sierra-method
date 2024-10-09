@@ -1,26 +1,27 @@
 description <http://modelware.io/trailpower/operational/functions#> as functions {
-	
+
 	uses <http://modelware.io/sierra/function#> as function
 
 	extends <http://modelware.io/trailpower/operational/capabilities#> as capabilities
 
 	uses <http://modelware.io/sierra/base#> as base
 
+	// Functions
 	instance Locate_Charger : function:Function [
 		function:isPerformedBy capabilities:User
-	]	
+	]
 
 	instance Comprend_State : function:Function [
 		function:isPerformedBy capabilities:User
-	]	
+	]
 
 	instance Connect_Device : function:Function [
 		function:isPerformedBy capabilities:User
-	]	
+	]
 
 	instance Disconnect_Device : function:Function [
 		function:isPerformedBy capabilities:User
-	]	
+	]
 
 	instance Receive_Connection : function:Function [
 		function:isPerformedBy capabilities:USB_Device
@@ -37,7 +38,7 @@ description <http://modelware.io/trailpower/operational/functions#> as functions
 	instance Illuminate_At_Night : function:Function [
 		function:isPerformedBy capabilities:Charger
 	]
-	
+
 	instance Provide_State : function:Function [
 		function:isPerformedBy capabilities:Charger
 	]
@@ -62,28 +63,39 @@ description <http://modelware.io/trailpower/operational/functions#> as functions
 		function:isPerformedBy capabilities:Developer
 	]
 
+	// Items
 	instance Charger_Light : function:Item
 
-	relation instance Exchange1 : function:Exchange[
+	instance Charger_State : function:Item
+
+	instance State : function:Item
+
+	instance Device_Connection : function:Item
+
+	instance Charger_Connection : function:Item
+
+	instance Energy : function:Item
+
+	instance Device_Disconnect : function:Item
+
+	instance Charger_Disconnect : function:Item
+
+	instance Performance : function:Item
+
+	instance Location : function:Item
+
+	// Exchanges
+	relation instance Exchange1 : function:Exchange [
 		from Illuminate_At_Night
 		to Locate_Charger
 		function:conveys Charger_Light
 	]
-	
-	instance Provide_24h_Visibility : function:Chain [
-		function:implements capabilities:Provide_24h_Visibility
-		base:contains Exchange1
-	]
-
-	instance Charger_State : function:Item
 
 	relation instance Exchange2 : function:Exchange [
 		from Provide_State
 		to Comprend_State
 		function:conveys Charger_State
 	]
-	
-	instance State : function:Item
 
 	relation instance Exchange3 : function:Exchange [
 		from Comprend_State
@@ -91,15 +103,11 @@ description <http://modelware.io/trailpower/operational/functions#> as functions
 		function:conveys State
 	]
 
-	instance Device_Connection : function:Item
-
 	relation instance Exchange4 : function:Exchange [
 		from Connect_Device
 		to Receive_Connection
 		function:conveys Device_Connection
 	]
-
-	instance Charger_Connection : function:Item
 
 	relation instance Exchange5 : function:Exchange [
 		from Connect_Device
@@ -107,28 +115,11 @@ description <http://modelware.io/trailpower/operational/functions#> as functions
 		function:conveys Charger_Connection
 	]
 
-	instance Connect_USB_Device : function:Chain [
-		function:implements capabilities:Connect_to_USB_Device_Cable
-		base:contains Exchange2
-		base:contains Exchange3
-		base:contains Exchange4
-		base:contains Exchange5
-	]
-
-	instance Energy : function:Item
-
 	relation instance Exchange6 : function:Exchange [
 		from Charge_Device
 		to Accept_Charger
 		function:conveys Energy
 	]
-
-	instance Charge_USB_Device : function:Chain [
-		function:implements capabilities:Disconnect_USB_Device_Cable
-		base:contains Exchange6
-	]
-
-	instance Device_Disconnect : function:Item
 
 	relation instance Exchange7 : function:Exchange [
 		from Disconnect_Device
@@ -136,21 +127,11 @@ description <http://modelware.io/trailpower/operational/functions#> as functions
 		function:conveys Device_Disconnect
 	]
 
-	instance Charger_Disconnect : function:Item
-
 	relation instance Exchange8 : function:Exchange [
 		from Disconnect_Device
 		to Disconnect2
 		function:conveys Charger_Disconnect
 	]
-
-	instance Disconnect_USB_Device : function:Chain [
-		function:implements capabilities:Charge_USB_Device
-		base:contains Exchange7
-		base:contains Exchange8
-	]
-
-	instance Performance : function:Item
 
 	relation instance Exchange9 : function:Exchange [
 		from Provide_Performance_Information
@@ -158,17 +139,35 @@ description <http://modelware.io/trailpower/operational/functions#> as functions
 		function:conveys Performance
 	]
 
-	instance Monitor_Operation_Remotely : function:Chain [
-		function:implements capabilities:Monitor_Operation_Remotey
-		base:contains Exchange9
-	]
-
-	instance Location : function:Item
-
 	relation instance Exchange10 : function:Exchange [
 		from Locate_Charger
 		to Comprend_State
 		function:conveys Location
 	]
 
+	// Chains
+	instance Provide_24h_Visibility : function:Chain [
+		function:implements capabilities:Provide_24h_Visibility
+		base:contains Exchange1
+	]
+
+	instance Connect_USB_Device : function:Chain [
+		function:implements capabilities:Connect_to_USB_Device_Cable
+		base:contains Exchange2, Exchange3, Exchange4, Exchange5
+	]
+
+	instance Charge_USB_Device : function:Chain [
+		function:implements capabilities:Charge_USB_Device
+		base:contains Exchange6
+	]
+
+	instance Disconnect_USB_Device : function:Chain [
+		function:implements capabilities:Disconnect_USB_Device_Cable
+		base:contains Exchange7, Exchange8
+	]
+
+	instance Monitor_Operation_Remotely : function:Chain [
+		function:implements capabilities:Monitor_Operation_Remotey
+		base:contains Exchange9
+	]
 }

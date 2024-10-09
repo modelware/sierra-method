@@ -7,10 +7,10 @@ description bundle <http://modelware.io/trailpower/bundle#> as ^bundle {
 
 	includes <http://modelware.io/trailpower/system/capabilities#>
 	includes <http://modelware.io/trailpower/system/functions#>
-	includes <http://modelware.io/trailpower/system/structure#>
+	includes <http://modelware.io/trailpower/system/components#>
 
 	includes <http://modelware.io/trailpower/logical/capabilities#>
 	includes <http://modelware.io/trailpower/logical/functions#>
-	includes <http://modelware.io/trailpower/logical/structure#>
+	includes <http://modelware.io/trailpower/logical/components#>
 
 }

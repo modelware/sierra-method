@@ -1,0 +1,33 @@
+description <http://modelware.io/trailpower/logical/components#> as components {
+
+	uses <http://modelware.io/sierra/component#> as component
+
+	uses <http://modelware.io/sierra/base#> as base
+
+	// Components
+	instance Trail_Power : component:System
+
+	instance Telemetry_System : component:Component [
+		base:isContainedIn Trail_Power
+	]
+
+	instance Battery : component:Component [
+		base:isContainedIn Trail_Power
+	]
+
+	instance Boost : component:Component [
+		base:isContainedIn Trail_Power
+	]
+
+	instance Solar_Panel : component:Component [
+		base:isContainedIn Trail_Power
+	]
+
+	instance Charger : component:Component [
+		base:isContainedIn Trail_Power
+	]
+
+	instance Light_System : component:Component [
+		base:isContainedIn Trail_Power
+	]
+}

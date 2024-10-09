@@ -1,0 +1,8 @@
+description <http://modelware.io/trailpower/system/components#> as components {
+	
+	uses <http://modelware.io/sierra/component#> as component
+
+	// Components
+
+	instance Trail_Power : component:System
+}
