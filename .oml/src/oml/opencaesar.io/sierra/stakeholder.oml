@@ -1,0 +1,33 @@
+vocabulary <http://opencaesar.io/sierra/stakeholder#> as stakeholder {
+
+	extends <http://www.w3.org/2000/01/rdf-schema#> as rdfs
+
+	extends <http://opencaesar.io/sierra/base#> as base
+
+    // --- Concepts ---
+
+    @rdfs:comment "A person with some needs from the system/mission"
+	concept Stakeholder < base:CategorizedElement
+
+    @rdfs:comment "An expectation or desired outcome expressed by a stakeholder on the system/mission"
+	concept Need < base:CategorizedElement, base:PrioritizedElement
+
+    // --- Scalars ---
+
+    // --- Relations ---
+
+	@rdfs:label "Expresses"
+	@rdfs:comment "The needs expressed by this stakeholder."
+	relation expresses [
+		from Stakeholder
+		to Need
+		@rdfs:label "Is Expressed By"
+		@rdfs:comment "The stakeholders expressing this need."
+		reverse isExpressedBy
+		irreflexive
+		asymmetric
+	]
+
+    // --- Properties ---
+
+}

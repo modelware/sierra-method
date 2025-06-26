@@ -1,0 +1,41 @@
+PREFIX :        <#>
+PREFIX fuseki:  <http://jena.apache.org/fuseki#>
+PREFIX ja:      <http://jena.hpl.hp.com/2005/11/Assembler#>
+PREFIX tdb:     <http://jena.hpl.hp.com/2008/tdb#>
+
+#############################################################################
+# Trailpower Dataset
+
+:trailpower.inf a		               	fuseki:Service ;
+    fuseki:name                   		"trailpower.inf" ; # set this value
+    fuseki:dataset                		:trailpower.inferences ;
+    fuseki:serviceQuery           		"" , "query", "sparql" ;
+    fuseki:serviceUpdate          		"" , "update" ;
+    fuseki:serviceReadWriteGraphStore 	"data" ;
+    fuseki:serviceReadGraphStore  		"get" ;
+	.
+
+:trailpower.tdb a               		fuseki:Service ;
+    fuseki:name                   		"trailpower.tdb" ; # set this value
+    fuseki:dataset                		:trailpower.assertions ;
+    fuseki:serviceQuery           		"" , "query", "sparql" ;
+    fuseki:serviceUpdate          		"" , "update" ;
+    fuseki:serviceReadWriteGraphStore 	"data" ;
+	.
+
+:trailpower.inferences a ja:RDFDataset ;
+	ja:defaultGraph [ a ja:InfModel ;
+		ja:reasoner [
+			ja:reasonerURL <http://jena.hpl.hp.com/2003/GenericRuleReasoner> ;
+			ja:rulesFrom <../build/owl/opencaesar.io/sierra/bundle.rules> ; # set this value
+		] ;
+		ja:baseModel [ a tdb:GraphTDB ;
+			tdb:graphName <urn:x-arq:DefaultGraph> ;
+			tdb:dataset :trailpower.assertions ;
+		]
+	]
+	.
+
+:trailpower.assertions a tdb:DatasetTDB ;
+	tdb:location  "trailpower" ; # set this value
+	.

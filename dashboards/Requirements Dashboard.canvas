@@ -1,0 +1,56 @@
+{
+  "edges": [
+  ],
+  "metadata": {
+    "frontmatter": {
+    },
+    "version": "1.0-1.0"
+  },
+  "nodes": [
+    {
+      "height": 480,
+      "id": "e380e14b9788414d",
+      "styleAttributes": {
+      },
+      "text": "```dataviewjs\nlet counts = {\n  Draft: 0,\n  Proposed: 0,\n  Deferred: 0,\n  Rejected: 0,\n  'Clarification Needed': 0,\n  Accepted: 0\n};\n\ndv.pages('#requirement/Requirement and !\"metadata\"')\n  .where(p => p.status)\n  .forEach(p => {\n    let s = p.status;\n    if (counts.hasOwnProperty(s)) counts[s]++;\n  });\n\nconst config = {\n\ttype: 'pie',\n\tdata: {\n\t\tlabels: [ 'Draft', 'Proposed', 'Deferred', 'Rejected', 'Clarification Needed', 'Accepted' ],\n\t\tdatasets: [{\n\t\t    label: 'My First Dataset',\n\t\t    data: [\n\t\t\t  counts.Draft,\n\t\t\t  counts.Proposed,\n\t\t\t  counts.Deferred,\n\t\t\t  counts.Rejected,\n\t\t\t  counts['Clarification Needed'],\n\t\t\t  counts.Accepted\n\t\t\t],\n\t\t    backgroundColor: [\n\t\t\t\t'rgb(158, 158, 158)',\n\t\t\t\t'rgb(33, 150, 243)',\n\t\t\t\t'rgb(255, 193, 7)',\n\t\t\t\t'rgb(244, 67, 54)',\n\t\t\t\t'rgb(156, 39, 176)',\n\t\t\t\t'rgb(76, 175, 80)'\n\t\t    ],\n\t\t    hoverOffset: 4\n\t\t}]\n\t}\n};\n\nwindow.renderChart(config, this.container);\nthis.container.style.width = \"100%\";\n```\n<p style=\"text-align:center\"> Requirements by Status </p>",
+      "type": "text",
+      "width": 420,
+      "x": -1500,
+      "y": -780
+    },
+    {
+      "height": 480,
+      "id": "74f86dbea01e466c",
+      "styleAttributes": {
+      },
+      "text": "```dataviewjs\nlet counts = {\n  Low: 0,\n  Medium: 0,\n  High: 0\n};\n\ndv.pages('#requirement/Requirement and !\"metadata\"')\n  .where(p => p.priority)\n  .forEach(p => {\n    let s = p.priority;\n    if (counts.hasOwnProperty(s)) counts[s]++;\n  });\n\nconst config = {\n\ttype: 'pie',\n\tdata: {\n\t\tlabels: [ 'Low', 'Medium', 'High' ],\n\t\tdatasets: [{\n\t\t    label: 'My First Dataset',\n\t\t    data: [\n\t\t\t  counts.Low,\n\t\t\t  counts.Medium,\n\t\t\t  counts.High\n\t\t\t],\n\t\t    backgroundColor: [\n\t\t\t\t'rgb(76, 175, 80)',\n\t\t\t\t'rgb(255, 152, 0)',\n\t\t\t\t'rgb(244, 67, 54)'\n\t\t    ],\n\t\t    hoverOffset: 4\n\t\t}]\n\t}\n};\n\nwindow.renderChart(config, this.container);\nthis.container.style.width = \"100%\";\n```\n<p style=\"text-align:center\"> Requirements by Priority </p>",
+      "type": "text",
+      "width": 420,
+      "x": -1060,
+      "y": -780
+    },
+    {
+      "height": 60,
+      "id": "7e408e29658d7d28",
+      "styleAttributes": {
+        "border": "invisible"
+      },
+      "text": "<big><big>[[Requirements|Requirements Dashboard]]</big></big>",
+      "type": "text",
+      "width": 320,
+      "x": -1523,
+      "y": -860
+    },
+    {
+      "height": 480,
+      "id": "cbe82d024c0d7cf5",
+      "styleAttributes": {
+      },
+      "text": "```dataviewjs\nlet counts = {};\n\n// Count category occurrences\ndv.pages('#requirement/Requirement and !\"metadata\"')\n  .forEach(p => {\n    let c = p.category || \"Uncategorized\";\n    counts[c] = (counts[c] || 0) + 1;\n  });\n\n// Deterministic color palette (add more as needed)\nconst palette = [\n  'rgb(33, 150, 243)',   // Blue\n  'rgb(76, 175, 80)',    // Green\n  'rgb(255, 193, 7)',    // Amber\n  'rgb(244, 67, 54)',    // Red\n  'rgb(156, 39, 176)',   // Purple\n  'rgb(0, 188, 212)',    // Cyan\n  'rgb(255, 152, 0)',    // Orange\n  'rgb(121, 85, 72)',    // Brown\n  'rgb(63, 81, 181)',    // Indigo\n  'rgb(139, 195, 74)'    // Light Green\n];\n\n// Simple hash function to convert string to a number\nfunction hashStringToIndex(str, mod) {\n  let hash = 0;\n  for (let i = 0; i < str.length; i++) {\n    hash = str.charCodeAt(i) + ((hash << 5) - hash);\n  }\n  return Math.abs(hash) % mod;\n}\n\n// Prepare labels, data, and mapped colors\nlet labels = Object.keys(counts);\nlet data = labels.map(label => counts[label]);\nlet backgroundColors = labels.map((label, i) =>\n  palette[i] || palette[hashStringToIndex(label, palette.length)]\n);\n\n// Build chart config\nconst config = {\n  type: 'pie',\n  data: {\n    labels: labels,\n    datasets: [{\n      label: 'Requirement Categories',\n      data: data,\n      backgroundColor: backgroundColors,\n      hoverOffset: 4\n    }]\n  }\n};\n\nwindow.renderChart(config, this.container);\nthis.container.style.width = \"100%\";\n```\n<p style=\"text-align:center\"> Requirements by Category </p>",
+      "type": "text",
+      "width": 420,
+      "x": -621,
+      "y": -783
+    }
+  ]
+}

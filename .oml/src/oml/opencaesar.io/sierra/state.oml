@@ -1,0 +1,54 @@
+vocabulary <http://opencaesar.io/sierra/state#> as state {
+
+	extends <http://www.w3.org/2000/01/rdf-schema#> as rdfs
+
+	extends <http://opencaesar.io/sierra/base#> as base
+
+	extends <http://opencaesar.io/sierra/process#> as process
+
+    // --- Aspect ---
+
+    @rdfs:comment "An element whose semantics are expressed over state variables"
+    aspect StateBasedElement < base:DescribedElement
+
+    @rdfs:comment "A state based element that pursues some state goals given some state constraints"
+    aspect PursuingElement < StateBasedElement
+
+    // --- Concepts ---
+
+    @rdfs:comment "A variable holding a particular state"
+    concept Variable < base:DescribedElement
+
+    @rdfs:comment "A condition on the value of state variables"
+    concept Condition < base:SpecifiedElement
+
+    @rdfs:comment "A state based element that asserts a state variable has some value for its duration"
+    concept Assertion < StateBasedElement, base:SpecifiedElement, process:ProcessStepElement
+
+    @rdfs:comment "A parameter representing a variability in a parameterized element."
+    concept Parameter < base:DescribedElement
+
+	// --- Relations ---
+
+    @rdfs:label "Has Parameters"
+    @rdfs:comment "The parameters declared by this [domain]."
+    relation hasParameter [
+        from StateBasedElement
+        to Parameter
+    ]
+
+    @rdfs:label "Has State Goals"
+    @rdfs:comment "The desired state conditions of executing this [domain]."
+    relation hasStateGoal [
+        from PursuingElement
+        to Condition
+    ]
+
+    @rdfs:label "Has State Constraints"
+    @rdfs:comment "The state conditions that must be met for this [domain] to achieve its goals."
+    relation hasStateConstraint [
+        from PursuingElement
+        to Condition
+    ]
+
+}

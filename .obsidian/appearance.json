@@ -1,0 +1,9 @@
+{
+  "theme": "obsidian",
+  "enabledCssSnippets": [
+    "dvit-cards",
+    "dvit-style",
+    "workspace"
+  ],
+  "cssTheme": ""
+}

@@ -1,0 +1,75 @@
+vocabulary <http://opencaesar.io/sierra/operational#> as operational {
+
+	extends <http://www.w3.org/2000/01/rdf-schema#> as rdfs
+
+	extends <http://opencaesar.io/sierra/base#> as base
+
+	extends <http://opencaesar.io/sierra/requirement#> as requirement
+
+	extends <http://opencaesar.io/sierra/state#> as state
+
+	extends <http://opencaesar.io/sierra/process#> as process
+
+    // --- Aspect ---
+
+    @rdfs:comment "An object that is involved in mission operations."
+    aspect Entity < base:DescribedElement
+
+    // --- Concepts ---
+
+    @rdfs:comment "An object that represents an environment for the mission."
+    concept Environment < Entity
+
+    @rdfs:comment "A state pursuing element that represents a mission operation."
+    concept Activity < state:PursuingElement, process:ProcessElement, process:ProcessStepElement [
+        restricts all process:hasProcessConstraint to Constraint
+    ]
+
+    @rdfs:comment "A state pursuing element that represents a V&V operation."
+    concept Scenario < state:PursuingElement, process:ProcessElement
+
+    @rdfs:comment "A process constraint specified on sub activities only."
+    concept Constraint < process:Constraint [
+        restricts all process:a to Activity
+        restricts all process:b to Activity
+        restricts all process:c to Activity
+    ]
+
+    // --- Relations ---
+
+    @rdfs:label "Drives"
+    @rdfs:comment "The activities driven by this requirement"
+	relation drives [
+		from requirement:Requirement
+		to Activity
+        @rdfs:label "Is Driven By"
+        @rdfs:comment "The requirements driving this activity"
+		reverse isDrivenBy
+		irreflexive
+		asymmetric
+	]
+
+    @rdfs:label "Derives"
+    @rdfs:comment "The requirements derived by this activity"
+	relation derives [
+		from Activity
+		to requirement:Requirement
+        @rdfs:label "Is Driven By"
+        @rdfs:comment "The activities deriving this requirement"
+		reverse isDerivedBy
+		irreflexive
+		asymmetric
+	]
+
+    @rdfs:label "Characterizes"
+    @rdfs:comment "The [range] that is characterized by this state variable."
+    relation characterizes [
+        from state:Variable
+        to Entity
+        @rdfs:label "Is Characterized By"
+        @rdfs:comment "The state variables that characterize this [domain]."
+        reverse isCharacterizedBy
+        functional
+    ]
+
+}

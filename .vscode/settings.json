@@ -1,0 +1,6 @@
+{
+    "files.exclude": {
+        "**/gradlew*": true,
+        "**/.gradle": true
+    }
+}

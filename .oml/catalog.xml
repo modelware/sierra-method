@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="public">
+	<rewriteURI uriStartString="http://opencaesar.io/sierra" rewritePrefix="src/oml/opencaesar.io/sierra"/>
+	<rewriteURI uriStartString="http://opencaesar.io/obsidian" rewritePrefix="src/oml/opencaesar.io/obsidian"/>
+	<rewriteURI uriStartString="http://" rewritePrefix="build/oml/"/>
+</catalog>

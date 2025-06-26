@@ -1,8 +1,6 @@
-.gradle
-build
-.DS_Store
-.idea
-
-# Fuseki output directory
 .fuseki
-
+.gradle
+.idea
+.DS_Store
+build
+workspace.json

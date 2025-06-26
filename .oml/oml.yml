@@ -1,0 +1,18 @@
+project:
+   title: Sierra
+   description: This is the Sierra vocabularies in OML
+   group: opencaesar.io
+   version: 0.3.0
+
+repositories:
+   - https://repo.maven.apache.org/maven2
+
+dependencies:
+   - io.opencaesar.ontologies:core-vocabularies:5.+
+
+datasets:
+   sierra:
+      iri: http://opencaesar.io/sierra/obsidian/bundle
+      url: http://localhost:3030/sierra
+      src: [ 'src/oml' ]
+      vault: '..'

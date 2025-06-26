@@ -1,0 +1,97 @@
+vocabulary <http://opencaesar.io/sierra/process#> as process {
+
+	extends <http://www.w3.org/2000/01/rdf-schema#> as rdfs
+
+	extends <http://opencaesar.io/sierra/base#> as base
+
+	extends <http://www.w3.org/2001/XMLSchema#> as xsd
+
+	extends <http://opencaesar.io/sierra/time#> as time
+
+    // --- aspects ---
+
+    @rdfs:comment "A temporal element that represents a process. It may be decomposable into sub-elements, 
+	on which it can have sequencing or multiplicity constraints."
+	aspect ProcessElement < time:TemporalElement
+
+    @rdfs:comment "A temporal element that represents a step within a process."
+	aspect ProcessStepElement < time:TemporalElement
+
+    // --- Concepts ---
+
+    @rdfs:comment "A constraint specified on occurrences of sub activities."
+    concept Constraint < base:DescribedElement
+
+    // Scalars
+
+	scalar ConstraintKind [ 
+		oneOf
+            // Existence Constraints
+            "LeastExistence(A, N)", // A must occur at least N times in context.
+            "MostExistence(A, N)", // A must occur at most N times in context.
+            "ExactExistence(A, N)", // A must occur exactly N times in context.
+            "Absense(A)", // A must not occur in context.
+            // Order Constraints
+            "First(A)", // A is the first to occur in context.
+            "Last(A)", // A is the last to occur in context.
+            // Choice Constraints
+            "Choice(C)", // At least one of the Cs eventually occur in context.
+            "ExclusiveChoice(C)", // At most one of the Cs eventually occur in context.
+            // Relational Constraints
+            "CoExistence(A, B)", // If A occurs in context, then B must occur as well, and vice vera.
+            "Response(A, B)", // If A occurs in context, then B must eventually occur after.
+            "Precedence (A, B)", // B can only occur in context if A has occurred before it.
+            "ChainResponse(A, B)", // If A occurs in context, then B must occur immediately after it.
+            "ChainPrecedence(A, B)" // B can only occur in context if A occurred immediately before it.
+	]
+
+    // Relations
+
+    @rdfs:label "Has Process Constraints"
+    @rdfs:comment "The process constraints specified on this [domain]."
+    relation hasProcessConstraint [
+        from ProcessElement
+        to Constraint
+    ]
+
+	@rdfs:label "A"
+	@rdfs:comment "Indicates the occurrence of subactivity A in this constraint."
+	relation a [
+		from Constraint
+		to ProcessStepElement
+		functional
+	]
+
+	@rdfs:label "B"
+	@rdfs:comment "Indicates the occurrence of sub activity B in this constraint."
+	relation b [
+		from Constraint
+		to ProcessStepElement
+		functional
+	]
+
+	@rdfs:label "C"
+	@rdfs:comment "Indicates the occurrence of sub activity Cs in this constraint."
+	relation c [
+		from Constraint
+		to ProcessStepElement
+	]
+
+	// Properties
+
+	@rdfs:label "Kind"
+	@rdfs:comment "Indicates the kind of this constraint."
+	scalar property kind [
+		domain Constraint
+		range ConstraintKind
+		functional
+	]
+
+	@rdfs:label "N"
+	@rdfs:comment "Indicates the N value in this constraint."
+	scalar property n [
+		domain Constraint
+		range xsd:int
+	]
+
+}
