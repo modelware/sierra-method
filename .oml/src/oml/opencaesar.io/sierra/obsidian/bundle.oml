@@ -1,6 +1,0 @@
-vocabulary bundle <http://opencaesar.io/sierra/obsidian/bundle#> as ^bundle {
-
-    extends <http://opencaesar.io/sierra/bundle#>
-
-    includes <http://opencaesar.io/sierra/obsidian/annotations#>    
-}

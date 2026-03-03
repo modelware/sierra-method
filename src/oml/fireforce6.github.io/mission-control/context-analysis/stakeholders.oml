@@ -1,0 +1,32 @@
+@dc:title "Stakeholders Description"
+@dc:description "Description of stakeholders for the Mission Control system."
+description <https://fireforce6.github.io/mission-control/context-analysis/stakeholders#> as stakeholders {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/stakeholder#> as stakeholder
+
+    instance FireFighter : stakeholder:Stakeholder, stakeholder:Stakeholder, stakeholder:Stakeholder [
+        base:description "Frontline operator fighting fires live, relies on dashboard for tactical awareness."
+        base:category "Beneficiary"
+    ]
+
+    instance Operator : stakeholder:Stakeholder [
+        base:description "Tele-operator or control-room staff [[https://www.modelware.io/sierra/stakeholder#Stakeholder]] monitoring and directing fire containment operations."
+        base:category "User"
+    ]
+
+    instance CommandCenter : stakeholder:Stakeholder [
+        base:description "Organizational authority responsible for overall coordination and decision-making."
+        base:category "User"
+    ]
+
+    instance SystemEngineer : stakeholder:Stakeholder [
+        base:description "Responsible for ensuring system reliability and integration with Fire Cloud and AI Warden."
+        base:category "Support"
+    ]
+
+    instance SafetyOfficer : stakeholder:Stakeholder [
+        base:description "Ensures alerts, communications, and responses comply with safety protocols."
+        base:category "Support"
+    ]
+}

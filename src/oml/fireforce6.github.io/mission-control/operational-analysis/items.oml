@@ -1,0 +1,51 @@
+@dc:title "Mission Control Items"
+@dc:description "Description of items that flow through the Mission Control system."
+description <https://fireforce6.github.io/mission-control/operational-analysis/items#> as items {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <https://www.modelware.io/sierra/base#> as base
+
+    instance alert : base:Item [
+        base:description "Alert signal (critical notification) produced by FireCloud or AIFireWarden."
+        base:category "Data"
+    ]
+
+    instance ai_proposal : base:Item [
+        base:description "Structured task proposal from AI Fire Warden (may require approval)."
+        base:category "Data"
+    ]
+
+    instance approval : base:Item [
+        base:description "Operator approval decision (approve / reject) for AI action."
+        base:category "Data"
+    ]
+
+    instance history_request : base:Item [
+        base:description "Request for historical telemetry/time-series data."
+        base:category "Data"
+    ]
+
+    instance history_response : base:Item [
+        base:description "Historical telemetry/time-series data returned from Fire Cloud."
+        base:category "Data"
+    ]
+
+    instance alert_acknowledgement : base:Item [
+        base:description "Operator acknowledgement of a notification or alert (non-approval scenario)."
+        base:category "Data"
+    ]
+
+    instance telemetry : base:Item [
+        base:description "Raw telemetry JSON packets."
+        base:category "Data"
+    ]
+
+    instance status : base:Item [
+        base:description "Parsed positional and status data for fire and drones."
+        base:category "Data"
+    ]
+
+    instance prompt : base:Item [
+        base:description "Message text or structured task command."
+        base:category "Data"
+    ]
+}

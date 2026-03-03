@@ -1,0 +1,64 @@
+@dc:title "Requirements Description"
+@dc:description "Description of requirements for the Mission Control system."
+description <https://fireforce6.github.io/mission-control/operational-analysis/requirements#> as requirements {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/stakeholder#> as stakeholder
+    extends <https://fireforce6.github.io/mission-control/context-analysis/stakeholders#> as stakeholders
+
+    instance R1 : stakeholder:Requirement [
+        base:description "Real-Time Map"
+        base:expression "The system shall display real-time fire and drone locations."
+        stakeholder:isStatedBy stakeholders:Operator
+        base:category "L1"
+        base:priority "High"
+    ]
+
+    instance R2 : stakeholder:Requirement [
+        base:description "Critical Alerts"
+        base:expression "The system shall show real-time critical alerts and notifications."
+        stakeholder:isStatedBy stakeholders:SafetyOfficer
+        base:category "L1"
+        base:priority "Low"
+    ]
+
+    instance R3 : stakeholder:Requirement [
+        base:description "AI Warden Interface"
+        base:expression "The system shall enable direct, smooth communication with the AI Fire Warden."
+        stakeholder:isStatedBy stakeholders:Operator
+        base:category "L2"
+        base:priority "High"
+    ]
+
+    instance R4 : stakeholder:Requirement [
+        base:description "Adaptive User Experience"
+        base:expression "The system shall remain functional under field conditions (heat, low connectivity)."
+        stakeholder:isStatedBy stakeholders:FireFighter
+        base:category "L1"
+        base:priority "Medium"
+    ]
+
+    instance R5 : stakeholder:Requirement [
+        base:description "Historical Views"
+        base:expression "The system shall support views of historical fire data for temporal analysis."
+        stakeholder:isStatedBy stakeholders:Operator
+        base:category "L1"
+        base:priority "High"
+    ]
+
+    instance R6 : stakeholder:Requirement [
+        base:description "Interoperability with Fire Cloud"
+        base:expression "The system shall ingest and interpret data streams from Fire Cloud."
+        stakeholder:isStatedBy stakeholders:SystemEngineer
+        base:category "L2"
+        base:priority "Low"
+    ]
+
+    instance R7 : stakeholder:Requirement [
+        base:description "Decision Approval Mechanism"
+        base:expression "The system shall allow human approval for AI Fire Warden's high-priority actions."
+        stakeholder:isStatedBy stakeholders:CommandCenter
+        base:category "L2"
+        base:priority "Medium"
+    ]
+}

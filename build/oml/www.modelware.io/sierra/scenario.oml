@@ -1,0 +1,229 @@
+@dc:title "Scenario vocabulary"
+@dc:description "Defines concepts and relations for modeling scenarios, interactions, and temporal aspects."
+vocabulary <https://www.modelware.io/sierra/scenario#> as scenario {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <http://www.w3.org/2001/XMLSchema#> as xsd
+    extends <http://www.w3.org/2000/01/rdf-schema#> as rdfs
+    extends <https://www.modelware.io/sierra/base#> as base
+    extends <https://www.modelware.io/sierra/entity#> as ^entity
+    extends <https://www.modelware.io/sierra/process#> as process
+    extends <https://www.modelware.io/sierra/state#> as state
+
+    @rdfs:comment "An element that spans a duration between two time points"
+    aspect Interval
+
+    @rdfs:comment "An element that occurs at one or more time points"
+    aspect Occurring
+
+    @rdfs:comment "A scenario represents interactions between entities over time"
+    concept Scenario < base:Element
+
+    @rdfs:comment "A lifeline represents an entity participating in the scenario"
+    concept Lifeline < base:Element
+
+    @rdfs:comment "A message represents communication between lifelines"
+    concept Message < Interval, base:Element
+
+    @rdfs:comment "A time point represents a specific temporal instant when something occurs on a lifeline"
+    concept TimePoint < base:Element
+
+    @rdfs:comment "Base concept for fragments"
+    concept Fragment < base:Element
+
+    @rdfs:comment "Reference to another interaction"
+    concept RefFragment < Occurring, Fragment
+
+    @rdfs:comment "A state fragment asserts that a given state holds at a particular event"
+    concept StateFragment < Occurring, Fragment [restricts atTime to max 1]
+
+    @rdfs:comment "A combined fragment with an interaction operator (alt, opt, loop, par, etc.)"
+    concept CombinedFragment < Fragment
+
+    @rdfs:comment "An operand within a combined fragment"
+    concept Operand < base:Element
+
+    @rdfs:comment "An execution showing when a lifeline is active"
+    concept Execution < Interval, base:Element
+
+    @rdfs:comment "kinds of a combined fragment in a scenario"
+    scalar CombinedFragmentKind [
+        oneOf "alt", "opt", "loop", "par"
+    ]
+
+    @rdfs:comment "Types of timing constraints between time points"
+    scalar TimingConstraintKind [
+        oneOf "atLeast", "atMost", "exactly", "concurrent"
+    ]
+
+    @rdfs:comment "Associates a lifeline with its scenario"
+    relation hasLifeline [
+        from Scenario
+        to Lifeline
+        reverse lifelineOf
+    ]
+
+    @rdfs:comment "Represents the participant (actor, object, component)"
+    relation represents [
+        from Lifeline
+        to entity:Entity
+        reverse representedBy
+        functional
+    ]
+
+    @rdfs:comment "The sequence of time points on a lifeline"
+    relation before [
+        from TimePoint
+        to TimePoint
+        reverse after
+        functional
+        inverse functional
+        asymmetric
+        irreflexive
+    ]
+
+    @rdfs:comment "Associates a time point with a lifeline"
+    relation occursOn [
+        from TimePoint
+        to Lifeline
+        reverse hasTimePoint
+        functional
+    ]
+
+    @rdfs:comment "The start time point of an interval"
+    relation startsAt [
+        from Interval
+        to TimePoint
+        reverse startOf
+        functional
+    ]
+
+    @rdfs:comment "The end time point of an interval"
+    relation endsAt [
+        from Interval
+        to TimePoint
+        reverse endOf
+        functional
+    ]
+
+    @rdfs:comment "The item(s) that the message carries"
+    relation carries [
+        from Message
+        to base:Item
+        reverse carriedBy
+    ]
+
+    @rdfs:comment "Reference to another scenario"
+    relation refersTo [
+        from RefFragment
+        to Scenario
+        reverse referredBy
+        functional
+    ]
+
+    @rdfs:comment "Associates an operand with its combined fragment"
+    relation hasOperand [
+        from CombinedFragment
+        to Operand
+        reverse operandOf
+    ]
+
+    @rdfs:comment "Associates a time point with an operand"
+    relation coveredBy [
+        from TimePoint
+        to Operand
+        reverse covers
+    ]
+
+    @rdfs:comment "Guard condition for an operand"
+    relation isGuardedBy [
+        from Operand
+        to base:Condition
+        reverse guardFor
+        functional
+    ]
+
+    @rdfs:comment "Associates a relation with an activity it executes"
+    relation executes [
+        from Execution
+        to process:Activity
+        reverse executedBy
+        functional
+    ]
+
+    @rdfs:comment "Associates a state fragment with the state it checks"
+    relation checks [
+        from StateFragment
+        to state:State
+        reverse checkedBy
+        functional
+    ]
+
+    @rdfs:comment "Associates an occurring element with a time point at which it occurs"
+    relation atTime [
+        from Occurring
+        to TimePoint
+        reverse hasOccurrence
+    ]
+
+    @rdfs:comment "A timing constraint between two time points"
+    relation entity TimingConstraint [
+        from TimePoint
+        to TimePoint
+        forward constraintFrom
+        reverse constraintTo
+    ] < base:Element
+
+    @rdfs:comment "The kind/type of a combined fragment"
+    scalar property fragmentKind [
+        domain CombinedFragment
+        range CombinedFragmentKind
+    ]
+
+    @rdfs:comment "Loop minimum iterations"
+    scalar property loopMin [
+        domain CombinedFragment
+        range xsd:integer
+    ]
+
+    @rdfs:comment "Loop maximum iterations"
+    scalar property loopMax [
+        domain CombinedFragment
+        range xsd:integer
+    ]
+
+    @rdfs:comment "Exact timestamp for a time point"
+    scalar property timeValue [
+        domain TimePoint
+        range xsd:dateTime
+    ]
+
+    @rdfs:comment "Minimum timestamp (earliest possible time) of a time point"
+    scalar property timeMin [
+        domain TimePoint
+        range xsd:dateTime
+    ]
+
+    @rdfs:comment "Maximum timestamp (latest possible time) of a time point"
+    scalar property timeMax [
+        domain TimePoint
+        range xsd:dateTime
+    ]
+
+    @rdfs:comment "The kind of timing constraint"
+    scalar property constraintKind [
+        domain TimingConstraint
+        range TimingConstraintKind
+    ]
+
+    @rdfs:comment "Duration value for relative timing constraints (in seconds)"
+    scalar property duration [
+        domain TimingConstraint
+        range xsd:decimal
+    ]
+
+    @rdfs:comment "Tolerance window for concurrent timing constraints (in seconds)"
+    scalar property tolerance [
+        domain TimingConstraint
+        range xsd:decimal
+    ]
+}

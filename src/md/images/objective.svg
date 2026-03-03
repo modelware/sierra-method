@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="#777777" stroke-width="2">
+  <!-- Outer circle -->
+  <circle cx="50" cy="50" r="45" />
+  
+  <!-- Middle circle -->
+  <circle cx="50" cy="50" r="30" />
+  
+  <!-- Inner circle -->
+  <circle cx="50" cy="50" r="15" />
+  
+  <!-- Center dot (filled) -->
+  <circle cx="50" cy="50" r="5" fill="black" />
+  
+  <!-- Arrow shaft -->
+  <line x1="50" y1="50" x2="85" y2="15" stroke-width="1" />
+  
+  <!-- Arrowhead point -->
+  <polygon points="85,15 85,10 90,15" fill="black" stroke="black" stroke-width="1" />
+</svg>

@@ -1,0 +1,48 @@
+@dc:title "Mission and Capabilities Description"
+@dc:description "Description of missions and capabilities for the Mission Control system."
+description <https://fireforce6.github.io/mission-control/operational-analysis/capabilities#> as capabilities {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/mission#> as mission
+    extends <https://fireforce6.github.io/mission-control/context-analysis/objectives#> as objectives
+
+    instance C1 : mission:Capability [
+        base:description "Enable view of fire state from specific time points."
+        mission:isRequiredBy objectives:O1
+    ]
+
+    instance C2 : mission:Capability [
+        base:description "Constantly fetch live fire and drone updates."
+        mission:isRequiredBy objectives:O2
+    ]
+
+    instance C3 : mission:Capability [
+        base:description "Fetch and visualize new notifications."
+        mission:isRequiredBy objectives:O2
+    ]
+
+    instance C4 : mission:Capability [
+        base:description "Allow adjustment of dashboard color schemes and layouts."
+        mission:isRequiredBy objectives:O3
+    ]
+
+    instance C5 : mission:Capability [
+        base:description "Enable chat-like interface for AI Warden communication."
+        mission:isRequiredBy objectives:O3
+    ]
+
+    instance C6 : mission:Capability [
+        base:description "Permit human approval of AI-generated tasks."
+        mission:isRequiredBy objectives:O4
+    ]
+
+    instance C7 : mission:Capability [
+        base:description "Display critical alerts by severity with acknowledgment function."
+        mission:isRequiredBy objectives:O4
+    ]
+
+    instance C8 : mission:Capability [
+        base:description "Integrate Fire Cloud telemetry for environment and drone data."
+        mission:isRequiredBy objectives:O2
+    ]
+}

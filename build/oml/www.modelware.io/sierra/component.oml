@@ -1,0 +1,19 @@
+@dc:title "Component vocabulary"
+@dc:description "Defines components."
+vocabulary <https://www.modelware.io/sierra/component#> as component {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <https://www.modelware.io/sierra/base#> as base
+    extends <http://www.w3.org/2001/XMLSchema#> as xsd
+
+    @dc:description "A component is a part of a system."
+    concept Component < base:Container, base:Contained, base:Element
+
+    concept PhysicalComponent < Component
+
+    @dc:description "The weight of the component."
+    scalar property mass [
+        domain PhysicalComponent
+        range xsd:decimal
+        functional
+    ]
+}

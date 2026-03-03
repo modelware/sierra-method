@@ -1,0 +1,13 @@
+@dc:title "Mission and Capabilities Description"
+@dc:description "Description of missions and capabilities for the Mission Control system."
+description <https://fireforce6.github.io/mission-control/context-analysis/missions#> as missions {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/mission#> as mission
+
+    instance MissionControl : mission:Mission [
+        base:description """Allow Analysis of **Wild Fires** any where in CA.
+        
+        ![](workspace:/src/md/images/mission-control.png)"""
+    ]
+}

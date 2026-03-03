@@ -1,0 +1,871 @@
+@dc:title "System Components"
+@dc:description "Description of components for the Mission Control system."
+description <https://fireforce6.github.io/mission-control/system-analysis/components#> as components {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/component#> as component
+
+    instance FireSat : component:Component [
+        base:description "Fire Satellite"
+    ]
+
+    instance Payload : component:Component [
+        base:description "Forest Fire Detection Payload"
+        base:isContainedBy FireSat
+    ]
+
+    instance Platform : component:Component [
+        base:description "Spacecraft Bus"
+        base:isContainedBy FireSat
+    ]
+
+    instance PowerSubsystem : component:Component [
+        base:description "Electrical Power Subsystem"
+        base:isContainedBy Platform
+    ]
+
+    instance Battery : component:Component [
+        base:description "Li-Ion Battery Pack"
+        base:isContainedBy PowerSubsystem
+    ]
+
+    instance BatteryCell1 : component:Component [
+        base:description "Li-Ion Cell - 3.7V 2.6Ah"
+        base:isContainedBy Battery
+    ]
+
+    instance BatteryCell2 : component:Component [
+        base:description "Li-Ion Cell - 3.7V 2.6Ah"
+        base:isContainedBy Battery
+    ]
+
+    instance BatteryCell3 : component:Component [
+        base:description "Li-Ion Cell - 3.7V 2.6Ah"
+        base:isContainedBy Battery
+    ]
+
+    instance BatteryCell4 : component:Component [
+        base:description "Li-Ion Cell - 3.7V 2.6Ah"
+        base:isContainedBy Battery
+    ]
+
+    instance BatteryManagementUnit : component:Component [
+        base:description "Battery Charge Controller & Protection"
+        base:isContainedBy Battery
+    ]
+
+    instance SolarArray : component:Component [
+        base:description "Solar Panel Assembly"
+        base:isContainedBy PowerSubsystem
+    ]
+
+    instance SolarPanel1 : component:Component [
+        base:description "Triple Junction GaAs Solar Panel - Port"
+        base:isContainedBy SolarArray
+    ]
+
+    instance SolarPanel2 : component:Component [
+        base:description "Triple Junction GaAs Solar Panel - Starboard"
+        base:isContainedBy SolarArray
+    ]
+
+    instance SolarCells1 : component:Component [
+        base:description "Solar Cell Array - Panel 1"
+        base:isContainedBy SolarPanel1
+    ]
+
+    instance SolarCells2 : component:Component [
+        base:description "Solar Cell Array - Panel 2"
+        base:isContainedBy SolarPanel2
+    ]
+
+    instance DeploymentMechanism1 : component:Component [
+        base:description "Solar Panel Deployment Hinge - Port"
+        base:isContainedBy SolarPanel1
+    ]
+
+    instance DeploymentMechanism2 : component:Component [
+        base:description "Solar Panel Deployment Hinge - Starboard"
+        base:isContainedBy SolarPanel2
+    ]
+
+    instance PowerConditioningUnit : component:Component [
+        base:description "Power Distribution & Regulation"
+        base:isContainedBy PowerSubsystem
+    ]
+
+    instance DCDCConverter1 : component:Component [
+        base:description "28V to 5V DC-DC Converter"
+        base:isContainedBy PowerConditioningUnit
+    ]
+
+    instance DCDCConverter2 : component:Component [
+        base:description "28V to 12V DC-DC Converter"
+        base:isContainedBy PowerConditioningUnit
+    ]
+
+    instance DCDCConverter3 : component:Component [
+        base:description "28V to 3.3V DC-DC Converter"
+        base:isContainedBy PowerConditioningUnit
+    ]
+
+    instance PowerDistributionBox : component:Component [
+        base:description "Switched Power Distribution"
+        base:isContainedBy PowerConditioningUnit
+    ]
+
+    instance CommunicationSubsystem : component:Component [
+        base:description "Telemetry, Tracking & Command Subsystem"
+        base:isContainedBy Platform
+    ]
+
+    instance CommUnit : component:Component [
+        base:description "S-Band Transceiver"
+        base:isContainedBy CommunicationSubsystem
+    ]
+
+    instance SBandTransmitter : component:Component [
+        base:description "S-Band Transmitter - 10W"
+        base:isContainedBy CommUnit
+    ]
+
+    instance TransmitterPA : component:Component [
+        base:description "Power Amplifier Module"
+        base:isContainedBy SBandTransmitter
+    ]
+
+    instance TransmitterOscillator : component:Component [
+        base:description "Frequency Synthesizer"
+        base:isContainedBy SBandTransmitter
+    ]
+
+    instance SBandReceiver : component:Component [
+        base:description "S-Band Receiver"
+        base:isContainedBy CommUnit
+    ]
+
+    instance ReceiverLNA : component:Component [
+        base:description "Low Noise Amplifier"
+        base:isContainedBy SBandReceiver
+    ]
+
+    instance ReceiverDemodulator : component:Component [
+        base:description "BPSK Demodulator"
+        base:isContainedBy SBandReceiver
+    ]
+
+    instance SBandAntenna : component:Component [
+        base:description "S-Band Patch Antenna Array"
+        base:isContainedBy CommunicationSubsystem
+    ]
+
+    instance AntennaPatch1 : component:Component [
+        base:description "Antenna Patch Element 1"
+        base:isContainedBy SBandAntenna
+    ]
+
+    instance AntennaPatch2 : component:Component [
+        base:description "Antenna Patch Element 2"
+        base:isContainedBy SBandAntenna
+    ]
+
+    instance AntennaPatch3 : component:Component [
+        base:description "Antenna Patch Element 3"
+        base:isContainedBy SBandAntenna
+    ]
+
+    instance AntennaPatch4 : component:Component [
+        base:description "Antenna Patch Element 4"
+        base:isContainedBy SBandAntenna
+    ]
+
+    instance AntennaFeedNetwork : component:Component [
+        base:description "RF Feed Distribution Network"
+        base:isContainedBy SBandAntenna
+    ]
+
+    instance OBC : component:Component [
+        base:description "On-Board Computer"
+        base:isContainedBy Platform
+    ]
+
+    instance MainProcessor : component:Component [
+        base:description "RAD750 PowerPC Processor"
+        base:isContainedBy OBC
+    ]
+
+    instance ProcessorCore : component:Component [
+        base:description "PowerPC 750 Core - 200 MHz"
+        base:isContainedBy MainProcessor
+    ]
+
+    instance ProcessorCache : component:Component [
+        base:description "L1/L2 Cache Memory"
+        base:isContainedBy MainProcessor
+    ]
+
+    instance RAMModule : component:Component [
+        base:description "256MB SDRAM Module"
+        base:isContainedBy OBC
+    ]
+
+    instance FlashMemory : component:Component [
+        base:description "2GB Flash Storage"
+        base:isContainedBy OBC
+    ]
+
+    instance IOController : component:Component [
+        base:description "Input/Output Controller"
+        base:isContainedBy OBC
+    ]
+
+    instance SpaceWireInterface : component:Component [
+        base:description "SpaceWire Network Interface"
+        base:isContainedBy IOController
+    ]
+
+    instance RS422Interface : component:Component [
+        base:description "RS-422 Serial Interface"
+        base:isContainedBy IOController
+    ]
+
+    instance WatchdogTimer : component:Component [
+        base:description "Watchdog Timer Circuit"
+        base:isContainedBy OBC
+    ]
+
+    instance DataStorage : component:Component [
+        base:description "Solid State Data Recorder"
+        base:isContainedBy Platform
+    ]
+
+    instance StorageModule1 : component:Component [
+        base:description "128GB Flash Storage Module"
+        base:isContainedBy DataStorage
+    ]
+
+    instance StorageModule2 : component:Component [
+        base:description "128GB Flash Storage Module"
+        base:isContainedBy DataStorage
+    ]
+
+    instance StorageController : component:Component [
+        base:description "RAID Controller"
+        base:isContainedBy DataStorage
+    ]
+
+    instance PropulsionSubsystem : component:Component [
+        base:description "Reaction Control System"
+        base:isContainedBy Platform
+    ]
+
+    instance PropulsionUnit : component:Component [
+        base:description "Monopropellant Thruster Assembly"
+        base:isContainedBy PropulsionSubsystem
+    ]
+
+    instance Thruster1 : component:Component [
+        base:description "1N Monopropellant Thruster - +X"
+        base:isContainedBy PropulsionUnit
+    ]
+
+    instance Thruster2 : component:Component [
+        base:description "1N Monopropellant Thruster - -X"
+        base:isContainedBy PropulsionUnit
+    ]
+
+    instance Thruster3 : component:Component [
+        base:description "1N Monopropellant Thruster - +Y"
+        base:isContainedBy PropulsionUnit
+    ]
+
+    instance Thruster4 : component:Component [
+        base:description "1N Monopropellant Thruster - -Y"
+        base:isContainedBy PropulsionUnit
+    ]
+
+    instance Thruster5 : component:Component [
+        base:description "1N Monopropellant Thruster - +Z"
+        base:isContainedBy PropulsionUnit
+    ]
+
+    instance Thruster6 : component:Component [
+        base:description "1N Monopropellant Thruster - -Z"
+        base:isContainedBy PropulsionUnit
+    ]
+
+    instance ThrusterValve1 : component:Component [
+        base:description "Solenoid Valve - Thruster 1"
+        base:isContainedBy Thruster1
+    ]
+
+    instance ThrusterValve2 : component:Component [
+        base:description "Solenoid Valve - Thruster 2"
+        base:isContainedBy Thruster2
+    ]
+
+    instance ThrusterValve3 : component:Component [
+        base:description "Solenoid Valve - Thruster 3"
+        base:isContainedBy Thruster3
+    ]
+
+    instance ThrusterValve4 : component:Component [
+        base:description "Solenoid Valve - Thruster 4"
+        base:isContainedBy Thruster4
+    ]
+
+    instance ThrusterValve5 : component:Component [
+        base:description "Solenoid Valve - Thruster 5"
+        base:isContainedBy Thruster5
+    ]
+
+    instance ThrusterValve6 : component:Component [
+        base:description "Solenoid Valve - Thruster 6"
+        base:isContainedBy Thruster6
+    ]
+
+    instance PropellantTank : component:Component [
+        base:description "Hydrazine Propellant Tank - 50L"
+        base:isContainedBy PropulsionSubsystem
+    ]
+
+    instance TankBladder : component:Component [
+        base:description "Propellant Management Device"
+        base:isContainedBy PropellantTank
+    ]
+
+    instance TankHeater : component:Component [
+        base:description "Tank Thermal Control Heater"
+        base:isContainedBy PropellantTank
+    ]
+
+    instance PropellantFeedSystem : component:Component [
+        base:description "Propellant Feed Lines & Filters"
+        base:isContainedBy PropulsionSubsystem
+    ]
+
+    instance PressureRegulator : component:Component [
+        base:description "Pressure Regulator"
+        base:isContainedBy PropellantFeedSystem
+    ]
+
+    instance PropellantFilter : component:Component [
+        base:description "In-Line Filter"
+        base:isContainedBy PropellantFeedSystem
+    ]
+
+    instance IsolationValve : component:Component [
+        base:description "Latch Valve"
+        base:isContainedBy PropellantFeedSystem
+    ]
+
+    instance ADCSSubsystem : component:Component [
+        base:description "Attitude Determination & Control Subsystem"
+        base:isContainedBy Platform
+    ]
+
+    instance StarTracker : component:Component [
+        base:description "Star Tracker Assembly"
+        base:isContainedBy ADCSSubsystem
+    ]
+
+    instance StarTrackerOptics : component:Component [
+        base:description "Star Tracker Lens Assembly"
+        base:isContainedBy StarTracker
+    ]
+
+    instance StarTrackerCCD : component:Component [
+        base:description "CCD Image Sensor"
+        base:isContainedBy StarTracker
+    ]
+
+    instance StarTrackerProcessor : component:Component [
+        base:description "Star Pattern Recognition Processor"
+        base:isContainedBy StarTracker
+    ]
+
+    instance SunSensor1 : component:Component [
+        base:description "Coarse Sun Sensor - Face 1"
+        base:isContainedBy ADCSSubsystem
+    ]
+
+    instance SunSensor2 : component:Component [
+        base:description "Coarse Sun Sensor - Face 2"
+        base:isContainedBy ADCSSubsystem
+    ]
+
+    instance SunSensor3 : component:Component [
+        base:description "Coarse Sun Sensor - Face 3"
+        base:isContainedBy ADCSSubsystem
+    ]
+
+    instance SunSensor4 : component:Component [
+        base:description "Coarse Sun Sensor - Face 4"
+        base:isContainedBy ADCSSubsystem
+    ]
+
+    instance IMU : component:Component [
+        base:description "Inertial Measurement Unit"
+        base:isContainedBy ADCSSubsystem
+    ]
+
+    instance Gyroscope1 : component:Component [
+        base:description "Fiber Optic Gyro - X Axis"
+        base:isContainedBy IMU
+    ]
+
+    instance Gyroscope2 : component:Component [
+        base:description "Fiber Optic Gyro - Y Axis"
+        base:isContainedBy IMU
+    ]
+
+    instance Gyroscope3 : component:Component [
+        base:description "Fiber Optic Gyro - Z Axis"
+        base:isContainedBy IMU
+    ]
+
+    instance Accelerometer : component:Component, component:PhysicalComponent, component:PhysicalComponent, component:PhysicalComponent [
+        base:description "3-Axis Accelerometer"
+        base:isContainedBy IMU
+    ]
+
+    instance Magnetometer : component:Component [
+        base:description "3-Axis Magnetometer"
+        base:isContainedBy ADCSSubsystem
+    ]
+
+    instance ReactionWheelAssembly : component:Component [
+        base:description "Reaction Wheel Array"
+        base:isContainedBy ADCSSubsystem
+    ]
+
+    instance ReactionWheel1 : component:Component [
+        base:description "Reaction Wheel - X Axis"
+        base:isContainedBy ReactionWheelAssembly
+    ]
+
+    instance ReactionWheel2 : component:Component [
+        base:description "Reaction Wheel - Y Axis"
+        base:isContainedBy ReactionWheelAssembly
+    ]
+
+    instance ReactionWheel3 : component:Component [
+        base:description "Reaction Wheel - Z Axis"
+        base:isContainedBy ReactionWheelAssembly
+    ]
+
+    instance ReactionWheel4 : component:Component [
+        base:description "Reaction Wheel - Skew Axis (redundant)"
+        base:isContainedBy ReactionWheelAssembly
+    ]
+
+    instance WheelMotor1 : component:Component [
+        base:description "Brushless DC Motor - Wheel 1"
+        base:isContainedBy ReactionWheel1
+    ]
+
+    instance WheelMotor2 : component:Component [
+        base:description "Brushless DC Motor - Wheel 2"
+        base:isContainedBy ReactionWheel2
+    ]
+
+    instance WheelMotor3 : component:Component [
+        base:description "Brushless DC Motor - Wheel 3"
+        base:isContainedBy ReactionWheel3
+    ]
+
+    instance WheelMotor4 : component:Component [
+        base:description "Brushless DC Motor - Wheel 4"
+        base:isContainedBy ReactionWheel4
+    ]
+
+    instance WheelSpeedSensor1 : component:Component [
+        base:description "Hall Effect Speed Sensor - Wheel 1"
+        base:isContainedBy ReactionWheel1
+    ]
+
+    instance WheelSpeedSensor2 : component:Component [
+        base:description "Hall Effect Speed Sensor - Wheel 2"
+        base:isContainedBy ReactionWheel2
+    ]
+
+    instance WheelSpeedSensor3 : component:Component [
+        base:description "Hall Effect Speed Sensor - Wheel 3"
+        base:isContainedBy ReactionWheel3
+    ]
+
+    instance WheelSpeedSensor4 : component:Component [
+        base:description "Hall Effect Speed Sensor - Wheel 4"
+        base:isContainedBy ReactionWheel4
+    ]
+
+    instance MagnetorquerAssembly : component:Component [
+        base:description "Magnetorquer Coils"
+        base:isContainedBy ADCSSubsystem
+    ]
+
+    instance MagnetorquerX : component:Component [
+        base:description "Magnetorquer Coil - X Axis"
+        base:isContainedBy MagnetorquerAssembly
+    ]
+
+    instance MagnetorquerY : component:Component [
+        base:description "Magnetorquer Coil - Y Axis"
+        base:isContainedBy MagnetorquerAssembly
+    ]
+
+    instance MagnetorquerZ : component:Component [
+        base:description "Magnetorquer Coil - Z Axis"
+        base:isContainedBy MagnetorquerAssembly
+    ]
+
+    instance StructuralFrame : component:Component [
+        base:description "Primary Spacecraft Structure"
+        base:isContainedBy Platform
+    ]
+
+    instance MainBusStructure : component:Component [
+        base:description "Aluminum Bus Frame"
+        base:isContainedBy StructuralFrame
+    ]
+
+    instance TopPanel : component:Component [
+        base:description "Top Panel - Aluminum Honeycomb"
+        base:isContainedBy MainBusStructure
+    ]
+
+    instance BottomPanel : component:Component [
+        base:description "Bottom Panel - Aluminum Honeycomb"
+        base:isContainedBy MainBusStructure
+    ]
+
+    instance SidePanel1 : component:Component [
+        base:description "Side Panel +X - Aluminum Honeycomb"
+        base:isContainedBy MainBusStructure
+    ]
+
+    instance SidePanel2 : component:Component [
+        base:description "Side Panel -X - Aluminum Honeycomb"
+        base:isContainedBy MainBusStructure
+    ]
+
+    instance SidePanel3 : component:Component [
+        base:description "Side Panel +Y - Aluminum Honeycomb"
+        base:isContainedBy MainBusStructure
+    ]
+
+    instance SidePanel4 : component:Component [
+        base:description "Side Panel -Y - Aluminum Honeycomb"
+        base:isContainedBy MainBusStructure
+    ]
+
+    instance InternalShelf1 : component:Component [
+        base:description "Equipment Mounting Shelf 1"
+        base:isContainedBy MainBusStructure
+    ]
+
+    instance InternalShelf2 : component:Component [
+        base:description "Equipment Mounting Shelf 2"
+        base:isContainedBy MainBusStructure
+    ]
+
+    instance LaunchAdapter : component:Component [
+        base:description "Launch Vehicle Interface Ring"
+        base:isContainedBy StructuralFrame
+    ]
+
+    instance SeparationSystem : component:Component [
+        base:description "Separation Mechanism"
+        base:isContainedBy LaunchAdapter
+    ]
+
+    instance SeparationSpring : component:Component [
+        base:description "Separation Spring Assembly"
+        base:isContainedBy SeparationSystem
+    ]
+
+    instance WireHarness : component:Component [
+        base:description "Electrical Harness & Cabling"
+        base:isContainedBy StructuralFrame
+    ]
+
+    instance PowerHarness : component:Component [
+        base:description "Power Distribution Cabling"
+        base:isContainedBy WireHarness
+    ]
+
+    instance DataHarness : component:Component [
+        base:description "Data Bus Cabling"
+        base:isContainedBy WireHarness
+    ]
+
+    instance ThermalSubsystem : component:Component [
+        base:description "Thermal Control Subsystem"
+        base:isContainedBy Platform
+    ]
+
+    instance PassiveThermalControl : component:Component [
+        base:description "Passive Thermal Control"
+        base:isContainedBy ThermalSubsystem
+    ]
+
+    instance MLI : component:Component [
+        base:description "Multi-Layer Insulation Blankets"
+        base:isContainedBy PassiveThermalControl
+    ]
+
+    instance MLIBlanket1 : component:Component [
+        base:description "MLI Blanket - Bus Side 1"
+        base:isContainedBy MLI
+    ]
+
+    instance MLIBlanket2 : component:Component [
+        base:description "MLI Blanket - Bus Side 2"
+        base:isContainedBy MLI
+    ]
+
+    instance MLIBlanket3 : component:Component [
+        base:description "MLI Blanket - Bus Side 3"
+        base:isContainedBy MLI
+    ]
+
+    instance RadiatorPanel : component:Component [
+        base:description "Thermal Radiator Panel"
+        base:isContainedBy PassiveThermalControl
+    ]
+
+    instance HeatPipes : component:Component [
+        base:description "Heat Pipe Network"
+        base:isContainedBy PassiveThermalControl
+    ]
+
+    instance HeatPipe1 : component:Component [
+        base:description "Heat Pipe - OBC to Radiator"
+        base:isContainedBy HeatPipes
+    ]
+
+    instance HeatPipe2 : component:Component [
+        base:description "Heat Pipe - Power to Radiator"
+        base:isContainedBy HeatPipes
+    ]
+
+    instance ActiveThermalControl : component:Component [
+        base:description "Active Thermal Control"
+        base:isContainedBy ThermalSubsystem
+    ]
+
+    instance SurvivalHeater1 : component:Component [
+        base:description "Survival Heater - Battery"
+        base:isContainedBy ActiveThermalControl
+    ]
+
+    instance SurvivalHeater2 : component:Component [
+        base:description "Survival Heater - Propellant Tank"
+        base:isContainedBy ActiveThermalControl
+    ]
+
+    instance SurvivalHeater3 : component:Component [
+        base:description "Survival Heater - Payload"
+        base:isContainedBy ActiveThermalControl
+    ]
+
+    instance TemperatureSensor1 : component:Component [
+        base:description "Temperature Sensor - Battery"
+        base:isContainedBy ActiveThermalControl
+    ]
+
+    instance TemperatureSensor2 : component:Component [
+        base:description "Temperature Sensor - OBC"
+        base:isContainedBy ActiveThermalControl
+    ]
+
+    instance TemperatureSensor3 : component:Component [
+        base:description "Temperature Sensor - Propellant"
+        base:isContainedBy ActiveThermalControl
+    ]
+
+    instance TemperatureSensor4 : component:Component [
+        base:description "Temperature Sensor - Payload"
+        base:isContainedBy ActiveThermalControl
+    ]
+
+    instance ThermalSensor : component:Component [
+        base:description "MWIR Thermal Imaging Sensor"
+        base:isContainedBy Payload
+    ]
+
+    instance ThermalOptics : component:Component [
+        base:description "MWIR Optical System"
+        base:isContainedBy ThermalSensor
+    ]
+
+    instance PrimaryLens : component:Component [
+        base:description "Germanium Primary Lens"
+        base:isContainedBy ThermalOptics
+    ]
+
+    instance SecondaryLens : component:Component [
+        base:description "Germanium Secondary Lens"
+        base:isContainedBy ThermalOptics
+    ]
+
+    instance LensBarrel : component:Component [
+        base:description "Optical Lens Barrel Assembly"
+        base:isContainedBy ThermalOptics
+    ]
+
+    instance FocalPlaneAssembly : component:Component [
+        base:description "MWIR Focal Plane Assembly"
+        base:isContainedBy ThermalSensor
+    ]
+
+    instance InSbDetectorArray : component:Component [
+        base:description "InSb Detector Array - 640x512"
+        base:isContainedBy FocalPlaneAssembly
+    ]
+
+    instance ReadoutIC : component:Component [
+        base:description "ROIC - Readout Integrated Circuit"
+        base:isContainedBy FocalPlaneAssembly
+    ]
+
+    instance DewarAssembly : component:Component [
+        base:description "Cryogenic Dewar"
+        base:isContainedBy FocalPlaneAssembly
+    ]
+
+    instance ColdShield : component:Component [
+        base:description "Cold Shield & Baffle"
+        base:isContainedBy FocalPlaneAssembly
+    ]
+
+    instance Cryocooler : component:Component [
+        base:description "Active Cryogenic Cooler"
+        base:isContainedBy ThermalSensor
+    ]
+
+    instance CryocoolerCompressor : component:Component [
+        base:description "Stirling Cycle Compressor"
+        base:isContainedBy Cryocooler
+    ]
+
+    instance CryocoolerExpander : component:Component [
+        base:description "Cold Finger Expander"
+        base:isContainedBy Cryocooler
+    ]
+
+    instance CryocoolerController : component:Component [
+        base:description "Cooler Drive Electronics"
+        base:isContainedBy Cryocooler
+    ]
+
+    instance VisualCamera : component:Component [
+        base:description "High Resolution Visible Camera"
+        base:isContainedBy Payload
+    ]
+
+    instance VisualOptics : component:Component [
+        base:description "Visible Light Optical System"
+        base:isContainedBy VisualCamera
+    ]
+
+    instance ObjectiveLens : component:Component [
+        base:description "Multi-Element Objective Lens"
+        base:isContainedBy VisualOptics
+    ]
+
+    instance FilterWheel : component:Component [
+        base:description "Color Filter Wheel"
+        base:isContainedBy VisualOptics
+    ]
+
+    instance RedFilter : component:Component [
+        base:description "Red Bandpass Filter"
+        base:isContainedBy FilterWheel
+    ]
+
+    instance GreenFilter : component:Component [
+        base:description "Green Bandpass Filter"
+        base:isContainedBy FilterWheel
+    ]
+
+    instance BlueFilter : component:Component [
+        base:description "Blue Bandpass Filter"
+        base:isContainedBy FilterWheel
+    ]
+
+    instance FilterMotor : component:Component [
+        base:description "Stepper Motor - Filter Wheel"
+        base:isContainedBy FilterWheel
+    ]
+
+    instance CMOSImager : component:Component [
+        base:description "CMOS Image Sensor - 4096x4096"
+        base:isContainedBy VisualCamera
+    ]
+
+    instance ImageSensorArray : component:Component [
+        base:description "Pixel Array"
+        base:isContainedBy CMOSImager
+    ]
+
+    instance ImageSensorADC : component:Component [
+        base:description "Analog to Digital Converter"
+        base:isContainedBy CMOSImager
+    ]
+
+    instance PayloadProcessor : component:Component [
+        base:description "Payload Data Processing Unit"
+        base:isContainedBy Payload
+    ]
+
+    instance ImageProcessor : component:Component [
+        base:description "FPGA Image Processor"
+        base:isContainedBy PayloadProcessor
+    ]
+
+    instance CompressionEngine : component:Component [
+        base:description "Lossy Compression Engine"
+        base:isContainedBy PayloadProcessor
+    ]
+
+    instance PayloadMemory : component:Component [
+        base:description "Payload Buffer Memory - 8GB"
+        base:isContainedBy PayloadProcessor
+    ]
+
+    instance PayloadInterface : component:Component [
+        base:description "SpaceWire Interface to OBC"
+        base:isContainedBy PayloadProcessor
+    ]
+
+    instance PayloadStructure : component:Component [
+        base:description "Payload Mounting Platform"
+        base:isContainedBy Payload
+    ]
+
+    instance OpticalBench : component:Component [
+        base:description "Optical Bench & Mounting"
+        base:isContainedBy PayloadStructure
+    ]
+
+    instance VibrationIsolator : component:Component [
+        base:description "Vibration Isolation Mounts"
+        base:isContainedBy PayloadStructure
+    ]
+
+    instance GPSReceiver : component:Component [
+        base:description "GPS Navigation Receiver"
+        base:isContainedBy ADCSSubsystem
+    ]
+
+    instance GPSAntenna : component:Component [
+        base:description "GPS Patch Antenna"
+        base:isContainedBy GPSReceiver
+    ]
+
+    instance GPSProcessor : component:Component [
+        base:description "GPS Signal Processor"
+        base:isContainedBy GPSReceiver
+    ]
+}

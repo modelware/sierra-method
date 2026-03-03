@@ -1,0 +1,18 @@
+# OML properties
+oml:
+   version: 2.13.0
+
+# Project properties
+project:
+   title: Sierra Vocabulary
+   description: This is the Sierra vocabulary project
+   group: io.github.fireforce6
+   version: 0.1.0
+
+# Maven repositories
+repositories:
+   - https://repo.maven.apache.org/maven2
+
+# Maven dependencies
+dependencies:
+   - io.opencaesar.ontologies:core-vocabularies:5.+

@@ -1,0 +1,51 @@
+@dc:title "Process vocabulary"
+@dc:description "Defines processes, activities, and data flows used to model behaviors and allocations."
+vocabulary <https://www.modelware.io/sierra/process#> as process {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <https://www.modelware.io/sierra/base#> as base
+    extends <https://www.modelware.io/sierra/mission#> as mission
+    extends <https://www.modelware.io/sierra/entity#> as ^entity
+
+    @dc:description "A modeled process composed of data flows between activities."
+    concept Process < base:Element
+
+    @dc:description "An Activity represents a unit of work."
+    concept Activity < base:Element
+
+    @dc:description "Connects a Process to the Capability it describes."
+    relation describes [
+        from Process
+        to mission:Capability
+        reverse isDescribedBy
+    ]
+
+    @dc:description "A Process includes Flows between Activities."
+    relation ^includes [
+        from Process
+        to Flow
+        reverse isIncludedIn
+    ]
+
+    @dc:description "A Flow flows data between two Activities."
+    relation entity Flow [
+        from Activity
+        to Activity
+        forward flowsTo
+        reverse flowsFrom
+        irreflexive
+    ] < base:Element
+
+    @dc:description "A Flow flows Data."
+    relation flows [
+        from Flow
+        to base:Item
+        reverse isCarriedBy
+    ]
+
+    @dc:description "An Activity may be allocated to an Entity (resource allocation)."
+    relation isAllocatedTo [
+        from Activity
+        to entity:Entity
+        reverse isResponsibleFor
+    ]
+}

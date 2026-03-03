@@ -1,6 +1,10 @@
-.fuseki
+# Gradle files
 .gradle
-.idea
+!build/oml
+!build/md
+
+# MacOS files
 .DS_Store
-build
-workspace.json
+
+# node files
+node_modules

@@ -1,0 +1,38 @@
+@dc:title "Mission Objectives Description"
+@dc:description "Description of objectives for the Mission Control system."
+description <https://fireforce6.github.io/mission-control/context-analysis/objectives#> as objectives {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/mission#> as mission
+    extends <https://fireforce6.github.io/mission-control/context-analysis/concerns#> as concerns
+    extends <https://fireforce6.github.io/mission-control/context-analysis/missions#> as missions
+
+    instance O1 : mission:Objective [
+        base:description "Allow Analysis of Fire at Any Point in Time."
+        mission:isPursuedBy missions:MissionControl
+        mission:isDerivedFrom concerns:OperatorNeeds
+    ]
+
+    instance O2 : mission:Objective [
+        base:description "Enable Real-Time Data Stream and Awareness."
+        mission:isPursuedBy missions:MissionControl
+        mission:isDerivedFrom concerns:OperatorNeeds
+        mission:isDerivedFrom concerns:SafetyOfficerNeeds
+        mission:isDerivedFrom concerns:SystemEngineerNeeds
+        mission:isDerivedFrom concerns:CommandCenterNeeds
+    ]
+
+    instance O3 : mission:Objective [
+        base:description "Provide Responsive, Easy-to-Use Interface."
+        mission:isPursuedBy missions:MissionControl
+        mission:isDerivedFrom concerns:OperatorNeeds
+        mission:isDerivedFrom concerns:FireFighterNeeds
+    ]
+
+    instance O4 : mission:Objective [
+        base:description "Ensure Safe and Controlled Decision Support."
+        mission:isPursuedBy missions:MissionControl
+        mission:isDerivedFrom concerns:SafetyOfficerNeeds
+        mission:isDerivedFrom concerns:CommandCenterNeeds
+    ]
+}

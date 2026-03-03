@@ -1,0 +1,77 @@
+@dc:title "State Machine Description"
+@dc:description "Description of state machines for the Mission Control system."
+description <https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm2#> as sm2 {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/state#> as state
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/entities#> as entities
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/processes#> as processes
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/items#> as items
+
+    instance AIFireWardenStateMachine : state:StateMachine [
+        base:description "State machine modeling the AI Fire Warden behavior."
+        state:isAllocatedTo entities:AIFireWarden
+    ]
+
+    instance WardenInitial : state:Initial [
+        base:description "AI Warden startup / idle."
+        base:isContainedBy AIFireWardenStateMachine
+    ]
+
+    instance Observing : state:State [
+        base:description "Warden monitors telemetry and looks for anomalies."
+        state:enables processes:A5
+        base:isContainedBy AIFireWardenStateMachine
+    ]
+
+    instance Advising : state:State [
+        base:description "Warden formulates a recommendation or task (advisory mode)."
+        state:enables processes:A5
+        base:isContainedBy AIFireWardenStateMachine
+    ]
+
+    instance AwaitingApproval : state:State [
+        base:description "Warden has proposed an action and is awaiting human approval."
+        state:enables processes:A6
+        base:isContainedBy AIFireWardenStateMachine
+    ]
+
+    instance ExecutingAction : state:State [
+        base:description "Warden is executing an approved mitigation task (autonomous actions)."
+        state:enables processes:A3
+        base:isContainedBy AIFireWardenStateMachine
+    ]
+
+    relation instance W_T_idle_to_observing : state:Transition [
+        from WardenInitial
+        to Observing
+        base:description "Warden becomes active and starts observation."
+    ]
+
+    relation instance W_T_detect_anomaly : state:Transition [
+        from Observing
+        to Advising
+        base:description "While observing, Warden detects anomaly (smoke/fire)."
+        state:isTriggeredBy items:alert
+    ]
+
+    relation instance W_T_propose_action : state:Transition [
+        from Advising
+        to AwaitingApproval
+        base:description "Warden generates a structured proposal and sends to dashboard/operator."
+        state:isTriggeredBy items:ai_proposal
+    ]
+
+    relation instance W_T_receive_approval : state:Transition [
+        from AwaitingApproval
+        to ExecutingAction
+        base:description "Warden receives approval from operator; begins execution."
+        state:isTriggeredBy items:approval
+    ]
+
+    relation instance W_T_execution_complete : state:Transition [
+        from ExecutingAction
+        to Observing
+        base:description "Execution completes; return to Observing mode."
+    ]
+}

@@ -1,0 +1,382 @@
+@dc:title "Scenarios Description"
+@dc:description "Description of scenarios for the Mission Control system."
+description <https://fireforce6.github.io/mission-control/operational-analysis/scenarios#> as scenarios {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/scenario#> as scenario
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/entities#> as entities
+    extends <https://fireforce6.github.io/mission-control/context-analysis/stakeholders#> as stakeholders
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/processes#> as processes
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/items#> as items
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm1#> as sm1
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm2#> as sm2
+
+    instance RespondToCriticalNotification : scenario:Scenario [
+        base:description "Scenario showing flow when a critical notification is produced and acknowledged."
+    ]
+
+    instance RCN_Dashboard_Lifeline : scenario:Lifeline [
+        base:description "Dashboard lifeline"
+        scenario:lifelineOf RespondToCriticalNotification
+        scenario:represents entities:DashboardSystem
+    ]
+
+    instance RCN_AIWarden_Lifeline : scenario:Lifeline [
+        base:description "AI Fire Warden lifeline"
+        scenario:lifelineOf RespondToCriticalNotification
+        scenario:represents entities:AIFireWarden
+    ]
+
+    instance RCN_Operator_Lifeline : scenario:Lifeline [
+        base:description "Operator lifeline (human in control-room or field UI)"
+        scenario:lifelineOf RespondToCriticalNotification
+        scenario:represents stakeholders:Operator
+    ]
+
+    instance RCN_FireCloud_Lifeline : scenario:Lifeline [
+        base:description "Fire Cloud lifeline (source of telemetry/alerts)"
+        scenario:lifelineOf RespondToCriticalNotification
+        scenario:represents entities:FireCloud
+    ]
+
+    instance RCN_Dashboard_TP1 : scenario:TimePoint [
+        scenario:occursOn RCN_Dashboard_Lifeline
+    ]
+
+    instance RCN_Dashboard_TP2 : scenario:TimePoint [
+        scenario:occursOn RCN_Dashboard_Lifeline
+        scenario:after RCN_Dashboard_TP1
+    ]
+
+    instance RCN_Dashboard_TP3 : scenario:TimePoint [
+        scenario:occursOn RCN_Dashboard_Lifeline
+        scenario:after RCN_Dashboard_TP2
+    ]
+
+    instance RCN_Dashboard_TP4 : scenario:TimePoint [
+        scenario:occursOn RCN_Dashboard_Lifeline
+        scenario:after RCN_Dashboard_TP3
+    ]
+
+    instance RCN_Dashboard_TP5 : scenario:TimePoint [
+        scenario:occursOn RCN_Dashboard_Lifeline
+        scenario:after RCN_Dashboard_TP4
+    ]
+
+    instance RCN_Dashboard_TP6 : scenario:TimePoint [
+        scenario:occursOn RCN_Dashboard_Lifeline
+        scenario:after RCN_Dashboard_TP5
+    ]
+
+    instance RCN_AIWarden_TP1 : scenario:TimePoint [
+        scenario:occursOn RCN_AIWarden_Lifeline
+    ]
+
+    instance RCN_AIWarden_TP2 : scenario:TimePoint [
+        scenario:occursOn RCN_AIWarden_Lifeline
+        scenario:after RCN_AIWarden_TP1
+    ]
+
+    instance RCN_AIWarden_TP3 : scenario:TimePoint [
+        scenario:occursOn RCN_AIWarden_Lifeline
+        scenario:after RCN_AIWarden_TP2
+    ]
+
+    instance RCN_AIWarden_TP4 : scenario:TimePoint [
+        scenario:occursOn RCN_AIWarden_Lifeline
+        scenario:after RCN_AIWarden_TP3
+    ]
+
+    instance RCN_Operator_TP1 : scenario:TimePoint [
+        scenario:occursOn RCN_Operator_Lifeline
+    ]
+
+    instance RCN_Operator_TP2 : scenario:TimePoint [
+        scenario:occursOn RCN_Operator_Lifeline
+        scenario:after RCN_Operator_TP1
+    ]
+
+    instance RCN_FireCloud_TP1 : scenario:TimePoint [
+        scenario:occursOn RCN_FireCloud_Lifeline
+    ]
+
+    instance RCN_SF_DashboardMonitoring : scenario:StateFragment [
+        base:description "Dashboard is in Monitoring when it receives the alert"
+        scenario:atTime RCN_Dashboard_TP1
+        scenario:checks sm1:Monitoring
+    ]
+
+    instance RCN_SF_WardenObserving : scenario:StateFragment [
+        base:description "AI Warden is Observing at scenario start"
+        scenario:atTime RCN_AIWarden_TP1
+        scenario:checks sm2:Observing
+    ]
+
+    instance RCN_M1 : scenario:Message [
+        base:description "FireCloud sends critical alert to Dashboard"
+        scenario:startsAt RCN_FireCloud_TP1
+        scenario:endsAt RCN_Dashboard_TP2
+        scenario:carries items:alert
+    ]
+
+    instance RCN_Exec_UpdateMap : scenario:Execution [
+        base:description "Dashboard updates map visualization after receiving alert"
+        scenario:startsAt RCN_Dashboard_TP2
+        scenario:endsAt RCN_Dashboard_TP3
+        scenario:executes processes:A3
+    ]
+
+    instance RCN_M2 : scenario:Message [
+        base:description "Dashboard displays alert to Operator"
+        scenario:startsAt RCN_Dashboard_TP4
+        scenario:endsAt RCN_Operator_TP1
+        scenario:carries items:alert
+    ]
+
+    instance RCN_M3 : scenario:Message [
+        base:description "Operator acknowledges alert (approval or ACK)"
+        scenario:startsAt RCN_Operator_TP2
+        scenario:endsAt RCN_Dashboard_TP5
+        scenario:carries items:approval
+    ]
+
+    instance RCN_M4 : scenario:Message [
+        base:description "Dashboard forwards acknowledgment to AI Warden"
+        scenario:startsAt RCN_Dashboard_TP6
+        scenario:endsAt RCN_AIWarden_TP2
+        scenario:carries items:approval
+    ]
+
+    instance RCN_M5 : scenario:Message [
+        base:description "AI Warden receives acknowledgment and updated internal state / telemetry"
+        scenario:startsAt RCN_AIWarden_TP3
+        scenario:endsAt RCN_AIWarden_TP4
+        scenario:carries items:approval
+    ]
+
+    instance ApproveAIWardenTask : scenario:Scenario [
+        base:description "Scenario for the human-in-the-loop approval of an AI Warden task proposal."
+    ]
+
+    instance AAT_AIWarden_Lifeline : scenario:Lifeline [
+        base:description "AI Warden lifeline"
+        scenario:lifelineOf ApproveAIWardenTask
+        scenario:represents entities:AIFireWarden
+    ]
+
+    instance AAT_Dashboard_Lifeline : scenario:Lifeline [
+        base:description "Dashboard lifeline"
+        scenario:lifelineOf ApproveAIWardenTask
+        scenario:represents entities:DashboardSystem
+    ]
+
+    instance AAT_Operator_Lifeline : scenario:Lifeline [
+        base:description "Operator lifeline"
+        scenario:lifelineOf ApproveAIWardenTask
+        scenario:represents stakeholders:Operator
+    ]
+
+    instance AAT_AIWarden_TP1 : scenario:TimePoint [
+        scenario:occursOn AAT_AIWarden_Lifeline
+    ]
+
+    instance AAT_AIWarden_TP2 : scenario:TimePoint [
+        scenario:occursOn AAT_AIWarden_Lifeline
+        scenario:after AAT_AIWarden_TP1
+    ]
+
+    instance AAT_AIWarden_TP3 : scenario:TimePoint [
+        scenario:occursOn AAT_AIWarden_Lifeline
+        scenario:after AAT_AIWarden_TP2
+    ]
+
+    instance AAT_Dashboard_TP1 : scenario:TimePoint [
+        scenario:occursOn AAT_Dashboard_Lifeline
+    ]
+
+    instance AAT_Dashboard_TP2 : scenario:TimePoint [
+        scenario:occursOn AAT_Dashboard_Lifeline
+        scenario:after AAT_Dashboard_TP1
+    ]
+
+    instance AAT_Dashboard_TP3 : scenario:TimePoint [
+        scenario:occursOn AAT_Dashboard_Lifeline
+        scenario:after AAT_Dashboard_TP2
+    ]
+
+    instance AAT_Dashboard_TP4 : scenario:TimePoint [
+        scenario:occursOn AAT_Dashboard_Lifeline
+        scenario:after AAT_Dashboard_TP3
+    ]
+
+    instance AAT_Dashboard_TP5 : scenario:TimePoint [
+        scenario:occursOn AAT_Dashboard_Lifeline
+        scenario:after AAT_Dashboard_TP4
+    ]
+
+    instance AAT_Operator_TP1 : scenario:TimePoint [
+        scenario:occursOn AAT_Operator_Lifeline
+    ]
+
+    instance AAT_M1 : scenario:Message [
+        base:description "AI Warden sends structured proposal to Dashboard"
+        scenario:startsAt AAT_AIWarden_TP1
+        scenario:endsAt AAT_Dashboard_TP1
+        scenario:carries items:ai_proposal
+    ]
+
+    instance AAT_SF_WardenAwaiting : scenario:StateFragment [
+        base:description "AI Warden is AwaitingApproval while the proposal is pending."
+        scenario:atTime AAT_AIWarden_TP2
+        scenario:checks sm2:AwaitingApproval
+    ]
+
+    instance AAT_Exec_DisplayProposal : scenario:Execution [
+        base:description "Dashboard displays AI proposal in chat interface (and shows Approve button)"
+        scenario:startsAt AAT_Dashboard_TP1
+        scenario:endsAt AAT_Dashboard_TP4
+        scenario:executes processes:A4
+    ]
+
+    instance AAT_M3 : scenario:Message [
+        base:description "Operator sends approval or rejection to dashboard"
+        scenario:startsAt AAT_Operator_TP1
+        scenario:endsAt AAT_Dashboard_TP2
+        scenario:carries items:approval
+    ]
+
+    instance AAT_Exec_ProcessApproval : scenario:Execution [
+        base:description "Dashboard processes approval"
+        scenario:startsAt AAT_Dashboard_TP2
+        scenario:endsAt AAT_Dashboard_TP3
+        scenario:executes processes:A6
+    ]
+
+    instance AAT_M4 : scenario:Message [
+        base:description "Dashboard forwards approval to AI Warden"
+        scenario:startsAt AAT_Dashboard_TP5
+        scenario:endsAt AAT_AIWarden_TP3
+        scenario:carries items:approval
+    ]
+
+    instance ViewHistoricalData : scenario:Scenario [
+        base:description "Scenario demonstrating an Operator viewing historical fire states on the dashboard."
+    ]
+
+    instance VHD_Operator_Lifeline : scenario:Lifeline [
+        base:description "Operator lifeline"
+        scenario:lifelineOf ViewHistoricalData
+        scenario:represents stakeholders:Operator
+    ]
+
+    instance VHD_Dashboard_Lifeline : scenario:Lifeline [
+        base:description "Dashboard lifeline"
+        scenario:lifelineOf ViewHistoricalData
+        scenario:represents entities:DashboardSystem
+    ]
+
+    instance VHD_FireCloud_Lifeline : scenario:Lifeline [
+        base:description "Fire Cloud lifeline (source of historical items)"
+        scenario:lifelineOf ViewHistoricalData
+        scenario:represents entities:FireCloud
+    ]
+
+    instance VHD_Operator_TP1 : scenario:TimePoint [
+        scenario:occursOn VHD_Operator_Lifeline
+    ]
+
+    instance VHD_Operator_TP2 : scenario:TimePoint [
+        scenario:occursOn VHD_Operator_Lifeline
+    ]
+
+    instance VHD_Dashboard_TP1 : scenario:TimePoint [
+        scenario:occursOn VHD_Dashboard_Lifeline
+    ]
+
+    instance VHD_Dashboard_TP2 : scenario:TimePoint [
+        scenario:occursOn VHD_Dashboard_Lifeline
+        scenario:after VHD_Dashboard_TP1
+    ]
+
+    instance VHD_Dashboard_TP3 : scenario:TimePoint [
+        scenario:occursOn VHD_Dashboard_Lifeline
+        scenario:after VHD_Dashboard_TP2
+    ]
+
+    instance VHD_Dashboard_TP4 : scenario:TimePoint [
+        scenario:occursOn VHD_Dashboard_Lifeline
+        scenario:after VHD_Dashboard_TP3
+    ]
+
+    instance VHD_Dashboard_TP5 : scenario:TimePoint [
+        scenario:occursOn VHD_Dashboard_Lifeline
+        scenario:after VHD_Dashboard_TP4
+    ]
+
+    instance VHD_Dashboard_TP6 : scenario:TimePoint [
+        scenario:occursOn VHD_Dashboard_Lifeline
+        scenario:after VHD_Dashboard_TP5
+    ]
+
+    instance VHD_Dashboard_TP7 : scenario:TimePoint [
+        scenario:occursOn VHD_Dashboard_Lifeline
+        scenario:after VHD_Dashboard_TP6
+    ]
+
+    instance VHD_FireCloud_TP1 : scenario:TimePoint [
+        scenario:occursOn VHD_FireCloud_Lifeline
+    ]
+
+    instance VHD_FireCloud_TP2 : scenario:TimePoint [
+        scenario:occursOn VHD_FireCloud_Lifeline
+        scenario:after VHD_FireCloud_TP1
+    ]
+
+    instance VHD_M1 : scenario:Message [
+        base:description "Operator requests historical items via dashboard UI"
+        scenario:startsAt VHD_Operator_TP1
+        scenario:endsAt VHD_Dashboard_TP1
+        scenario:carries items:history_request
+    ]
+
+    instance VHD_M2 : scenario:Message [
+        base:description "Dashboard forwards history request to FireCloud"
+        scenario:startsAt VHD_Dashboard_TP2
+        scenario:endsAt VHD_FireCloud_TP1
+        scenario:carries items:history_request
+    ]
+
+    instance VHD_Exec_RequestHistory : scenario:Execution [
+        base:description "NetworkInterface issues history fetch to FireCloud (A1)."
+        scenario:startsAt VHD_FireCloud_TP1
+        scenario:endsAt VHD_FireCloud_TP2
+        scenario:executes processes:A1
+    ]
+
+    instance VHD_M3 : scenario:Message [
+        base:description "FireCloud returns historical telemetry to Dashboard"
+        scenario:startsAt VHD_FireCloud_TP2
+        scenario:endsAt VHD_Dashboard_TP3
+        scenario:carries items:history_response
+    ]
+
+    instance VHD_Exec_RenderHistory : scenario:Execution [
+        base:description "Dashboard parses history and updates the map/historical layer (A2/A3)."
+        scenario:startsAt VHD_Dashboard_TP4
+        scenario:endsAt VHD_Dashboard_TP5
+        scenario:executes processes:A2
+    ]
+
+    instance VHD_M4 : scenario:Message [
+        base:description "Dashboard renders historical items on the map/time-slider"
+        scenario:startsAt VHD_Dashboard_TP6
+        scenario:endsAt VHD_Operator_TP2
+        scenario:carries items:history_response
+    ]
+
+    instance VHD_SF_DashboardHistorical : scenario:StateFragment [
+        base:description "Dashboard is in HistoricalReview while rendering and user inspects past state."
+        scenario:atTime VHD_Dashboard_TP7
+        scenario:checks sm1:HistoricalReview
+    ]
+}

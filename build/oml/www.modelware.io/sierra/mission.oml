@@ -1,0 +1,37 @@
+@dc:title "Capability vocabulary"
+@dc:description "Defines concepts and relations used to capture capabilities and their relationships to requirements."
+vocabulary <https://www.modelware.io/sierra/mission#> as mission {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <https://www.modelware.io/sierra/base#> as base
+    extends <https://www.modelware.io/sierra/stakeholder#> as stakeholder
+
+    @dc:description "A Mission is a higher-level goal that can be decomposed into more specific objectives."
+    concept Mission < base:Element
+
+    @dc:description "An Objective is a measurable outcome of a mission."
+    aspect Objective < base:Element
+
+    @dc:description "A Capability is an ability that is required by the mission."
+    concept Capability < base:Element
+
+    @dc:description "Indicates that a Mission pursues an Objective."
+    relation pursues [
+        from Mission
+        to Objective
+        reverse isPursuedBy
+    ]
+
+    @dc:description "Indicates that an Objective is derived from a Concern."
+    relation derives [
+        from stakeholder:Concern
+        to Objective
+        reverse isDerivedFrom
+    ]
+
+    @dc:description "Indicates that an Objective requires a Capability."
+    relation requires [
+        from Objective
+        to Capability
+        reverse isRequiredBy
+    ]
+}

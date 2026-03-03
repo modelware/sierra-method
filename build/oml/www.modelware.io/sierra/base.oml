@@ -1,0 +1,68 @@
+@dc:title "Base Vocabulary"
+@dc:description "The base vocabulary for Sierra modeling language."
+vocabulary <https://www.modelware.io/sierra/base#> as base {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <http://www.w3.org/2001/XMLSchema#> as xsd
+
+    @dc:description "A general model element; the root of the Sierra type hierarchy."
+    aspect Element
+
+    @dc:description "An element that can contain other elements (e.g., a StateMachine or LifeLine)."
+    aspect Container
+
+    @dc:description "An element that may be contained by a Container (e.g., State, Operand)."
+    aspect Contained
+
+    @dc:description "An element that can have an expression or textual value (used for requirements, conditions, operands)."
+    aspect Expressible
+
+    @dc:description "An element that can have a priority assigned to it."
+    aspect Prioritized
+
+    @dc:description "An element that can be categorized by arbitrary labels."
+    aspect Categorized
+
+    @dc:description "A boolean or logical test expressed as text; a subtype of Expressible."
+    concept Condition < Expressible, Element
+
+    @dc:description "An item represents information, material, or energy."
+    concept Item < Categorized, Element
+
+    @dc:description "A priority level assigned to an element."
+    scalar Priority [
+        oneOf "Low", "Medium", "High"
+    ] = xsd:string
+
+    @dc:description "General relation indicating one element contains another. The inverse is 'isContainedBy'."
+    relation contains [
+        from Container
+        to Contained
+        reverse isContainedBy
+        inverse functional
+    ]
+
+    @dc:description "A textual description attached to an Element."
+    scalar property ^description [
+        domain Element
+        range xsd:string
+        functional
+    ]
+
+    @dc:description "A textual expression attached to an Expressible element."
+    scalar property expression [
+        domain Expressible
+        range xsd:string
+        functional
+    ]
+
+    scalar property priority [
+        domain Prioritized
+        range Priority
+        functional
+    ]
+
+    scalar property category [
+        domain Categorized
+        range xsd:string
+    ]
+}

@@ -1,0 +1,123 @@
+@dc:title "State Machine Description"
+@dc:description "Description of state machines for the Mission Control system."
+description <https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm1#> as sm1 {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/state#> as state
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/entities#> as entities
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/processes#> as processes
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/items#> as items
+
+    instance MissionControlDashboard : state:StateMachine [
+        base:description "State machine modeling the Mission Control Dashboard operational modes."
+        state:isAllocatedTo entities:DashboardSystem
+    ]
+
+    instance DashboardInitial : state:Initial [
+        base:description "Initial dashboard state (startup / not connected)."
+        base:isContainedBy MissionControlDashboard
+    ]
+
+    instance Idle : state:State [
+        base:description "Dashboard is idle or on standby; not actively streaming."
+        base:isContainedBy MissionControlDashboard
+        state:enables processes:A1
+    ]
+
+    instance Monitoring : state:State [
+        base:description "Dashboard is actively monitoring live items and updating the map."
+        base:isContainedBy MissionControlDashboard
+        state:enables processes:A2, processes:A3
+    ]
+
+    instance AlertHandling : state:State [
+        base:description "Dashboard is handling a critical alert; displaying pop-up and workflow."
+        base:isContainedBy MissionControlDashboard
+        state:enables processes:A3, processes:A6
+    ]
+
+    instance DecisionPending : state:State [
+        base:description "Dashboard is awaiting human approval for an AI-suggested task."
+        base:isContainedBy MissionControlDashboard
+        state:enables processes:A6
+    ]
+
+    instance HistoricalReview : state:State [
+        base:description "Dashboard is in historical/time-travel view mode (slider engaged)."
+        base:isContainedBy MissionControlDashboard
+        state:enables processes:A2
+    ]
+
+    instance DashboardFinal : state:Final [
+        base:description "Dashboard session ended / system shutdown."
+        base:isContainedBy MissionControlDashboard
+    ]
+
+    relation instance T_startMonitoring : state:Transition [
+        from DashboardInitial
+        to Monitoring
+        base:description "Startup / user starts monitoring."
+        state:isTriggeredBy items:history_response
+    ]
+
+    relation instance T_idle_to_monitoring : state:Transition [
+        from Idle
+        to Monitoring
+        base:description "Operator starts live monitoring."
+        state:isTriggeredBy items:alert
+    ]
+
+    relation instance T_monitoring_to_idle : state:Transition [
+        from Monitoring
+        to Idle
+        base:description "Operator pauses or suspends active monitoring."
+    ]
+
+    relation instance T_monitoring_receive_alert : state:Transition [
+        from Monitoring
+        to AlertHandling
+        base:description "Incoming critical alert moves dashboard into AlertHandling state."
+        state:isTriggeredBy items:alert
+    ]
+
+    relation instance T_alert_acknowledge : state:Transition [
+        from AlertHandling
+        to Monitoring
+        base:description "Operator acknowledges alert (non-approval scenario); return to Monitoring."
+        state:isTriggeredBy items:alert_acknowledgement
+    ]
+
+    relation instance T_alert_requires_approval : state:Transition [
+        from AlertHandling
+        to DecisionPending
+        base:description "Alert triggers an AI proposal that requires human approval; go to DecisionPending."
+        state:isTriggeredBy items:ai_proposal
+    ]
+
+    relation instance T_decision_approved : state:Transition [
+        from DecisionPending
+        to Monitoring
+        base:description "Operator approves AI action; return to Monitoring (or remain in DecisionPending until executed)."
+        state:isTriggeredBy items:approval
+    ]
+
+    relation instance T_enter_historical : state:Transition [
+        from Monitoring
+        to HistoricalReview
+        base:description "Operator requests historical view."
+        state:isTriggeredBy items:history_request
+    ]
+
+    relation instance T_exit_historical : state:Transition [
+        from HistoricalReview
+        to Monitoring
+        base:description "Operator returns from historical view to live monitoring."
+        state:isTriggeredBy items:history_response
+    ]
+
+    relation instance T_shutdown : state:Transition [
+        from Monitoring
+        to DashboardFinal
+        base:description "Operator or system shuts down dashboard session."
+    ]
+}

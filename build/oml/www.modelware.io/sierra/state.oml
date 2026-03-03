@@ -1,0 +1,59 @@
+@dc:title "State vocabulary"
+@dc:description "Models state machines, states, transitions, triggers and guards for operational modes and behaviors."
+vocabulary <https://www.modelware.io/sierra/state#> as state {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <https://www.modelware.io/sierra/base#> as base
+    extends <https://www.modelware.io/sierra/entity#> as ^entity
+    extends <https://www.modelware.io/sierra/process#> as process
+
+    @dc:description "A [[StateMachine]] is a container of [[State]]s and models the state-based behavior of an [[entity:Entity]] ."
+    concept StateMachine < base:Container, base:Element [
+        restricts all base:contains to State 
+        restricts base:contains to max 1 Initial
+    ]
+
+    @dc:description "A State represents a stable condition in a StateMachine [[entity:Actor8]]."
+    concept State < base:Contained, base:Element
+
+    @dc:description "An Initial state marks the start of a [[StateMachine]]."
+    concept Initial < State [restricts transitionsFrom to max 0]
+
+    @dc:description "A Final state marks termination in a StateMachine."
+    concept Final < State [restricts transitionsTo to max 0]
+
+    @dc:description "Allocates a StateMachine to an Entity (which performs or owns the state machine)."
+    relation isAllocatedTo [
+        from StateMachine
+        to entity:Entity
+        reverse allocates
+    ]
+
+    @dc:description "Transition relation between States; forward label transitionsTo."
+    relation entity Transition [
+        from State
+        to State
+        forward transitionsTo
+        reverse transitionsFrom
+    ] < base:Element
+
+    @dc:description "A Transition may have a trigger Data item."
+    relation isTriggeredBy [
+        from Transition
+        to base:Item
+        reverse triggers
+    ]
+
+    @dc:description "A Transition may have a guard Condition constraining the transition."
+    relation guards [
+        from base:Condition
+        to Transition
+        reverse isGuardedBy
+    ]
+
+    @dc:description "Indicates that a State enables the given Activity."
+    relation enables [
+        from State
+        to process:Activity
+        reverse isEnabledBy
+    ]
+}

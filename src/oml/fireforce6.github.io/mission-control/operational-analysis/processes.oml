@@ -1,0 +1,79 @@
+@dc:title "Processes and Activities Description"
+@dc:description "Description of processes and activities for the Mission Control system."
+description <https://fireforce6.github.io/mission-control/operational-analysis/processes#> as processes {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/process#> as process
+    extends <https://fireforce6.github.io/mission-control/context-analysis/stakeholders#> as stakeholders
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/capabilities#> as capabilities
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/entities#> as entities
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/items#> as items
+
+    instance A1 : process:Activity [
+        base:description "Request live telemetry from Fire Cloud."
+        process:isAllocatedTo entities:NetworkInterface
+    ]
+
+    instance A2 : process:Activity [
+        base:description "Receive and parse incoming items stream."
+        process:isAllocatedTo entities:DashboardSystem
+    ]
+
+    instance A3 : process:Activity [
+        base:description "Update map visualization layer with new fire and drone items."
+        process:isAllocatedTo entities:DashboardSystem
+    ]
+
+    instance A4 : process:Activity [
+        base:description "Send operator message to AI Warden."
+        process:isAllocatedTo entities:DashboardSystem
+    ]
+
+    instance A5 : process:Activity [
+        base:description "Receive AI Warden response or task proposal."
+        process:isAllocatedTo entities:AIFireWarden
+    ]
+
+    instance A6 : process:Activity [
+        base:description "Display AI message in chat interface and await user approval."
+        process:isAllocatedTo stakeholders:Operator
+    ]
+
+    relation instance F1 : process:Flow [
+        from A1
+        to A2
+        process:flows items:telemetry
+    ]
+
+    relation instance F2 : process:Flow [
+        from A2
+        to A3
+        process:flows items:status
+    ]
+
+    relation instance F3 : process:Flow [
+        from A4
+        to A5
+        process:flows items:prompt
+    ]
+
+    relation instance F4 : process:Flow [
+        from A5
+        to A6
+        process:flows items:prompt
+    ]
+
+    instance P1 : process:Process [
+        base:description "Process for Real-Time Fire Data Streaming."
+        process:describes capabilities:C2
+        process:includes F1
+        process:includes F2
+    ]
+
+    instance P2 : process:Process [
+        base:description "Process for Operator-Warden Communication and Task Approval."
+        process:describes capabilities:C5
+        process:includes F3
+        process:includes F4
+    ]
+}

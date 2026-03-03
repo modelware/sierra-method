@@ -1,0 +1,13 @@
+<svg width="240" height="530" shape-rendering="geometricPrecision" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 53" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+	<g stroke-width="1px" stroke="#777777" fill="none">
+		<!-- Head -->
+		<circle cx="12" cy="7" r="6"/>
+		<!-- Body -->
+		<line x1="12" y1="13" x2="12" y2="36"/>
+		<!-- Arms -->
+		<line x1="4" y1="24" x2="20" y2="24"/>
+		<!-- Legs -->
+		<line x1="12" y1="36" x2="3" y2="52"/>
+		<line x1="12" y1="36" x2="21" y2="52"/>
+	</g>
+</svg>
