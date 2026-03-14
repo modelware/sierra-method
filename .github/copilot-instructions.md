@@ -5,7 +5,7 @@ You are assisting with Ontological Modeling Language (OML), a language for creat
 
 ## File Structure and Extensions
 - `.oml` - OML textual syntax files
-- Source files typically go in `/src/oml/` directory
+- Source files typically go in `/src/model/oml/` directory
 - Build outputs typically go in `build/oml/` directory
 
 ## Core Concepts

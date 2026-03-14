@@ -1,0 +1,29 @@
+@dc:title "Stakeholder vocabulary"
+@dc:description "Captures stakeholders and their needs and requirements."
+vocabulary <https://www.modelware.io/sierra/stakeholder#> as stakeholder {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <https://www.modelware.io/sierra/base#> as base
+
+    @dc:description "A Stakeholder is an entity that has interests in Requirements (people, organizations)."
+    concept Stakeholder < base:Categorized, base:Element
+
+    @dc:description "A Concern is a statement describing the interest, need, expectation, constraint, risk, or priority of stakeholders."
+    concept Concern < base:Categorized, base:Prioritized, base:Element
+
+    @dc:description "A Requirement is an expressible statement describing a needed property or behavior of a system."
+    concept Requirement < base:Categorized, base:Prioritized, base:Expressible, base:Element
+
+    @dc:description "Indicates that a Stakeholder states a Need."
+    relation expresses [
+        from Stakeholder
+        to Concern
+        reverse isExpressedBy
+    ]
+
+    @dc:description "Indicates that a Stakeholder expresses or owns a Requirement."
+    relation states [
+        from Stakeholder
+        to Requirement
+        reverse isStatedBy
+    ]
+}

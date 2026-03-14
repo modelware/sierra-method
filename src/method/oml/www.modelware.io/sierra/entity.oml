@@ -1,0 +1,21 @@
+@dc:title "Entity vocabulary"
+@dc:description "Defines entities and actors and how capabilities involve entities."
+vocabulary <https://www.modelware.io/sierra/entity#> as ^entity {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <https://www.modelware.io/sierra/base#> as base
+    extends <https://www.modelware.io/sierra/mission#> as mission
+    extends <https://www.modelware.io/sierra/stakeholder#> as stakeholder
+
+    @dc:description "A generic operational entity (person, organization, system component)."
+    concept Entity < base:Element
+
+    @dc:description "An Actor represents an entity that plays roles as a stakeholder or participant. It is a Stakeholder and an Entity."
+    concept Actor < stakeholder:Stakeholder, Entity
+
+    @dc:description "Indicates that a Capability is assigned to an Entity."
+    relation isAssignedTo [
+        from mission:Capability
+        to Entity
+        reverse hasCapability
+    ]
+}

@@ -1,0 +1,14 @@
+version: 0.6.0
+
+project:
+   title: Fire Force VI
+   description: This project demonstrates the use of the Sierra method
+   group: io.modelware.examples
+   artifact: fireforce6
+   version: 0.1.0
+
+repositories:
+   - https://repo.maven.apache.org/maven2
+
+dependencies:
+   - io.opencaesar.ontologies:core-vocabularies:5.+

@@ -6,7 +6,7 @@ This repository provides an [OML Code](https://www.modelware.io/) template for m
 
 ## 🚀 Already in OML Code?
 
-Click on <a href="src/md/index.md" class="internal-link"><button style="color: white; border: 2px solid green; background-color: green; padding: 10px 20px; font-size: 12px; cursor: pointer; border-radius: 5px;">START</button></a>
+Click on <a href="src/model/md/index.md" class="internal-link"><button style="color: white; border: 2px solid green; background-color: green; padding: 10px 20px; font-size: 12px; cursor: pointer; border-radius: 5px;">START</button></a>
 
 ## 🛠️ Install OML Code
 
