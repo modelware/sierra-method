@@ -17,6 +17,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      OML_PLATFORM_API_KEY: ${{ secrets.OML_PLATFORM_API_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -40,7 +42,7 @@ jobs:
         run: oml -V
 
       - name: Render Oml
-        run: oml render -md src/model/md -owl build/owl -web build/web
+        run: oml render -md src/model/md -owl build/owl -web build/web -c src/model/oml/fireforce6.github.io/mission-control/bundle.oml
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
