@@ -7,11 +7,33 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.2
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Install Oml
+        run: npm install -g @oml/cli
+
+      - name: Version Oml
+        run: oml -V
+
+      - name: Lint Oml
+        run: oml lint
+
+      - name: Compile Oml
+        run: oml compile -owl build/owl --only
+
+      - name: Reason Oml
+        run: oml reason -owl build/owl --only
+
+      - name: Validate Oml
+        run: oml validate -md src/model/md -owl build/owl --only
