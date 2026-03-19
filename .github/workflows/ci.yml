@@ -16,9 +16,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.18.2
+          node-version: 22.18.0
           registry-url: https://registry.npmjs.org
-          cache: npm
 
       - name: Install Oml
         run: npm install -g @oml/cli
