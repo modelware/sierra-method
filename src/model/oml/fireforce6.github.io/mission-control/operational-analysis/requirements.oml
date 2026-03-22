@@ -49,7 +49,7 @@ description <https://fireforce6.github.io/mission-control/operational-analysis/r
     instance R6 : stakeholder:Requirement [
         base:description "Interoperability with Fire Cloud"
         base:expression "The system shall ingest and interpret data streams from Fire Cloud."
-        stakeholder:isStatedBy stakeholders:SystemEngineer
+        stakeholder:isStatedBy stakeholders:SystemsEngineer
         base:category "L2"
         base:priority "Low"
     ]

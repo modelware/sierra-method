@@ -164,6 +164,7 @@ state:StateShape
     sh:property [
         sh:path rdf:type ;
         sh:name "Type" ;
+        dash:readOnly true ;
     ] ;
     sh:property [
         sh:path base:isContainedBy ;

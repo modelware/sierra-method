@@ -4,27 +4,33 @@ description <https://fireforce6.github.io/mission-control/context-analysis/stake
     uses <http://purl.org/dc/elements/1.1/> as dc
     uses <https://www.modelware.io/sierra/base#> as base
     uses <https://www.modelware.io/sierra/stakeholder#> as stakeholder
+    uses <http://opencaesar.io/oml#> as oml
 
+    @oml:label "Fire Fighter"
     instance FireFighter : stakeholder:Stakeholder [
         base:description "Frontline operator fighting fires live, relies on dashboard for tactical awareness."
         base:category "Beneficiary"
     ]
 
+    @oml:label "Operator"
     instance Operator : stakeholder:Stakeholder [
         base:description "Tele-operator or control-room staff [[https://www.modelware.io/sierra/stakeholder#Stakeholder]] monitoring and directing fire containment operations."
         base:category "User"
     ]
 
+    @oml:label "Command Center"
     instance CommandCenter : stakeholder:Stakeholder [
         base:description "Organizational authority responsible for overall coordination and decision-making."
         base:category "User"
     ]
 
-    instance SystemEngineer : stakeholder:Stakeholder [
+    @oml:label "Systems Engineer"
+    instance SystemsEngineer : stakeholder:Stakeholder [
         base:description "Responsible for ensuring system reliability and integration with Fire Cloud and AI Warden."
         base:category "Support"
     ]
 
+    @oml:label "Safety Officer"
     instance SafetyOfficer : stakeholder:Stakeholder [
         base:description "Ensures alerts, communications, and responses comply with safety protocols."
         base:category "Support"

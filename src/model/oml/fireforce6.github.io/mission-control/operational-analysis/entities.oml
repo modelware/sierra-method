@@ -42,7 +42,7 @@ description <https://fireforce6.github.io/mission-control/operational-analysis/e
         ent:hasCapability capabilities:C6
     ]
 
-    ref instance stakeholders:SystemEngineer : ent:Actor [
+    ref instance stakeholders:SystemsEngineer : ent:Actor [
         base:description "Maintains and updates the Mission Control system."
         ent:hasCapability capabilities:C8
     ]

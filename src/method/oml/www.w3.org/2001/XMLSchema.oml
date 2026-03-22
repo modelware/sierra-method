@@ -88,6 +88,9 @@ vocabulary <http://www.w3.org/2001/XMLSchema#> as xsd {
     @dc:source "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/datatypes.html#anyURI"
     scalar anyURI
 
+    @dc:source "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/datatypes.html#date"
+    scalar date
+
     @dc:source "https://www.w3.org/TR/2012/REC-xmlschema11-2-20120405/datatypes.html#dateTime"
     scalar dateTime
 

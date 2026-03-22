@@ -8,36 +8,36 @@ description <https://fireforce6.github.io/mission-control/context-analysis/conce
 
     instance FireFighterNeeds : stakeholder:Concern [
         base:description "Rapid situational awareness and robust field usability."
-        base:priority "Medium"
-        base:category "Need"
         stakeholder:isExpressedBy stakeholders:FireFighter
+        base:category "Need"
+        base:priority "Medium"
     ]
 
     instance OperatorNeeds : stakeholder:Concern [
         base:description "Clear system feedback and control over fire containment operations."
-        base:priority "High"
         stakeholder:isExpressedBy stakeholders:Operator
         base:category "Need"
+        base:priority "High"
     ]
 
     instance CommandCenterNeeds : stakeholder:Concern [
         base:description "Reliable decision support and approval mechanisms."
-        base:priority "High"
         stakeholder:isExpressedBy stakeholders:CommandCenter
         base:category "Objective"
+        base:priority "High"
     ]
 
     instance SystemEngineerNeeds : stakeholder:Concern [
         base:description "Seamless integration and data interoperability."
-        stakeholder:isExpressedBy stakeholders:SystemEngineer
-        base:priority "Low"
+        stakeholder:isExpressedBy stakeholders:SystemsEngineer
         base:category "Need"
+        base:priority "Low"
     ]
 
     instance SafetyOfficerNeeds : stakeholder:Concern [
         base:description "Assurance of safety compliance and timely alerts."
-        base:category "Constraint"
         stakeholder:isExpressedBy stakeholders:SafetyOfficer
+        base:category "Constraint"
         base:priority "Low"
     ]
 }
