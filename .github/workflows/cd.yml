@@ -41,12 +41,6 @@ jobs:
       - name: Render Oml
         run: oml render -md src/model/md -owl build/owl -web build/web -c src/model/oml/fireforce6.github.io/mission-control/bundle.oml
 
-      - name: Rename _oml to oml for Pages
-        run: |
-          mv build/web/_oml build/web/oml
-          find build/web -type f \( -name "*.html" -o -name "*.js" -o -name "*.css" \) \
-            -exec sed -i 's|_oml/|oml/|g' {} +
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
