@@ -64,10 +64,10 @@
     <td>2. <a href="./system-analysis/masses.md">Specify Component Masses</a></td>
   </tr>
   <tr>
-    <td>2. <a href="./system-analysis/connections.md">Specify Component Connctions</a></td>
+    <td>3. <a href="./system-analysis/connections.md">Specify Component Connctions</a></td>
   </tr>
   <tr>
-    <td>3. <a href="./system-analysis/dashboard.md">View Systems Dashboard</a></td>
+    <td>4. <a href="./system-analysis/dashboard.md">View Systems Dashboard</a></td>
   </tr>
 </table>
 

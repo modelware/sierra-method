@@ -32,6 +32,10 @@ stylesheet:
         text-anchor: middle
       label-body:
         fill: none
+
+  - selector: port
+    style:
+      fill: "var(--oml-static-background, #ffffff)"
 ---
 PREFIX base: <https://www.modelware.io/sierra/base#>
 PREFIX component: <https://www.modelware.io/sierra/component#>
