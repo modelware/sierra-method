@@ -8,13 +8,16 @@ contextUri: workspace:/src/model/oml/fireforce6.github.io/mission-control/bundle
 View how mission objectives are addressed by operational capabilities allocated to operational entities.
 
 ```diagram
----
-layout:
-  rankdir: TB
-  ranksep: 50
-  nodesep: 50
-  
+---  
 stylesheet:
+  - selector: diagram
+    style:
+      layout:
+        type: dagre
+        rankdir: TB
+        ranksep: 50
+        nodesep: 20
+
   - selector: node
     style:
       stroke-width: 0

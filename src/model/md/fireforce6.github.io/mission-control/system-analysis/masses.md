@@ -1,9 +1,9 @@
 ---
 contextUri: workspace:/src/model/oml/fireforce6.github.io/mission-control/system-analysis/masses.oml
 ---
-# Physical Components
+# Physical Parts
 
-Identify which components are physical and specify their mass.
+Identify which components are physical parts and specify their leaf mass.
 
 ```table-editor
 ---
@@ -16,7 +16,7 @@ columns: { focus: { label: "Component" } }
 
 component:ComponentShape
     a sh:NodeShape ;
-    sh:targetClass component:PhysicalComponent ;
+    sh:targetClass component:PhysicalPart;
     sh:property [
         sh:path component:mass ;
         sh:name "Mass" ;

@@ -1,0 +1,73 @@
+description <https://fireforce6.github.io/mission-control/system-analysis/connections#> as connections {
+
+	extends <https://fireforce6.github.io/mission-control/system-analysis/components#> as components
+
+	uses <https://www.modelware.io/sierra/component#> as component
+
+    ref instance components:FireSat [
+        component:hasPort FireSat_Command_In
+        component:hasPort FireSat_Telemetry_Out
+    ]
+    instance FireSat_Command_In : component:Port [ component:direction "In" ]
+    instance FireSat_Telemetry_Out : component:Port [ component:direction "Out" ]
+
+    ref instance components:Payload [
+        component:hasPort Payload_Data_Out
+        component:hasPort Payload_Power_In
+    ]
+    instance Payload_Data_Out : component:Port [ component:direction "Out" ]
+    instance Payload_Power_In : component:Port [ component:direction "In" ]
+
+    ref instance components:Platform [
+        component:hasPort Platform_Data_In
+        component:hasPort Platform_Data_Out
+        component:hasPort Platform_Power_Out
+        component:hasPort Platform_Command_In
+    ]
+    instance Platform_Data_In : component:Port [ component:direction "In" ]
+    instance Platform_Data_Out : component:Port [ component:direction "Out" ]
+    instance Platform_Power_Out : component:Port [ component:direction "Out" ]
+    instance Platform_Command_In : component:Port [ component:direction "In" ]
+
+    ref instance components:PropulsionSegment [
+        component:hasPort Propulsion_Command_In
+        component:hasPort Propulsion_Power_In
+    ]
+    instance Propulsion_Command_In : component:Port [ component:direction "In" ]
+    instance Propulsion_Power_In : component:Port [ component:direction "In" ]
+
+    instance TelemetrySignal : component:Signal []
+    instance CommandSignal : component:Signal []
+    instance ElectricalPower : component:Energy []
+
+    relation instance Conn_FireSatCmd_to_Platform : component:Connection [
+        from FireSat_Command_In
+        to Platform_Command_In
+        component:transfers CommandSignal
+    ]
+
+    relation instance Conn_PlatformPower_to_Payload : component:Connection [
+        from Platform_Power_Out
+        to Payload_Power_In
+        component:transfers ElectricalPower
+    ]
+
+    relation instance Conn_PlatformPower_to_Propulsion : component:Connection [
+        from Platform_Power_Out
+        to Propulsion_Power_In
+        component:transfers ElectricalPower
+    ]
+
+    relation instance Conn_Payload_to_Platform : component:Connection [
+        from Payload_Data_Out
+        to Platform_Data_In
+        component:transfers TelemetrySignal
+    ]
+
+    relation instance Conn_Platform_to_FireSatTelem : component:Connection [
+        from Platform_Data_Out
+        to FireSat_Telemetry_Out
+        component:transfers TelemetrySignal
+    ]
+
+}

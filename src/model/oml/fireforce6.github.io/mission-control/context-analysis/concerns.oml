@@ -5,39 +5,45 @@ description <https://fireforce6.github.io/mission-control/context-analysis/conce
     uses <https://www.modelware.io/sierra/base#> as base
     uses <https://www.modelware.io/sierra/stakeholder#> as stakeholder
     extends <https://fireforce6.github.io/mission-control/context-analysis/stakeholders#> as stakeholders
+    uses <http://opencaesar.io/oml#> as oml
 
+    @oml:label "Fire Fighter Needs"
     instance FireFighterNeeds : stakeholder:Concern [
         base:description "Rapid situational awareness and robust field usability."
         stakeholder:isExpressedBy stakeholders:FireFighter
         base:category "Need"
-        base:priority "Medium"
+        base:priority "Low"
     ]
 
+    @oml:label "Operator Needs"
     instance OperatorNeeds : stakeholder:Concern [
         base:description "Clear system feedback and control over fire containment operations."
         stakeholder:isExpressedBy stakeholders:Operator
         base:category "Need"
-        base:priority "High"
-    ]
-
-    instance CommandCenterNeeds : stakeholder:Concern [
-        base:description "Reliable decision support and approval mechanisms."
-        stakeholder:isExpressedBy stakeholders:CommandCenter
-        base:category "Objective"
-        base:priority "High"
-    ]
-
-    instance SystemEngineerNeeds : stakeholder:Concern [
-        base:description "Seamless integration and data interoperability."
-        stakeholder:isExpressedBy stakeholders:SystemsEngineer
-        base:category "Need"
         base:priority "Low"
     ]
 
+    @oml:label "Command Center Needs"
+    instance CommandCenterNeeds : stakeholder:Concern [
+        base:description "Reliable decision support, approval mechanisms, and timely situational summaries."
+        stakeholder:isExpressedBy stakeholders:CommandCenter
+        base:category "Need"
+        base:priority "High"
+    ]
+
+    @oml:label "System Engineer Needs"
+    instance SystemEngineerNeeds : stakeholder:Concern [
+        base:description "Seamless integration, APIs, and data interoperability."
+        base:category "Need"
+        base:priority "Medium"
+        stakeholder:isExpressedBy stakeholders:SystemsEngineer
+    ]
+
+    @oml:label "Safety Officer Needs"
     instance SafetyOfficerNeeds : stakeholder:Concern [
         base:description "Assurance of safety compliance and timely alerts."
         stakeholder:isExpressedBy stakeholders:SafetyOfficer
-        base:category "Constraint"
-        base:priority "Low"
+        base:priority "High"
+        base:category "Need"
     ]
 }

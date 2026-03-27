@@ -20,4 +20,5 @@ description bundle <https://fireforce6.github.io/mission-control/bundle#> as d-b
 
     includes <https://fireforce6.github.io/mission-control/system-analysis/components#>
     includes <https://fireforce6.github.io/mission-control/system-analysis/masses#>
+    includes <https://fireforce6.github.io/mission-control/system-analysis/connections#>
 }

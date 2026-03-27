@@ -4,13 +4,14 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
     uses <http://purl.org/dc/elements/1.1/> as dc
     uses <https://www.modelware.io/sierra/base#> as base
     uses <https://www.modelware.io/sierra/component#> as component
+    uses <http://opencaesar.io/oml#> as oml
 
     instance FireSat : component:Component [
-        base:description "Fire Satellite"
+        base:description "FireSat Spacecraft"
     ]
 
     instance Payload : component:Component [
-        base:description "Forest Fire Detection Payload"
+        base:description "Wildfire Detection Payload"
         base:isContainedBy FireSat
     ]
 
@@ -19,9 +20,24 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
         base:isContainedBy FireSat
     ]
 
+    instance PropulsionSegment : component:Component [
+        base:description "Propulsion Segment"
+        base:isContainedBy FireSat
+    ]
+
+    instance ServiceSegment : component:Component [
+        base:description "Bus Service Segment"
+        base:isContainedBy Platform
+    ]
+
+    instance ElectronicsSegment : component:Component [
+        base:description "Bus Electronics Segment"
+        base:isContainedBy Platform
+    ]
+
     instance PowerSubsystem : component:Component [
         base:description "Electrical Power Subsystem"
-        base:isContainedBy Platform
+        base:isContainedBy ServiceSegment
     ]
 
     instance Battery : component:Component [
@@ -59,11 +75,13 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
         base:isContainedBy PowerSubsystem
     ]
 
+    @oml:label "Solar Panel 1"
     instance SolarPanel1 : component:Component [
         base:description "Triple Junction GaAs Solar Panel - Port"
         base:isContainedBy SolarArray
     ]
 
+    @oml:label "Solar Panel 2"
     instance SolarPanel2 : component:Component [
         base:description "Triple Junction GaAs Solar Panel - Starboard"
         base:isContainedBy SolarArray
@@ -116,7 +134,7 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
 
     instance CommunicationSubsystem : component:Component [
         base:description "Telemetry, Tracking & Command Subsystem"
-        base:isContainedBy Platform
+        base:isContainedBy ElectronicsSegment
     ]
 
     instance CommUnit : component:Component [
@@ -186,7 +204,7 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
 
     instance OBC : component:Component [
         base:description "On-Board Computer"
-        base:isContainedBy Platform
+        base:isContainedBy ElectronicsSegment
     ]
 
     instance MainProcessor : component:Component [
@@ -236,7 +254,7 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
 
     instance DataStorage : component:Component [
         base:description "Solid State Data Recorder"
-        base:isContainedBy Platform
+        base:isContainedBy ElectronicsSegment
     ]
 
     instance StorageModule1 : component:Component [
@@ -256,7 +274,7 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
 
     instance PropulsionSubsystem : component:Component [
         base:description "Reaction Control System"
-        base:isContainedBy Platform
+        base:isContainedBy PropulsionSegment
     ]
 
     instance PropulsionUnit : component:Component [
@@ -361,7 +379,7 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
 
     instance ADCSSubsystem : component:Component [
         base:description "Attitude Determination & Control Subsystem"
-        base:isContainedBy Platform
+        base:isContainedBy ServiceSegment
     ]
 
     instance StarTracker : component:Component [
@@ -521,7 +539,7 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
 
     instance StructuralFrame : component:Component [
         base:description "Primary Spacecraft Structure"
-        base:isContainedBy Platform
+        base:isContainedBy ServiceSegment
     ]
 
     instance MainBusStructure : component:Component [
@@ -601,7 +619,7 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
 
     instance ThermalSubsystem : component:Component [
         base:description "Thermal Control Subsystem"
-        base:isContainedBy Platform
+        base:isContainedBy ServiceSegment
     ]
 
     instance PassiveThermalControl : component:Component [
@@ -816,7 +834,7 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
 
     instance PayloadProcessor : component:Component [
         base:description "Payload Data Processing Unit"
-        base:isContainedBy Payload
+        base:isContainedBy ElectronicsSegment
     ]
 
     instance ImageProcessor : component:Component [

@@ -8,12 +8,58 @@ vocabulary <https://www.modelware.io/sierra/component#> as component {
     @dc:description "A component is a part of a system."
     concept Component < base:Container, base:Contained, base:Element
 
-    concept PhysicalComponent < Component
+    @dc:description "A physical part of the system."
+    concept PhysicalPart < Component
 
-    @dc:description "The weight of the component."
+    @dc:description "The mass of the physical part."
     scalar property mass [
-        domain PhysicalComponent
+        domain PhysicalPart
         range xsd:decimal
         functional
     ]
+
+    @dc:description "The interface of a component."
+    concept Port < base:Contained, base:Element
+
+    @dc:description "The port of a component."
+    relation hasPort [
+        from Component
+        to Port
+        reverse portOf
+        inverse functional
+    ]
+
+    @dc:description "Port Direction."
+    scalar Direction [
+        oneOf "In", "Out"
+    ]
+
+    @dc:description "The direction of the port."
+    scalar property direction [
+        domain Port
+        range Direction
+        functional
+    ]
+
+    @dc:description "Indicates that two ports are connected."
+    relation entity Connection [
+        from Port
+        to Port
+        forward connectedTo
+    ]
+
+    concept Item < base:Element
+
+    concept Signal < Item
+
+    concept Material < Item
+
+    concept Energy < Item
+
+    relation transfers [
+        from Connection
+        to Item
+        reverse isTransferedBy
+    ]
+
 }

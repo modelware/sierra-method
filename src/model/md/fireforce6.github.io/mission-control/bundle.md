@@ -61,7 +61,10 @@
     <td>1. <a href="./system-analysis/components.md">Define System Components</a></td>
   </tr>
   <tr>
-    <td>2. <a href="./system-analysis/masses.md">Specify Component masses</a></td>
+    <td>2. <a href="./system-analysis/masses.md">Specify Component Masses</a></td>
+  </tr>
+  <tr>
+    <td>2. <a href="./system-analysis/connections.md">Specify Component Connctions</a></td>
   </tr>
   <tr>
     <td>3. <a href="./system-analysis/dashboard.md">View Systems Dashboard</a></td>

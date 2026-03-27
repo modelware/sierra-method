@@ -8,7 +8,7 @@ contextUri: workspace:/src/model/oml/fireforce6.github.io/mission-control/operat
 stylesheet:
   - selector: node.statemachine
     style:
-      paddingTop: 45
+      padding: 40 10 10 10
       layout:
         type: stack
         direction: vertical
@@ -23,8 +23,8 @@ stylesheet:
       layout:
         type: dagre
         rankdir: TB
-        nodesep: 100
-        ranksep: 80
+        nodesep: 180
+        ranksep: 60
       stroke-width: 1
       fill-opacity: 0
       stroke: none

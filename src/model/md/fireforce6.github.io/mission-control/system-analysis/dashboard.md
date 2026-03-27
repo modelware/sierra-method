@@ -24,7 +24,7 @@ WHERE {
     {
       SELECT ?parent (SUM(xsd:decimal(?mass)) AS ?totalMass)
       WHERE {
-        ?parent a component:Component .
+        ?parent a component:PhysicalPart .
         OPTIONAL {
           ?child base:isContainedBy* ?parent .
           ?child component:mass ?mass .

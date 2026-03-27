@@ -1,45 +1,589 @@
-@dc:title "System Components"
-@dc:description "Description of components for the Mission Control system."
+@dc:title "System Masses"
+@dc:description "Mass estimates for the FireSat physical parts."
 description <https://fireforce6.github.io/mission-control/system-analysis/masses#> as masses {
     uses <http://purl.org/dc/elements/1.1/> as dc
     uses <https://www.modelware.io/sierra/component#> as component
     extends <https://fireforce6.github.io/mission-control/system-analysis/components#> as components
 
-    ref instance components:Battery : component:PhysicalComponent [
-        component:mass 45
+    ref instance components:FireSat : component:PhysicalPart
+
+    ref instance components:Payload : component:PhysicalPart
+
+    ref instance components:Platform : component:PhysicalPart
+
+    ref instance components:PropulsionSegment : component:PhysicalPart
+
+    ref instance components:ServiceSegment : component:PhysicalPart
+
+    ref instance components:ElectronicsSegment : component:PhysicalPart
+
+    ref instance components:PowerSubsystem : component:PhysicalPart
+
+    ref instance components:Battery : component:PhysicalPart
+
+    ref instance components:SolarArray : component:PhysicalPart
+
+    ref instance components:PowerConditioningUnit : component:PhysicalPart
+
+    ref instance components:CommunicationSubsystem : component:PhysicalPart
+
+    ref instance components:CommUnit : component:PhysicalPart
+
+    ref instance components:SBandTransmitter : component:PhysicalPart
+
+    ref instance components:SBandReceiver : component:PhysicalPart
+
+    ref instance components:SBandAntenna : component:PhysicalPart
+
+    ref instance components:OBC : component:PhysicalPart
+
+    ref instance components:MainProcessor : component:PhysicalPart
+
+    ref instance components:IOController : component:PhysicalPart
+
+    ref instance components:DataStorage : component:PhysicalPart
+
+    ref instance components:PropulsionSubsystem : component:PhysicalPart
+
+    ref instance components:PropulsionUnit : component:PhysicalPart
+
+    ref instance components:PropellantTank : component:PhysicalPart
+
+    ref instance components:PropellantFeedSystem : component:PhysicalPart
+
+    ref instance components:ADCSSubsystem : component:PhysicalPart
+
+    ref instance components:StarTracker : component:PhysicalPart
+
+    ref instance components:IMU : component:PhysicalPart
+
+    ref instance components:ReactionWheelAssembly : component:PhysicalPart
+
+    ref instance components:ReactionWheel1 : component:PhysicalPart
+
+    ref instance components:ReactionWheel2 : component:PhysicalPart
+
+    ref instance components:ReactionWheel3 : component:PhysicalPart
+
+    ref instance components:ReactionWheel4 : component:PhysicalPart
+
+    ref instance components:MagnetorquerAssembly : component:PhysicalPart
+
+    ref instance components:StructuralFrame : component:PhysicalPart
+
+    ref instance components:MainBusStructure : component:PhysicalPart
+
+    ref instance components:LaunchAdapter : component:PhysicalPart
+
+    ref instance components:SeparationSystem : component:PhysicalPart
+
+    ref instance components:WireHarness : component:PhysicalPart
+
+    ref instance components:ThermalSubsystem : component:PhysicalPart
+
+    ref instance components:PassiveThermalControl : component:PhysicalPart
+
+    ref instance components:MLI : component:PhysicalPart
+
+    ref instance components:HeatPipes : component:PhysicalPart
+
+    ref instance components:ActiveThermalControl : component:PhysicalPart
+
+    ref instance components:ThermalSensor : component:PhysicalPart
+
+    ref instance components:ThermalOptics : component:PhysicalPart
+
+    ref instance components:FocalPlaneAssembly : component:PhysicalPart
+
+    ref instance components:Cryocooler : component:PhysicalPart
+
+    ref instance components:VisualCamera : component:PhysicalPart
+
+    ref instance components:VisualOptics : component:PhysicalPart
+
+    ref instance components:FilterWheel : component:PhysicalPart
+
+    ref instance components:CMOSImager : component:PhysicalPart
+
+    ref instance components:PayloadProcessor : component:PhysicalPart
+
+    ref instance components:PayloadStructure : component:PhysicalPart
+
+    ref instance components:GPSReceiver : component:PhysicalPart
+
+    ref instance components:SolarPanel1 : component:PhysicalPart
+
+    ref instance components:SolarPanel2 : component:PhysicalPart
+
+    ref instance components:Thruster1 : component:PhysicalPart
+
+    ref instance components:Thruster2 : component:PhysicalPart
+
+    ref instance components:Thruster3 : component:PhysicalPart
+
+    ref instance components:Thruster4 : component:PhysicalPart
+
+    ref instance components:Thruster5 : component:PhysicalPart
+
+    ref instance components:Thruster6 : component:PhysicalPart
+
+    ref instance components:BatteryCell1 : component:PhysicalPart [
+        component:mass 4.5
     ]
 
-    ref instance components:SolarArray : component:PhysicalComponent [
-        component:mass 25
+    ref instance components:BatteryCell2 : component:PhysicalPart [
+        component:mass 4.5
     ]
 
-    ref instance components:CommUnit : component:PhysicalComponent [
-        component:mass 15
+    ref instance components:BatteryCell3 : component:PhysicalPart [
+        component:mass 4.5
     ]
 
-    ref instance components:OBC : component:PhysicalComponent [
-        component:mass 10
+    ref instance components:BatteryCell4 : component:PhysicalPart [
+        component:mass 4.5
     ]
 
-    ref instance components:PropulsionUnit : component:PhysicalComponent [
-        component:mass 50
+    ref instance components:BatteryManagementUnit : component:PhysicalPart [
+        component:mass 2.5
     ]
 
-    ref instance components:StructuralFrame : component:PhysicalComponent [
-        component:mass 100
+    ref instance components:SolarCells1 : component:PhysicalPart [
+        component:mass 6
     ]
 
-    ref instance components:ThermalSensor : component:PhysicalComponent [
-        component:mass 30
+    ref instance components:SolarCells2 : component:PhysicalPart [
+        component:mass 6
     ]
 
-    ref instance components:VisualCamera : component:PhysicalComponent [
-        component:mass 20
+    ref instance components:DeploymentMechanism1 : component:PhysicalPart [
+        component:mass 1.5
     ]
 
-    ref instance components:PayloadProcessor : component:PhysicalComponent [
-        component:mass 10
+    ref instance components:DeploymentMechanism2 : component:PhysicalPart [
+        component:mass 1.5
     ]
 
-    ref instance components:Cryocooler : component:PhysicalComponent
+    ref instance components:DCDCConverter1 : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:DCDCConverter2 : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:DCDCConverter3 : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:PowerDistributionBox : component:PhysicalPart [
+        component:mass 2
+    ]
+
+    ref instance components:TransmitterPA : component:PhysicalPart [
+        component:mass 1.5
+    ]
+
+    ref instance components:TransmitterOscillator : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:ReceiverLNA : component:PhysicalPart [
+        component:mass 0.8
+    ]
+
+    ref instance components:ReceiverDemodulator : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:AntennaPatch1 : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:AntennaPatch2 : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:AntennaPatch3 : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:AntennaPatch4 : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:AntennaFeedNetwork : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:ProcessorCore : component:PhysicalPart [
+        component:mass 1.5
+    ]
+
+    ref instance components:ProcessorCache : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:RAMModule : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:FlashMemory : component:PhysicalPart [
+        component:mass 0.3
+    ]
+
+    ref instance components:SpaceWireInterface : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:RS422Interface : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:WatchdogTimer : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:StorageModule1 : component:PhysicalPart [
+        component:mass 2
+    ]
+
+    ref instance components:StorageModule2 : component:PhysicalPart [
+        component:mass 2
+    ]
+
+    ref instance components:StorageController : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:ThrusterValve1 : component:PhysicalPart [
+        component:mass 0.8
+    ]
+
+    ref instance components:ThrusterValve2 : component:PhysicalPart [
+        component:mass 0.8
+    ]
+
+    ref instance components:ThrusterValve3 : component:PhysicalPart [
+        component:mass 0.8
+    ]
+
+    ref instance components:ThrusterValve4 : component:PhysicalPart [
+        component:mass 0.8
+    ]
+
+    ref instance components:ThrusterValve5 : component:PhysicalPart [
+        component:mass 0.8
+    ]
+
+    ref instance components:ThrusterValve6 : component:PhysicalPart [
+        component:mass 0.8
+    ]
+
+    ref instance components:TankBladder : component:PhysicalPart [
+        component:mass 1
+    ]
+
+    ref instance components:TankHeater : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:PressureRegulator : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:PropellantFilter : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:IsolationValve : component:PhysicalPart [
+        component:mass 0.3
+    ]
+
+    ref instance components:StarTrackerOptics : component:PhysicalPart [
+        component:mass 1
+    ]
+
+    ref instance components:StarTrackerCCD : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:StarTrackerProcessor : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:SunSensor1 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:SunSensor2 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:SunSensor3 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:SunSensor4 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:Gyroscope1 : component:PhysicalPart [
+        component:mass 0.4
+    ]
+
+    ref instance components:Gyroscope2 : component:PhysicalPart [
+        component:mass 0.4
+    ]
+
+    ref instance components:Gyroscope3 : component:PhysicalPart [
+        component:mass 0.4
+    ]
+
+    ref instance components:Accelerometer : component:PhysicalPart [
+        component:mass 0.3
+    ]
+
+    ref instance components:Magnetometer : component:PhysicalPart [
+        component:mass 0.4
+    ]
+
+    ref instance components:WheelMotor1 : component:PhysicalPart [
+        component:mass 1.5
+    ]
+
+    ref instance components:WheelMotor2 : component:PhysicalPart [
+        component:mass 1.5
+    ]
+
+    ref instance components:WheelMotor3 : component:PhysicalPart [
+        component:mass 1.5
+    ]
+
+    ref instance components:WheelMotor4 : component:PhysicalPart [
+        component:mass 1.5
+    ]
+
+    ref instance components:WheelSpeedSensor1 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:WheelSpeedSensor2 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:WheelSpeedSensor3 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:WheelSpeedSensor4 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:MagnetorquerX : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:MagnetorquerY : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:MagnetorquerZ : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:TopPanel : component:PhysicalPart [
+        component:mass 4
+    ]
+
+    ref instance components:BottomPanel : component:PhysicalPart [
+        component:mass 4
+    ]
+
+    ref instance components:SidePanel1 : component:PhysicalPart [
+        component:mass 3.5
+    ]
+
+    ref instance components:SidePanel2 : component:PhysicalPart [
+        component:mass 3.5
+    ]
+
+    ref instance components:SidePanel3 : component:PhysicalPart [
+        component:mass 3.5
+    ]
+
+    ref instance components:SidePanel4 : component:PhysicalPart [
+        component:mass 3.5
+    ]
+
+    ref instance components:InternalShelf1 : component:PhysicalPart [
+        component:mass 1.5
+    ]
+
+    ref instance components:InternalShelf2 : component:PhysicalPart [
+        component:mass 1.5
+    ]
+
+    ref instance components:SeparationSpring : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:PowerHarness : component:PhysicalPart [
+        component:mass 1
+    ]
+
+    ref instance components:DataHarness : component:PhysicalPart [
+        component:mass 1
+    ]
+
+    ref instance components:MLIBlanket1 : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:MLIBlanket2 : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:MLIBlanket3 : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:RadiatorPanel : component:PhysicalPart [
+        component:mass 2
+    ]
+
+    ref instance components:HeatPipe1 : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:HeatPipe2 : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:SurvivalHeater1 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:SurvivalHeater2 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:SurvivalHeater3 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:TemperatureSensor1 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:TemperatureSensor2 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:TemperatureSensor3 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:TemperatureSensor4 : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:PrimaryLens : component:PhysicalPart [
+        component:mass 1.5
+    ]
+
+    ref instance components:SecondaryLens : component:PhysicalPart [
+        component:mass 1
+    ]
+
+    ref instance components:LensBarrel : component:PhysicalPart [
+        component:mass 1.5
+    ]
+
+    ref instance components:InSbDetectorArray : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:ReadoutIC : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:DewarAssembly : component:PhysicalPart [
+        component:mass 2
+    ]
+
+    ref instance components:ColdShield : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:CryocoolerCompressor : component:PhysicalPart [
+        component:mass 2
+    ]
+
+    ref instance components:CryocoolerExpander : component:PhysicalPart [
+        component:mass 1
+    ]
+
+    ref instance components:CryocoolerController : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:ObjectiveLens : component:PhysicalPart [
+        component:mass 1.5
+    ]
+
+    ref instance components:RedFilter : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:GreenFilter : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:BlueFilter : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:FilterMotor : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:ImageSensorArray : component:PhysicalPart [
+        component:mass 0.2
+    ]
+
+    ref instance components:ImageSensorADC : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:ImageProcessor : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:CompressionEngine : component:PhysicalPart [
+        component:mass 0.3
+    ]
+
+    ref instance components:PayloadMemory : component:PhysicalPart [
+        component:mass 0.3
+    ]
+
+    ref instance components:PayloadInterface : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:OpticalBench : component:PhysicalPart [
+        component:mass 3
+    ]
+
+    ref instance components:VibrationIsolator : component:PhysicalPart [
+        component:mass 0.5
+    ]
+
+    ref instance components:GPSAntenna : component:PhysicalPart [
+        component:mass 0.1
+    ]
+
+    ref instance components:GPSProcessor : component:PhysicalPart [
+        component:mass 0.2
+    ]
 }
