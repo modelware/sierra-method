@@ -12,6 +12,8 @@ columns: { focus: { label: "Component" } }
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix base: <https://www.modelware.io/sierra/base#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix component: <https://www.modelware.io/sierra/component#> .
 
 component:ComponentShape
@@ -28,6 +30,11 @@ component:ComponentShape
         sh:name "Description" ;
         dash:editor dash:TextAreaEditor ;
         sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path rdfs:seeAlso ;
+        sh:name "See Also" ;
+        sh:datatype xsd:anyURI ;
     ] ;
     .
 ```

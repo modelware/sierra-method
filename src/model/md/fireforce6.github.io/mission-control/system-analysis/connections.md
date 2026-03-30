@@ -3,7 +3,6 @@ contextUri: workspace:/src/model/oml/fireforce6.github.io/mission-control/bundle
 ---
 # Connections
 
-
 View internal connections between system components.
 
 ```diagram
@@ -11,6 +10,7 @@ View internal connections between system components.
 stylesheet:
   - selector: node
     style:
+      stroke: red
       height: 100
       padding: 40
       layout:
@@ -19,23 +19,33 @@ stylesheet:
         nodesep: 40
       label:
         refY: 10
+        fill: vblack
+
+  - selector: node.component
+    style:
+      fill: lightgreen
+
+  - selector: node.subComponent
+    style:
+      fill: yellow
 
   - selector: edge
     style:
+      stroke: red
       router:
         name: manhattan
         args:
           padding: 10
       label:
         font-size: 10
-        fill: var(--vscode-editor-foreground)
+        fill: vblack
         text-anchor: middle
       label-body:
         fill: none
 
   - selector: port
     style:
-      fill: "var(--oml-static-background, #ffffff)"
+      fill: var(--oml-static-background, #ffffff)
 ---
 PREFIX base: <https://www.modelware.io/sierra/base#>
 PREFIX component: <https://www.modelware.io/sierra/component#>
@@ -51,7 +61,8 @@ CONSTRUCT {
             :parent ?component .
 
   ?subComponent a :Node ;
-             :parent ?component .
+             :parent ?component ;
+             :class "subComponent" .
 
   ?subPort a :Port ;
             :class "port" ;

@@ -54,6 +54,7 @@ ORDER BY STRAFTER(STR(?Property), "#")
 
 ```graph
 ---
+expandOnClick: true
 stylesheet:
   - selector: node[value === "${contextIri}"]
     style:
@@ -64,14 +65,10 @@ stylesheet:
       fill: pink
   - selector: node[incoming.some(e => e.value.endsWith("#graph"))]
     style:
-      radius: 0
-      opacity: 0
-      color: none
+      display: none
   - selector: edge[value.endsWith("#graph")]
     style:
-      stroke-width: 0
-      opacity: 0
-      color: none
+      display: none
 ---
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX oml: <http://opencaesar.io/oml#>
