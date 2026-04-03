@@ -1,5 +1,5 @@
 ---
-contextUri: workspace:/src/model/oml/fireforce6.github.io/mission-control/system-analysis/components.oml
+contextIri: https://fireforce6.github.io/mission-control/system-analysis/components
 ---
 # Components
 

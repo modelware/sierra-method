@@ -1,5 +1,5 @@
 ---
-contextUri: workspace:/src/model/oml/fireforce6.github.io/mission-control/operational-analysis/statemachines/sm1.oml
+contextIri: https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm1
 ---
 # State Machine Diagram
 

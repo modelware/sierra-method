@@ -1,5 +1,5 @@
 ---
-contextUri: workspace:/src/model/oml/fireforce6.github.io/mission-control/context-analysis/stakeholders.oml
+contextIri: https://fireforce6.github.io/mission-control/context-analysis/stakeholders
 ---
 # Stakeholders
 Identify individuals, groups, or organizations with interests in the missions:

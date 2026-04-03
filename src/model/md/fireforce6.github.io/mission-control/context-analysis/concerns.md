@@ -1,6 +1,5 @@
 ---
-contextUri: workspace:/src/model/oml/fireforce6.github.io/mission-control/context-analysis/concerns.oml
-templateUri: 
+contextIri: https://fireforce6.github.io/mission-control/context-analysis/concerns
 ---
 # Stakeholder Concerns
 
