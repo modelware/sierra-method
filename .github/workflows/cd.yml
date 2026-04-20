@@ -41,9 +41,9 @@ jobs:
       - name: Starting server
         run: oml server start
 
-      - name: Checking server status
-        run: oml server status
-        
+      - name: Checking authentication
+        run: oml whoami
+
       - name: Rendering
         run: oml render -m src/model/md -b build/web -c https://fireforce6.github.io/mission-control/bundle
 
