@@ -41,6 +41,9 @@ jobs:
       - name: Starting server
         run: oml server start
 
+      - name: Logging in
+        run: oml login
+
       - name: Rendering
         run: oml render -m src/model/md -b build/web -c https://fireforce6.github.io/mission-control/bundle
 

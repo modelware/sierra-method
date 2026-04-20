@@ -30,6 +30,9 @@ jobs:
       - name: Starting server
         run: oml server start
 
+      - name: Logging in
+        run: oml login
+
       - name: Linting
         run: oml lint
 
