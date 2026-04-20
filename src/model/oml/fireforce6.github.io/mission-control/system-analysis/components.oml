@@ -8,10 +8,6 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
     uses <http://www.w3.org/2000/01/rdf-schema#> as rdfschema
     uses <http://www.w3.org/2001/XMLSchema#> as xmlschema
 
-    instance FireSat : component:Component [
-        base:description "FireSat Spacecraft"
-    ]
-
     @rdfschema:seeAlso "https://www.google.com/"^^xmlschema:anyURI
     instance Payload : component:Component [
         base:description "Wildfire Detection Payload"
@@ -891,4 +887,9 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
         base:description "GPS Signal Processor"
         base:isContainedBy GPSReceiver
     ]
+
+    instance FireSat : component:Component [
+        base:description "FireSat Spacecraft"
+    ]
+
 }

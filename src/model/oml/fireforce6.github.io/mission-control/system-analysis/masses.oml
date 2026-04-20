@@ -128,7 +128,7 @@ description <https://fireforce6.github.io/mission-control/system-analysis/masses
     ref instance components:Thruster6 : component:PhysicalPart
 
     ref instance components:BatteryCell1 : component:PhysicalPart [
-        component:mass 4.5
+        component:mass 14.5
     ]
 
     ref instance components:BatteryCell2 : component:PhysicalPart [
@@ -340,7 +340,7 @@ description <https://fireforce6.github.io/mission-control/system-analysis/masses
     ]
 
     ref instance components:Accelerometer : component:PhysicalPart [
-        component:mass 0.3
+        component:mass 0.41
     ]
 
     ref instance components:Magnetometer : component:PhysicalPart [

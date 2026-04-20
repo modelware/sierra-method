@@ -1,6 +1,3 @@
----
-contextIri: https://fireforce6.github.io/mission-control/bundle
----
 # State Machines
 
 <table>

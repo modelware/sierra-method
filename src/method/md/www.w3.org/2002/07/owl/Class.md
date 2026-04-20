@@ -1,8 +1,25 @@
 ---
-type: <http://www.w3.org/2002/07/owl#Class>
-priority: 0
+template:
+  id: http://www.w3.org/2002/07/owl/Class
+  name: "Class Overview"
+  rank: 0
+  expose:
+    - kind: navigation
+      match:
+        anyTypeOf:
+          - http://www.w3.org/2002/07/owl#Class
+          - http://www.w3.org/2002/07/owl#Datatype
+  params:
+    - id: member
+      type: iri
+      from: context.member
+      required: true
+    - id: ontology
+      type: iri
+      from: context.ontology
+      required: true
 ---
-# [[${contextIri}]]
+# [[${member}]]
 
 ## Description
 
@@ -12,7 +29,7 @@ PREFIX base: <https://www.modelware.io/sierra/base#>
 SELECT ?description
 WHERE {
     GRAPH ?g {
-        <${contextIri}> base:description ?description .
+        <${member}> base:description ?description .
     }
 }
 ```
@@ -40,7 +57,7 @@ PREFIX base: <https://www.modelware.io/sierra/base#>
 SELECT ?g ?Property (GROUP_CONCAT(?Value; separator=", ") AS ?Values)
 WHERE {
     GRAPH ?g {
-        <${contextIri}> ?Property ?Value .
+        <${member}> ?Property ?Value .
         FILTER(?Value != owl:NamedIndividual)
         FILTER(?Property != oml:type)
         FILTER(?Property != base:description)
@@ -56,7 +73,7 @@ ORDER BY STRAFTER(STR(?Property), "#")
 ---
 expandOnClick: true
 stylesheet:
-  - selector: node[value === "${contextIri}"]
+  - selector: node[value === "${member}"]
     style:
       fill: white
   - selector: node[outgoing.some(e => e.target.value.endsWith("__entailments"))]
@@ -74,12 +91,12 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX oml: <http://opencaesar.io/oml#>
 
 CONSTRUCT {
-    <${contextIri}> ?Property ?Value .
+    <${member}> ?Property ?Value .
     ?Value oml:graph ?g .
 }
 WHERE {
     GRAPH ?g {
-        <${contextIri}> ?Property ?Value .
+        <${member}> ?Property ?Value .
         FILTER (!isLiteral(?Value))
         FILTER(?Value != owl:NamedIndividual)
         FILTER(?Property != oml:type)

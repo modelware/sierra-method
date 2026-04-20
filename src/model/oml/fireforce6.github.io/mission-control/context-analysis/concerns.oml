@@ -20,7 +20,7 @@ description <https://fireforce6.github.io/mission-control/context-analysis/conce
         base:description "Clear system feedback and control over fire containment operations."
         stakeholder:isExpressedBy stakeholders:Operator
         base:category "Need"
-        base:priority "Low"
+        base:priority "Medium"
     ]
 
     @oml:label "Command Center Needs"
@@ -35,7 +35,7 @@ description <https://fireforce6.github.io/mission-control/context-analysis/conce
     instance SystemEngineerNeeds : stakeholder:Concern [
         base:description "Seamless integration, APIs, and data interoperability."
         base:category "Need"
-        base:priority "Medium"
+        base:priority "Low"
         stakeholder:isExpressedBy stakeholders:SystemsEngineer
     ]
 

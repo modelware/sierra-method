@@ -1,4 +1,4 @@
-![Sierra Method](workspace:/src/model/md/images/sierra.png)
+![Sierra Method](../../../../method/md/images/sierra.png)
 
 # Sierra Method
 

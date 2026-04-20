@@ -1,0 +1,91 @@
+vocabulary <https://www.modelware.io/sierra/state2#> as state2 {
+
+    aspect CompositeElement
+
+    relation regions [
+        from CompositeElement
+        to Region
+        inverse functional
+    ]
+
+    concept Region
+
+    relation vertices [
+        from Region
+        to Vertex
+        reverse region
+        inverse functional
+    ]
+
+    aspect Vertex
+
+    relation outgoingTransition [
+        from Vertex
+        to Transition
+        reverse source
+        inverse functional
+    ]
+
+    relation incomingTransition [
+        from Vertex
+        to Transition
+        reverse target
+        inverse functional
+    ]
+
+    concept Transition 
+
+    aspect Pseudostate < Vertex
+
+    aspect RegularState < Vertex
+
+    concept Entry < Pseudostate
+
+    concept Exit < Pseudostate
+
+    concept Choice < Pseudostate
+
+    concept FinalState < RegularState
+
+    concept State < RegularState, CompositeElement
+
+    concept Statechart < CompositeElement
+
+    // Predicates
+
+    // entryInRegion r [ Region(r) & Entry(e) -> vertices(r,e) ]
+    
+    // stateInRegion(Region r, State s) -> vertices(r, s)
+
+    // Errors
+
+    // noEntryInRegion [ Region(r) -> !entryInRegion(r,_) ]
+
+    // multipleEntryInRegion [ Region(r) -> entryInRegion(r, e1), entryInRegion(r, e2), e1 != e2
+
+    // incomingToEntry(Transition t, Entry e) -> target(t, e)
+
+    // noOutgoingTransitionFromEntry(Entry e) - !source(_, e)
+
+    // multipleTransitionFromEntry(Entry e, Transition t1, Transition t2) -> outgoingTransition(e, t1), outgoingTransition(e, t2), t1 != t2
+
+    // outgoingFromExit(Transition t, Exit e) -> source(t, e)
+
+    // outgoingFromFinal(Transition t, FinalState e) -> source(t, e)
+
+    // noStateInRegion(Region r) -> !stateInRegion(r, _)
+
+    // choiceHasNoOutgoing(Choice c) -> !source(_, c)
+
+    // choiceHasNoIncoming(Choice c) ->  !target(_, c)
+
+    // Instances
+
+    // instance sct : Statechart
+
+    // Scope
+
+    // scope node = 20..30, Region = 2..*, Choice = 1..*, Statechart += 0.
+
+}
+

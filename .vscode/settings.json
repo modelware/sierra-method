@@ -1,6 +1,4 @@
 {
-  "workbench.editor.enablePreview": true,
-  "workbench.editor.enablePreviewFromQuickOpen": true,
   "workbench.editorAssociations": {
     "*.md": "oml.markdown.preview.editor",
   }

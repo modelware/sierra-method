@@ -6,8 +6,6 @@ description <https://fireforce6.github.io/mission-control/context-analysis/missi
     uses <https://www.modelware.io/sierra/mission#> as mission
 
     instance MissionControl : mission:Mission [
-        base:description """Allow Analysis of **Wild Fires** any where in CA.
-        
-        ![](workspace:/src/model/md/images/mission-control.png)"""
+        base:description "Allow Analysis of **Wild Fires** any where in CA."
     ]
 }
