@@ -36,15 +36,21 @@ jobs:
         run: npm install -g @oml/cli
 
       - name: Version Oml
-        run: oml -V
+        run: oml -v
 
-      - name: Render Oml
-        run: oml render -md src/model/md -owl build/owl -web build/web -c src/model/oml/fireforce6.github.io/mission-control/bundle.oml
+      - name: Starting server
+        run: oml server start
+
+      - name: Rendering
+        run: oml render -m src/model/md -b build/web -c https://fireforce6.github.io/mission-control/bundle
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: build/web
+
+      - name: Stopping server
+        run: oml server stop
 
   deploy:
     needs: build

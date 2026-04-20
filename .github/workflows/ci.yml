@@ -25,16 +25,19 @@ jobs:
         run: npm install -g @oml/cli
 
       - name: Version Oml
-        run: oml -V
+        run: oml -v
 
-      - name: Lint Oml
+      - name: Starting server
+        run: oml server start
+
+      - name: Linting
         run: oml lint
 
-      - name: Compile Oml
-        run: oml compile -owl build/owl --only
+      - name: Validating
+        run: oml validate --only
 
-      - name: Reason Oml
-        run: oml reason -owl build/owl --only
+      - name: Reasoning
+        run: oml reason --only
 
-      - name: Validate Oml
-        run: oml validate -md src/model/md -owl build/owl --only
+      - name: Stopping server
+        run: oml server stop
