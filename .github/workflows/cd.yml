@@ -20,12 +20,6 @@ jobs:
     env:
       OML_PLATFORM_API_KEY: ${{ secrets.OML_PLATFORM_API_KEY }}
     steps:
-      # remove after oml v0.14.3
-      - name: Install libsecret runtime
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libsecret-1-0
-
       - name: Checkout
         uses: actions/checkout@v4
 
