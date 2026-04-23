@@ -38,22 +38,22 @@ jobs:
       - name: Version Oml
         run: oml -v
 
-      - name: Starting server
-        run: oml server start
-
       - name: Checking authentication
         run: oml whoami
+
+      - name: Starting server
+        run: oml start
 
       - name: Rendering
         run: oml render -m src/model/md -b build/web -c https://fireforce6.github.io/mission-control/bundle
 
+      - name: Stopping server
+        run: oml stop
+        
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: build/web
-
-      - name: Stopping server
-        run: oml server stop
 
   deploy:
     needs: build
