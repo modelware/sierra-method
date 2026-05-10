@@ -8,7 +8,7 @@ template:
   params:
     - id: ontology
       type: iri
-      from: context.ontology
+      defaultValue: ${context.ontology}
       required: true
 ---
 # System Analysis
@@ -36,14 +36,14 @@ WHERE {
       WHERE {
         ?parent a component:PhysicalPart .
         OPTIONAL {
-          ?child base:isContainedBy* ?parent .
+          ?parent base:contains* ?child .
           ?child component:mass ?mass .
         }
       }
       GROUP BY ?parent
     }
     OPTIONAL {
-      ?child base:isContainedBy ?parent .
+      ?parent base:contains ?child .
     }
 }
 ```

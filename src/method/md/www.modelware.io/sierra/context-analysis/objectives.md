@@ -8,7 +8,7 @@ template:
   params:
     - id: ontology
       type: iri
-      from: context.ontology
+      defaultValue: ${context.ontology}
       required: true
 ---
 # Mission Objectives

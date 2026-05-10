@@ -13,11 +13,11 @@ template:
   params:
     - id: member
       type: iri
-      from: context.member
+      defaultValue: ${context.member}
       required: true
     - id: ontology
       type: iri
-      from: context.ontology
+      defaultValue: ${context.ontology}
       required: true
 ---
 # [[${member}]]

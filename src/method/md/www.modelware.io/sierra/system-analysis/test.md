@@ -11,15 +11,15 @@ template:
   params:
     - id: ontology
       type: iri
-      from: context.ontology
+      defaultValue: ${context.ontology}
       required: true
     - id: source
       type: iri
-      from: context.selection[0]
+      defaultValue: ${context.selection[0]}
       required: true
     - id: target
       type: iri
-      from: context.selection[1]
+      defaultValue: ${context.selection[1]}
       required: true
 ---
 # Selection

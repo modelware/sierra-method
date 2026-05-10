@@ -8,9 +8,10 @@ template:
   params:
     - id: ontology
       type: iri
-      from: context.ontology
+      defaultValue: ${context.ontology}
       required: true
 ---
+
 # Stakeholders
 Identify individuals, groups, or organizations with interests in the missions:
 

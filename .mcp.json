@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "oml": {
+      "command": "oml-mcp"
+    }
+  }
+}

@@ -3,12 +3,10 @@
 description bundle <https://fireforce6.github.io/mission-control/bundle#> as d-bundle {
     uses <http://purl.org/dc/elements/1.1/> as dc
     uses <https://www.modelware.io/sierra/bundle#>
-
     includes <https://fireforce6.github.io/mission-control/context-analysis/stakeholders#>
     includes <https://fireforce6.github.io/mission-control/context-analysis/concerns#>
     includes <https://fireforce6.github.io/mission-control/context-analysis/missions#>
     includes <https://fireforce6.github.io/mission-control/context-analysis/objectives#>
-    
     includes <https://fireforce6.github.io/mission-control/operational-analysis/capabilities#>
     includes <https://fireforce6.github.io/mission-control/operational-analysis/entities#>
     includes <https://fireforce6.github.io/mission-control/operational-analysis/items#>
@@ -17,7 +15,6 @@ description bundle <https://fireforce6.github.io/mission-control/bundle#> as d-b
     includes <https://fireforce6.github.io/mission-control/operational-analysis/requirements#>
     includes <https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm1#>
     includes <https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm2#>
-
     includes <https://fireforce6.github.io/mission-control/system-analysis/components#>
     includes <https://fireforce6.github.io/mission-control/system-analysis/masses#>
     includes <https://fireforce6.github.io/mission-control/system-analysis/connections#>

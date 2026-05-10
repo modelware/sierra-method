@@ -1,15 +1,15 @@
-project:
-   title: Fire Force VI
-   description: This project demonstrates the use of the Sierra method
-   group: io.modelware.examples
-   artifact: fireforce6
-   version: 0.1.0
+oml: 0.15
+name: @oml/sierra-method
+version: 0.1.0
+title: Sierra Method
+description: The defnition of the Sierra method
 
-repositories:
-   - https://repo.maven.apache.org/maven2
+sources:
+  - src
+
+registries:
+  - url: https://www.npmjs.com/
 
 dependencies:
-   - io.opencaesar.ontologies:core-vocabularies:5.+
+  "@oml/core": "^1.0.0"
 
-oml:
-  version: 0.14.0

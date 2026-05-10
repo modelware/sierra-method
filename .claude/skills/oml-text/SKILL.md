@@ -1,253 +1,42 @@
-# Copilot Instructions for OML Projects
+---
+name: oml-text
+description: 'Use when working with OML source text, syntax, and repository structure, especially if OML MCP is unavailable or the task depends on authoring details that MCP does not expose.'
+---
 
-## Language Overview
-You are assisting with Ontological Modeling Language (OML), a language for creating formal ontologies with description logic semantics. OML is used primarily in systems engineering for defining vocabularies, concepts, and relationships.
+# OML Text Skill
 
-## File Structure and Extensions
-- `.oml` - OML textual syntax files
-- Source files typically go in `/src/model/oml/` directory
-- Build outputs typically go in `build/oml/` directory
+Use this skill when the answer depends on the OML source files themselves rather than the model surface exposed by OML MCP.
 
-## Core Concepts
+## When to use
+- OML MCP is unavailable.
+- The task is about textual authoring details such as aliases, annotations, comments, file layout, or instruction files.
+- You need to compare source declarations across files or inspect syntax that is easier to answer from text.
 
-### Ontology Types
-OML supports four concrete ontology types:
+## Workflow
+1. Start from the smallest relevant OML file.
+- Prefer the active file, the referenced ontology IRI, or a nearby import.
+- Search narrowly before widening scope.
 
-1. **Vocabulary** - Defines domain terms and rules (open-world semantics)
-2. **VocabularyBundle** - Bundles vocabularies into a DSL (closed-world semantics)
-3. **Description** - Defines system instances using vocabulary terms
-4. **DescriptionBundle** - Bundles descriptions into a dataset for reasoning
+2. Use repository text tools deliberately.
+- Use file search and targeted reads to find ontology IRIs, declarations, and property assignments.
+- Prefer nearby reads over broad scans.
 
-### Import Relationships
-- **Vocabulary** can: `extends` Vocabulary, `uses` Description
-- **VocabularyBundle** can: `extends` VocabularyBundle, `includes` Vocabulary
-- **Description** can: `extends` Description, `uses` Vocabulary
-- **DescriptionBundle** can: `extends` DescriptionBundle, `includes` Description, `uses` VocabularyBundle, `uses` Vocabulary
+3. Preserve OML semantics.
+- Distinguish vocabulary definitions from description instances.
+- Track whether a file is defining terms or assigning instance data.
+- Follow `extends`, `uses`, and containment relationships carefully.
 
-## Comprehensive Syntax Examples
+4. Escalate to MCP when it becomes the better tool.
+If the question turns into model navigation, validation, or structured querying and MCP is available, switch to the `oml-mcp` skill.
 
-### 1. Vocabulary - Mission Domain
+## Repository heuristics
+- Source OML files are typically under `src/model/oml/`.
+- Built artifacts are under `build/` and should not be the default source for answers.
+- In this repository, structural containment often lives in system-analysis descriptions such as `components.oml`, while physical-property values may live in neighboring descriptions such as `masses.oml`.
 
-```oml
-@dc:title "Mission Domain Vocabulary"
-@dc:creator "Systems Engineering Team"
-@dc:date "2024-11-18"^^xsd:dateTime
-vocabulary <http://com.xyz/methodology/mission#> as mission {
-  extends <http://www.w3.org/2001/XMLSchema#> as xsd
-  extends <http://www.w3.org/2000/01/rdf-schema#> as rdfs
-  extends <http://com.xyz/methodology/base#> as base
-  
-  // ========== ASPECTS ==========
-  // Aspects represent capabilities/mixins
-  @rdfs:comment "Elements that can be identified uniquely"
-  aspect IdentifiedElement [
-    key hasId
-  ]
-  
-  @rdfs:comment "Elements that can contain other elements"
-  aspect Container
-  
-  // ========== CONCEPTS ==========
-  // Concepts represent concrete domain types
-  @rdfs:comment "A component that performs functions"
-  concept Component [
-    key hasId
-  ] < IdentifiedElement, Container [
-    restricts all hasSubcomponent to Component
-    restricts some performs to Function
-  ]
-  
-  @rdfs:comment "A specialized component"
-  concept Assembly < Component [
-    restricts hasSubcomponent to min 2
-  ]
-  
-  @rdfs:comment "A mechanical component type"
-  concept MechanicalComponent < Component [
-    restricts all hasSubcomponent to MechanicalComponent
-  ]
-  
-  @rdfs:comment "A functional capability"
-  concept Function < IdentifiedElement [
-    key hasId, hasName
-  ]
-  
-  @rdfs:comment "A power-related function"
-  concept Power < Function
-  
-  @rdfs:comment "An interface between components"
-  concept Interface < IdentifiedElement
-  
-  @rdfs:comment "An input interface"
-  concept InputInterface < Interface
-  
-  @rdfs:comment "An output interface"  
-  concept OutputInterface < Interface
-  
-  // ========== RELATION ENTITIES ==========
-  // Reified relations with properties
-  @rdfs:comment "Reified relation: Component performs Function"
-  relation entity Performs [
-    from Component
-    to Function
-    forward performs
-    reverse isPerformedBy
-    inverse functional
-    asymmetric
-    irreflexive
-  ] < base:Characterizes
-  
-  @rdfs:comment "Specialized performs relation"
-  relation entity Provides [
-    from Assembly
-    to Power
-    forward provides
-    reverse isProvidedBy
-  ] < Performs [
-    restricts hasPriority to exactly 1
-  ]
-  
-  @rdfs:comment "Component presents Interface"
-  relation entity Presents [
-    from Component
-    to Interface
-    forward presents
-    reverse isPresentedBy
-    functional
-  ]
-  
-  // ========== UNREIFIED RELATIONS ==========
-  // Simple relations without reification
-  @rdfs:comment "Component contains subcomponents"
-  relation hasSubcomponent [
-    from Component
-    to Component
-    reverse isSubcomponentOf
-    asymmetric
-    irreflexive
-  ]
-  
-  @rdfs:comment "Function invokes other functions"
-  relation invokes [
-    from Function
-    to Function
-    reverse isInvokedBy
-    transitive
-  ]
-  
-  @rdfs:comment "Interface joins with another interface"
-  relation joins [
-    from Interface
-    to Interface
-    reverse isJoinedBy
-    symmetric
-  ]
-  
-  // ========== SCALAR PROPERTIES ==========
-  @rdfs:comment "Unique identifier"
-  scalar property hasId [
-    domain IdentifiedElement
-    range xsd:string
-    functional
-  ]
-  
-  @rdfs:comment "Human-readable name"
-  scalar property hasName [
-    domain Function
-    range xsd:string
-    functional
-  ]
-  
-  @rdfs:comment "Mass in kilograms"
-  scalar property hasMass [
-    domain Component
-    range xsd:decimal
-    functional
-  ]
-  
-  @rdfs:comment "Power consumption in watts"
-  scalar property hasPowerConsumption [
-    domain Component
-    range xsd:double
-    functional
-  ]
-  
-  @rdfs:comment "Whether the element is abstract"
-  scalar property isAbstract [
-    domain Function
-    range xsd:boolean
-    functional
-  ]
-  
-  @rdfs:comment "Priority level (1-10)"
-  scalar property hasPriority [
-    domain Performs
-    range xsd:integer
-    functional
-  ]
-  
-  // ========== CUSTOM SCALARS ==========
-  @rdfs:comment "Ten character string"
-  scalar TenCharString < xsd:string [
-    length 10
-  ]
-  
-  @rdfs:comment "Social Security Number format"
-  scalar SSN = xsd:string [
-    pattern "^\d{3}-?\d{2}-?\d{4}$"
-  ]
-  
-  @rdfs:comment "RGB color enumeration"
-  scalar RGB [
-    oneOf "Red", "Green", "Blue"
-  ]
-  
-  @rdfs:comment "Positive decimal between 0 and 100"
-  scalar Percentage = xsd:decimal [
-    minInclusive 0.0
-    maxInclusive 100.0
-  ]
-  
-  // ========== RULES ==========
-  @rdfs:comment "Transitivity: if c1 performs f1 and f1 invokes f2, then c1 performs f2"
-  rule TransitivePerformance [
-    Component(c) & performs(c, f1) & invokes(f1, f2) 
-    -> performs(c, f2)
-  ]
-  
-  @rdfs:comment "Components with different IDs are different"
-  rule UniqueById [
-    hasId(c1, id1) & hasId(c2, id2) & differentFrom(id1, id2)
-    -> differentFrom(c1, c2)
-  ]
-  
-  @rdfs:comment "Mass accumulation: parent mass includes subcomponent masses"
-  rule AccumulateMass [
-    hasMass(parent, m1) & hasSubcomponent(parent, child) & hasMass(child, m2) & 
-    builtIn(swrlb:add, totalMass, m1, m2)
-    -> hasMass(parent, totalMass)
-  ]
-}
-```
-
-### 2. Vocabulary with Equivalence and Complex Restrictions
-
-```oml
-vocabulary <http://com.xyz/methodology/analysis#> as analysis {
-  extends <http://com.xyz/methodology/mission#> as mission
-  extends <http://www.w3.org/2001/XMLSchema#> as xsd
-  
-  // ========== CONCEPTS WITH EQUIVALENCE ==========
-  @rdfs:comment "A functional component is equivalent to a component that performs functional requirements"
-  concept FunctionalComponent = mission:Component [
-    restricts some performs to FunctionalRequirement
-  ]
-  
-  @rdfs:comment "A critical component performs at least 3 functions with high priority"
-  concept CriticalComponent = mission:Component [
-    restricts performs to min 3
-    restricts all performs to HighPriorityFunction
-  ]
+## Response expectations
+- State whether the answer comes from source text or model inference.
+- Call out assumptions when combining facts across multiple OML files.
   
   @rdfs:comment "A leaf component has no subcomponents"
   concept LeafComponent = mission:Component [
