@@ -1,2 +1,3 @@
 [mcp_servers.context7]
-command = "oml-mcp"
+command = "npx"
+args = ["-y", "@oml/mcp"]
