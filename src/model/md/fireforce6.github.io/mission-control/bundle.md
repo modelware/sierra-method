@@ -32,10 +32,10 @@
     <td>2. <a href="./operational-analysis/entities.md">Identify Operational Entities</a></td>
   </tr>
   <tr>
-    <td>3. <a href="./operational-analysis/items.md">Define Operational Items</a></td>
+    <td>4. <a href="./operational-analysis/activities.md">Define Operational Activities</a></td>
   </tr>
   <tr>
-    <td>4. <a href="./operational-analysis/activities.md">Define Operational Activities</a></td>
+    <td>3. <a href="./operational-analysis/items.md">Define Operational Items</a></td>
   </tr>
   <tr>
     <td>5. <a href="./operational-analysis/processes.md">Define Operational Processes</a></td>

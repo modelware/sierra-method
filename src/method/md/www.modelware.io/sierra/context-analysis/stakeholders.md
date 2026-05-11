@@ -11,7 +11,6 @@ template:
       defaultValue: ${context.ontology}
       required: true
 ---
-
 # Stakeholders
 Identify individuals, groups, or organizations with interests in the missions:
 
