@@ -45,7 +45,19 @@ jobs:
         run: oml start
 
       - name: Rendering
-        run: oml render -m src/model/md -b build/web -c src/model/oml/fireforce6.github.io/mission-control/bundle.oml
+        run: oml render
+
+      - name: Install nbconvert
+        run: pip install nbconvert
+
+      - name: Convert notebooks to HTML
+        run: find build/web -name "*.ipynb" -exec jupyter nbconvert --to html --no-input {} \;
+
+      - name: Style notebook pages
+        run: find build/web -name "*.ipynb" | sed 's/\.ipynb$/.html/' | xargs perl -pi -e 's|</head>|<style>html,body{margin:0!important;padding:0 26px!important}</style></head>|'
+
+      - name: Rewrite notebook links
+        run: grep -rl '\.ipynb"' build/web | xargs perl -pi -e 's/href="([^"]*?)\.ipynb"/href="$1.html"/g'
 
       - name: Stopping server
         run: oml stop

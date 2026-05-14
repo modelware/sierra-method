@@ -1,15 +1,40 @@
-oml: 0.15
-name: @oml/sierra-method
-version: 0.1.0
-title: Sierra Method
-description: The defnition of the Sierra method
+# oml-code settings
+oml-code:
+  schemaVersion: 1
 
+# project npm settings
+project:
+  name: "@oml/sierra-method"
+  version: 0.1.0
+  title: Sierra Method
+  description: The defnition of the Sierra method
+
+# source folders
 sources:
-  - src
+  oml:
+    - src/method/oml
+    - src/model/oml
+  md:
+    - src/method/md
+    - src/model/md
 
+# npm registries
 registries:
   - url: https://www.npmjs.com/
 
+# npm dependencies
 dependencies:
   "@oml/core": "^1.0.0"
 
+# oml server settings
+server:
+  port: 8080
+
+# oml-cli parameter defaults
+defaults:
+  build:
+    owl: build/owl
+  render:
+    md: src/model/md
+    web: build/web
+    context: src/model/oml/fireforce6.github.io/mission-control/bundle.oml
