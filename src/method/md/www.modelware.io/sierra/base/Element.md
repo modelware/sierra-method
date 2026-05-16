@@ -27,9 +27,7 @@ PREFIX base: <https://www.modelware.io/sierra/base#>
 
 SELECT ?description
 WHERE {
-    GRAPH ?g {
-        <${member}> base:description ?description .
-    }
+  <${member}> base:description ?description .
 }
 ```
 

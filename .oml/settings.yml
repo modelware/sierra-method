@@ -4,19 +4,14 @@ oml-code:
 
 # project npm settings
 project:
-  name: "@oml/sierra-method"
+  name: "@oml/fireforce6"
   version: 0.1.0
-  title: Sierra Method
-  description: The defnition of the Sierra method
+  title: Fire Force VI
+  description: The Fire Force VI architecture
 
 # source folders
 sources:
-  oml:
-    - src/method/oml
-    - src/model/oml
-  md:
-    - src/method/md
-    - src/model/md
+  - src
 
 # npm registries
 registries:

@@ -2,6 +2,6 @@
 
 This is the mission control system model of the Fire Force VI project. 
 
-[CLICK TO BROWSE](fireforce6.github.io/mission-control/bundle.md)
+[CLICK TO BROWSE](Fire%20Force%20VI/Mission%20Control/Overview.md)
 
 ![](images/mission-control.png)

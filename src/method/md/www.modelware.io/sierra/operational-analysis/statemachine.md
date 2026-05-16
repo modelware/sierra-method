@@ -11,7 +11,6 @@ template:
       defaultValue: ${context.ontology}
       required: true
 ---
-# State Machine Diagram
 
 ```diagram
 ---

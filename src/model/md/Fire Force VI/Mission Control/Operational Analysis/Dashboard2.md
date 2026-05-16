@@ -5,6 +5,29 @@ ontology: https://fireforce6.github.io/mission-control/bundle
 # Entities (Python)
 
 ```python
+result = await query("""
+    PREFIX component: <https://www.modelware.io/sierra/component#>
+    PREFIX components: <https://fireforce6.github.io/mission-control/system-analysis/components#>
+    SELECT ?mass 
+    WHERE {
+        components:PrimaryLens component:mass ?mass .
+    }
+""")
+current = result['rows'][0]['mass']
+
+display(interactive(
+    f'<button>Click</button> to increment mass of Primary Lens by 0.1',
+    {
+        'kind': 'updateAssertion',
+        'descriptionIri': 'https://fireforce6.github.io/mission-control/system-analysis/masses',
+        'subjectIri': 'https://fireforce6.github.io/mission-control/system-analysis/components#PrimaryLens',
+        'predicateIri': 'https://www.modelware.io/sierra/component#mass',
+        'object': round(float(current) + 0.1, 10)
+    }
+))
+```
+
+```python
 import micropip
 await micropip.install(['matplotlib', 'pandas'])
 import matplotlib
@@ -69,6 +92,29 @@ display(f'<img src="data:image/png;base64,{b64}" style="max-width:100%;border-ra
 # Activities (R)
 
 ```r
+result <- query("
+    PREFIX component: <https://www.modelware.io/sierra/component#>
+    PREFIX components: <https://fireforce6.github.io/mission-control/system-analysis/components#>
+    SELECT ?mass 
+    WHERE {
+        components:PrimaryLens component:mass ?mass .
+    }
+")
+current <- result[["mass"]][[1]]
+
+display(interactive(
+    '<button>Click</button> to increment mass of Primary Lens by 0.1',
+    list(
+        kind = 'updateAssertion',
+        descriptionIri = 'https://fireforce6.github.io/mission-control/system-analysis/masses',
+        subjectIri = 'https://fireforce6.github.io/mission-control/system-analysis/components#PrimaryLens',
+        predicateIri = 'https://www.modelware.io/sierra/component#mass',
+        object = round(as.numeric(current) + 0.1, 10)
+    )
+))
+```
+
+```r
 frag <- function(iri) { parts <- strsplit(iri, "[#/]")[[1]]; tail(parts[nchar(parts) > 0], 1) }
 
 result <- query("
@@ -116,6 +162,31 @@ display(paste0(
 ```
 
 # Flows (Javascript)
+
+```javascript
+const result = await query(`
+  PREFIX component: <https://www.modelware.io/sierra/component#>
+  PREFIX components: <https://fireforce6.github.io/mission-control/system-analysis/components#>
+  SELECT ?mass
+  WHERE {
+    components:PrimaryLens component:mass ?mass .
+  }
+`);
+
+const current = result.rows[0].mass;
+
+display(interactive(
+  '<button>Click</button> to increment mass of Primary Lens by 0.1',
+  {
+    kind: 'updateAssertion',
+    descriptionIri: 'https://fireforce6.github.io/mission-control/system-analysis/masses',
+    subjectIri: 'https://fireforce6.github.io/mission-control/system-analysis/components#PrimaryLens',
+    predicateIri: 'https://www.modelware.io/sierra/component#mass',
+    object: Math.round((Number(current) + 0.1) * 1e10) / 1e10
+  }
+));
+```
+
 
 ```javascript
 await load('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js');
