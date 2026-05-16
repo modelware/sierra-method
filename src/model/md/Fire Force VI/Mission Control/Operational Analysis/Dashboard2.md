@@ -28,15 +28,13 @@ display(interactive(
 ```
 
 ```python
+include('src/method/py/utils.py')
 import micropip
 await micropip.install(['matplotlib', 'pandas'])
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import pandas as pd
-import io, base64
-
-frag = lambda iri: (iri or '').split('#')[-1].split('/')[-1]
 
 result = await query("""
   PREFIX oml: <http://opencaesar.io/oml#>
@@ -52,17 +50,17 @@ result = await query("""
 """)
 
 rows = result['rows']
-entities     = sorted({r.get('entityLabel')     or frag(r.get('entity',''))     for r in rows})
-capabilities = sorted({r.get('capabilityLabel') or frag(r.get('capability','')) for r in rows})
+entities     = sorted({display_label(r.get('entityLabel'),     r.get('entity',''))     for r in rows})
+capabilities = sorted({display_label(r.get('capabilityLabel'), r.get('capability','')) for r in rows})
 
 matrix = pd.DataFrame(0, index=entities, columns=capabilities)
 for r in rows:
-    e = r.get('entityLabel')     or frag(r.get('entity',''))
-    c = r.get('capabilityLabel') or frag(r.get('capability',''))
+    e = display_label(r.get('entityLabel'),     r.get('entity',''))
+    c = display_label(r.get('capabilityLabel'), r.get('capability',''))
     matrix.loc[e, c] = 1
 
 fig, ax = plt.subplots(figsize=(max(6, len(capabilities) * 0.7), max(3, len(entities) * 0.6)))
-im = ax.imshow(matrix.values, cmap='Blues', vmin=0, vmax=1, aspect='auto')
+ax.imshow(matrix.values, cmap='Blues', vmin=0, vmax=1, aspect='auto')
 
 ax.set_xticks(range(len(capabilities)))
 ax.set_xticklabels(capabilities, rotation=45, ha='right', fontsize=9)
@@ -80,13 +78,7 @@ ax.grid(which='minor', color='white', linewidth=1.5)
 ax.tick_params(which='minor', length=0)
 ax.set_title('Entity × Capability Matrix', fontsize=11, pad=12)
 plt.tight_layout()
-
-buf = io.BytesIO()
-plt.savefig(buf, format='png', dpi=130, bbox_inches='tight')
-plt.close()
-buf.seek(0)
-b64 = base64.b64encode(buf.read()).decode()
-display(f'<img src="data:image/png;base64,{b64}" style="max-width:100%;border-radius:4px">')
+display(image_html(fig))
 ```
 
 # Activities (R)
@@ -115,7 +107,7 @@ display(interactive(
 ```
 
 ```r
-frag <- function(iri) { parts <- strsplit(iri, "[#/]")[[1]]; tail(parts[nchar(parts) > 0], 1) }
+include('src/method/r/utils.r')
 
 result <- query("
   PREFIX oml: <http://opencaesar.io/oml#>
@@ -130,35 +122,9 @@ result <- query("
   ORDER BY ?entityLabel ?activityLabel
 ")
 
-entity_label <- if (!is.null(result$entityLabel)) result$entityLabel else rep("", nrow(result))
-labels <- ifelse(
-  !is.na(entity_label) & nchar(entity_label) > 0,
-  entity_label,
-  sapply(result$entity, frag)
-)
-
+labels <- display_label(result$entityLabel, result$entity)
 counts <- sort(base::table(labels), decreasing = TRUE)
-maxval <- if (length(counts) > 0) max(counts) else 1
-palette <- c("#4a90d9","#e67e22","#27ae60","#8e44ad","#c0392b","#16a085","#d35400","#2980b9")
-
-bars <- sapply(seq_along(counts), function(i) {
-  pct <- max(4, round(as.integer(counts[i]) / maxval * 70))
-  col <- palette[(i - 1L) %% length(palette) + 1L]
-  paste0(
-    '<div style="display:flex;align-items:center;margin:4px 0">',
-    '<div style="width:140px;text-align:right;padding-right:10px;font-size:13px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">', names(counts)[i], '</div>',
-    '<div style="background:', col, ';width:', pct, '%;height:20px;border-radius:3px;min-width:4px"></div>',
-    '<div style="padding-left:8px;font-size:13px;color:#555">', as.integer(counts[i]), '</div>',
-    '</div>'
-  )
-})
-
-display(paste0(
-  '<div style="padding:12px 4px">',
-  '<div style="font-weight:600;font-size:14px;margin-bottom:8px;color:#222">Activities Allocated per Entity</div>',
-  paste(bars, collapse=""),
-  '</div>'
-))
+bar_chart(names(counts), as.integer(counts), "Activities Allocated per Entity")
 ```
 
 # Flows (Javascript)
@@ -189,10 +155,8 @@ display(interactive(
 
 
 ```javascript
+await include('src/method/js/utils.js')
 await load('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js');
-
-const frag = iri => iri.split(/[#\/]/).pop();
-const toId = iri => frag(iri).replace(/\W/g, '_');
 
 const result = await query(`
   PREFIX oml: <http://opencaesar.io/oml#>
@@ -236,7 +200,5 @@ for (const { srcId, srcLabel, tgtId, tgtLabel, items } of edges.values()) {
   def += `  ${srcId} -->${label}${tgtId}\n`;
 }
 
-mermaid.initialize({ startOnLoad: false, theme: 'default' });
-const { svg } = await mermaid.render('mmd' + Date.now(), def);
-display(svg);
+renderMermaid(def);
 ```
