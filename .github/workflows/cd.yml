@@ -56,9 +56,6 @@ jobs:
       - name: Style notebook pages
         run: find build/web -name "*.ipynb" | sed 's/\.ipynb$/.html/' | xargs -I {} perl -pi -e 's|</head>|<style>html,body{margin:0!important;padding:0 26px!important}</style></head>|' {}
 
-      - name: Rewrite notebook links
-        run: grep -rl '\.ipynb"' build/web | xargs -I {} perl -pi -e 's/href="([^"]*?)\.ipynb"/href="$1.html"/g' {}
-
       - name: Stopping server
         run: oml stop
 
