@@ -21,7 +21,7 @@
     <td>5. <a href="./Context%20Analysis/Dashboard.md">View Context Dashboard</a></td>
   </tr>
   <tr>
-    <td>5. <a href="./Context%20Analysis/Dashboard2.ipynb">View Context Dashboard2 (Jupyter Notebook)</a></td>
+    <td>6. <a href="./Context%20Analysis/Dashboard2.ipynb">View Context Dashboard2 (Jupyter Notebook)</a></td>
   </tr>
 </table>
 
