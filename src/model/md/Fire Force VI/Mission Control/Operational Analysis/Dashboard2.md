@@ -125,6 +125,8 @@ result <- query("
 labels <- display_label(result$entityLabel, result$entity)
 counts <- sort(base::table(labels), decreasing = TRUE)
 bar_chart(names(counts), as.integer(counts), "Activities Allocated per Entity")
+
+render_mermaid("graph LR\n  A[Start] --> B[End]")
 ```
 
 # Flows (Javascript)

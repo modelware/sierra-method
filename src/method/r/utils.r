@@ -31,3 +31,21 @@ bar_chart <- function(labels, values, title = "", palette = oml_palette) {
     else ''
     display(paste0('<div style="padding:12px 4px">', hdr, paste(bars, collapse = ""), '</div>'))
 }
+
+render_mermaid <- function(code) {
+    id <- paste0('mmd-', as.hexmode(sample.int(2^31, 1)))
+    display(paste0('<div id="', id, '"></div>'))
+    js(paste0(
+        'if(!globalThis.mermaid){await new Promise((resolve,reject)=>{',
+        'const s=document.createElement("script");',
+        's.src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js";',
+        's.onload=resolve;',
+        's.onerror=()=>reject(new Error("Failed to load Mermaid"));',
+        'document.head.appendChild(s);',
+        '});}',
+        'mermaid.initialize({startOnLoad:false,theme:"default"});',
+        'const{svg}=await mermaid.render("', id, '-svg",`',
+        gsub('`', '\\`', code, fixed=TRUE),
+        '`);document.getElementById("', id, '").innerHTML=svg;'
+    ))
+}
