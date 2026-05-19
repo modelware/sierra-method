@@ -1,0 +1,58 @@
+description <https://www.modelware.io/sierra/codegen/conops#> as conops {
+
+	uses <http://opencaesar.io/codegen#> as codegen
+
+    instance ConOpsSpec : codegen:Spec [
+        codegen:construct """
+            PREFIX oml: <http://opencaesar.io/oml#>
+            PREFIX codegen: <http://opencaesar.io/codegen#>
+            PREFIX base: <https://www.modelware.io/sierra/base#>
+            PREFIX stakeholder: <https://www.modelware.io/sierra/stakeholder#>
+            PREFIX templates: <https://www.modelware.io/sierra/codegen/conops#>
+
+            CONSTRUCT {
+                ?file a codegen:File ;
+                    codegen:path "${path}/ConOps.md" ;
+                    codegen:template templates:ConOpsTemplate ;
+                    codegen:root ?stakeholder .
+
+                ?stakeholder a stakeholder:Stakeholder ;
+                    base:description ?stakeholderDesc ;
+                    oml:label ?stakeholderLabel ;
+                    stakeholder:expresses ?concern .
+
+                ?concern a stakeholder:Concern ;
+                    base:description ?concernDesc ;
+                    oml:label ?concernLabel .
+            }
+            WHERE {
+                BIND(IRI("urn:file") AS ?file)
+
+                ?stakeholder a stakeholder:Stakeholder ;
+                    stakeholder:expresses ?concern .
+
+                OPTIONAL { ?stakeholder oml:label ?stakeholderLabel }
+                OPTIONAL { ?stakeholder base:description ?stakeholderDesc }
+                OPTIONAL { ?concern oml:label ?concernLabel }
+                OPTIONAL { ?concern base:description ?concernDesc }
+            }
+        """
+        codegen:parameter "path"
+    ]
+
+    instance ConOpsTemplate : codegen:Template [
+        codegen:body """
+            # Stakeholders and Concerns
+
+            {% for stakeholder in objects(file, "codegen:root") %}
+            ## {{ object(stakeholder, "oml:label") }}
+            {{ object(stakeholder, "base:description")}}
+            
+            **Concerns:**
+                {% for concern in objects(stakeholder, "stakeholder:expresses") %}
+            - <u>{{ object(concern, "oml:label") }}:</u> {{ object(concern, "base:description") }}
+                {% endfor %}
+            {% endfor %}
+        """ 
+    ]
+}

@@ -1,0 +1,26 @@
+description <https://fireforce6.github.io/mission-control/codegen/configs#> as configs {
+
+	uses <http://opencaesar.io/codegen#> as codegen
+    
+	extends <https://www.modelware.io/sierra/codegen/conops#> as conops
+	extends <https://www.modelware.io/sierra/codegen/statemachine#> as statemachine
+
+    instance conops : codegen:Config [
+        codegen:spec conops:ConOpsSpec
+        codegen:context "https://fireforce6.github.io/mission-control/bundle"
+        codegen:binding [codegen:key "path" codegen:value "build/docs"]
+    ]
+    
+    instance sm1 : codegen:Config [
+        codegen:spec statemachine:StateMachineSpec
+        codegen:context "https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm1"
+        codegen:binding [codegen:key "path" codegen:value "build/docs"]
+    ]
+
+    instance sm2 : codegen:Config [
+        codegen:spec statemachine:StateMachineSpec
+        codegen:context "https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm2"
+        codegen:binding [codegen:key "path" codegen:value "build/docs"]
+    ]
+
+}

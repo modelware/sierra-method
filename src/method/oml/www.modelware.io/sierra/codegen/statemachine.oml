@@ -1,0 +1,131 @@
+description <https://www.modelware.io/sierra/codegen/statemachine#> as statemachine {
+
+	uses <http://opencaesar.io/codegen#> as codegen
+
+    instance StateMachineSpec : codegen:Spec [
+        codegen:construct """
+            PREFIX oml:       <http://opencaesar.io/oml#>
+            PREFIX codegen:   <http://opencaesar.io/codegen#>
+            PREFIX base:      <https://www.modelware.io/sierra/base#>
+            PREFIX state:     <https://www.modelware.io/sierra/state#>
+            PREFIX xst:       <https://mozilla.github.io/nunjucks#>
+            PREFIX templates: <https://www.modelware.io/sierra/codegen/statemachine#>
+
+            CONSTRUCT {
+                ?file a codegen:File ;
+                    codegen:path ?path ;
+                    codegen:template templates:StateMachineTemplate ;
+                    codegen:root ?machine .
+
+                ?machine a xst:Machine ;
+                    xst:id ?machineName ;
+                    xst:allocatedTo ?allocatedToName ;
+                    xst:initial ?initialName ;
+                    xst:state ?state ;
+                    xst:finalState ?finalState .
+
+                ?state a xst:State ;
+                    xst:name ?stateName ;
+                    xst:enables ?enabledProcessName ;
+                    xst:on ?transition .
+
+                ?finalState a xst:FinalState ;
+                    xst:name ?finalStateName .
+
+                ?transition a xst:Transition ;
+                    xst:source ?state ;
+                    xst:target ?targetName ;
+                    xst:event ?eventName .
+            }
+            WHERE {
+                ?machine a state:StateMachine .
+
+                BIND(REPLACE(STR(?machine), "^.*[/#]", "") AS ?machineName)
+                BIND(IRI(CONCAT("urn:file:xstate:", ?machineName)) AS ?file)
+                BIND(CONCAT("${path}/", ?machineName, ".js") AS ?path)
+
+                OPTIONAL {
+                    ?machine state:isAllocatedTo ?allocatedTo .
+                    BIND(REPLACE(STR(?allocatedTo), "^.*[/#]", "") AS ?allocatedToName)
+                }
+
+                # Regular states
+                OPTIONAL {
+                    ?state a state:State ;
+                           base:isContainedBy ?machine .
+                    FILTER NOT EXISTS { ?state a state:Final }
+                    BIND(REPLACE(STR(?state), "^.*[/#]", "") AS ?stateName)
+
+                    OPTIONAL {
+                        ?state state:enables ?enabledProcess .
+                        BIND(REPLACE(STR(?enabledProcess), "^.*[/#]", "") AS ?enabledProcessName)
+                    }
+
+                    # Transitions nested inside state to avoid cross-join
+                    OPTIONAL {
+                        ?transition a state:Transition ;
+                                    oml:hasSource ?state ;
+                                    oml:hasTarget ?target .
+                        BIND(REPLACE(STR(?target), "^.*[/#]", "") AS ?targetName)
+                        
+                        OPTIONAL {
+                            ?transition state:isTriggeredBy ?event .
+                            BIND(REPLACE(STR(?event), "^.*[/#]", "") AS ?eventName)
+                        }
+                    }
+                }
+
+                # Final states
+                OPTIONAL {
+                    ?finalState a state:Final ;
+                                base:isContainedBy ?machine .
+                    BIND(REPLACE(STR(?finalState), "^.*[/#]", "") AS ?finalStateName)
+                }
+
+                # Initial state
+                OPTIONAL {
+                    ?initial a state:Initial ;
+                             base:isContainedBy ?machine .
+                    BIND(REPLACE(STR(?initial), "^.*[/#]", "") AS ?initialName)
+                }
+            }
+        """
+        codegen:parameter "path"
+    ]
+
+    instance StateMachineTemplate : codegen:Template [
+        codegen:body """
+            {%- set statemachine = object(file, "codegen:root") -%}
+            import { createMachine } from "xstate";
+
+            export const {{ object(statemachine, "xst:id") | camelCase }} = createMachine({
+              id: "{{ object(statemachine, "xst:id") }}",
+              initial: "{{ object(statemachine, "xst:initial") }}",
+
+              states: {
+            {%- set states = objects(statemachine, "xst:state") %}
+            {%- set finalStates = objects(statemachine, "xst:finalState") %}
+            {%- for state in states %}
+                {{ object(state, "xst:name") }}: {
+                  on: {
+            {%- for t in objects(state, "xst:on") %}
+                    {{ object(t, "xst:event") or "unknown" }}: {
+                      target: "{{ object(t, "xst:target") }}"
+                    }{% if not loop.last %},{% endif %}
+
+            {%- endfor %}
+                  }
+                }{% if not loop.last or finalStates.length %},{% endif %}
+
+            {%- endfor %}
+            {%- for fs in finalStates %}
+                {{ object(fs, "xst:name") }}: {
+                  type: "final"
+                }{% if not loop.last %},{% endif %}
+
+            {%- endfor %}
+              }
+            });
+        """
+    ]
+}

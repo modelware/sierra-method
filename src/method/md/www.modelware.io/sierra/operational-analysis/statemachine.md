@@ -115,6 +115,18 @@ WHERE {
 }
 ```
 
+## Execution Scenario
+
+```javascript
+include('src/method/js/utils.js');
+const { createActor } = await import("https://esm.sh/xstate");
+const machines = await createMachinesFromModel('${ontology}');
+const [machineName, machine] = Object.entries(machines)[0];
+const actor = createActor(machine);
+actor.start();
+console.log("initial state: "+actor.getSnapshot().value);
+```
+
 ## State Machine
 
 Define a state machine representing state-based configurations of an operational entity.

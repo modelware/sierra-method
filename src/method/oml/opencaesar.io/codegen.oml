@@ -1,0 +1,71 @@
+vocabulary <http://opencaesar.io/codegen#> as codegen {
+
+	extends <http://www.w3.org/2001/XMLSchema#> as xsd
+
+	extends <http://www.w3.org/2002/07/owl#> as owl
+
+    concept Config
+
+    relation spec [
+        from Config
+        to Spec
+    ]
+
+    scalar property context [
+        domain Config
+        range xsd:string
+    ]
+
+    relation binding [
+        from Config
+        to Binding
+    ]
+
+    concept Binding
+
+    scalar property ^key [
+        domain Binding
+        range xsd:string
+    ]
+
+    scalar property value [
+        domain Binding
+        range xsd:string
+    ]
+
+    concept Spec
+
+    scalar property construct [
+        domain Spec
+        range xsd:string
+    ]
+
+    scalar property parameter [
+        domain Spec
+        range xsd:string
+    ]
+
+    concept Template
+
+    scalar property body [
+        domain Template
+        range xsd:string
+    ]
+
+    concept File
+
+    scalar property path [
+        domain File
+        range xsd:string
+    ]
+
+    relation template [
+        from File
+        to Template
+    ]
+
+    relation root [
+        from File
+        to owl:Thing
+    ]
+}
