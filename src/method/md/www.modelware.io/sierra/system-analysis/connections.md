@@ -11,7 +11,7 @@ template:
       defaultValue: ${context.ontology}
       required: true
 ---
-# Connections
+# Component Interfaces
 
 View internal connections between system components.
 

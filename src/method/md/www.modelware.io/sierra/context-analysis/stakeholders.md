@@ -10,12 +10,16 @@ template:
       type: iri
       defaultValue: ${context.ontology}
       required: true
+    - id: target
+      type: iri
+      required: true
 ---
 # Stakeholders
 Identify individuals, groups, or organizations with interests in the missions:
 
 ```table-editor
 ---
+target: ${target}
 columns: { focus: { label: "Stakeholder" } }
 stylesheet:
   - selector: cell[col === "Categories"  && value]

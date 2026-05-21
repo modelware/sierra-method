@@ -11,7 +11,9 @@ description bundle <https://fireforce6.github.io/mission-control/bundle#> as d-b
     includes <https://fireforce6.github.io/mission-control/operational-analysis/entities#>
     includes <https://fireforce6.github.io/mission-control/operational-analysis/items#>
     includes <https://fireforce6.github.io/mission-control/operational-analysis/processes#>
-    includes <https://fireforce6.github.io/mission-control/operational-analysis/scenarios#>
+    includes <https://fireforce6.github.io/mission-control/operational-analysis/scenarios/sc1#>
+    includes <https://fireforce6.github.io/mission-control/operational-analysis/scenarios/sc2#>
+    includes <https://fireforce6.github.io/mission-control/operational-analysis/scenarios/sc3#>
     includes <https://fireforce6.github.io/mission-control/operational-analysis/requirements#>
     includes <https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm1#>
     includes <https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm2#>

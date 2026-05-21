@@ -42,3 +42,42 @@ process:ActivityShape
     ] ;
     .
 ```
+
+# Flows
+
+Identify item flows between activities.
+
+```table-editor
+---
+columns: { focus: { label: "Flow" } }
+---
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix oml: <http://opencaesar.io/oml#> .
+@prefix base: <https://www.modelware.io/sierra/base#> .
+@prefix process: <https://www.modelware.io/sierra/process#> .
+
+process:FlowShape
+    a sh:NodeShape ;
+    sh:targetClass process:Flow ;
+    sh:property [
+        sh:path oml:hasSource ;
+        sh:name "Source" ;
+        sh:class process:Activity ;        
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path oml:hasTarget ;
+        sh:name "Target" ;
+        sh:class process:Activity ;        
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path process:flows ;
+        sh:name "Items" ;
+        sh:class base:Item ;        
+    ] ;
+    .
+```

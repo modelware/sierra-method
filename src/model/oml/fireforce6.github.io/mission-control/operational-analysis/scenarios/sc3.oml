@@ -1,0 +1,133 @@
+@dc:title "Scenarios Description"
+@dc:description "Description of scenarios for the Mission Control system."
+description <https://fireforce6.github.io/mission-control/operational-analysis/scenarios/sc3#> as sc3 {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <https://www.modelware.io/sierra/base#> as base
+    uses <https://www.modelware.io/sierra/scenario#> as scenario
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/entities#> as entities
+    extends <https://fireforce6.github.io/mission-control/context-analysis/stakeholders#> as stakeholders
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/processes#> as processes
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/items#> as items
+    extends <https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm1#> as sm1
+
+    instance ViewHistoricalData : scenario:Scenario [
+        base:description "Scenario demonstrating an Operator viewing historical fire states on the dashboard."
+    ]
+
+    instance Operator_Lifeline : scenario:Lifeline [
+        base:description "Operator lifeline"
+        scenario:lifelineOf ViewHistoricalData
+        scenario:represents stakeholders:Operator
+    ]
+
+    instance Dashboard_Lifeline : scenario:Lifeline [
+        base:description "Dashboard lifeline"
+        scenario:lifelineOf ViewHistoricalData
+        scenario:represents entities:DashboardSystem
+    ]
+
+    instance FireCloud_Lifeline : scenario:Lifeline [
+        base:description "Fire Cloud lifeline (source of historical items)"
+        scenario:lifelineOf ViewHistoricalData
+        scenario:represents entities:FireCloud
+    ]
+
+    instance Operator_TP1 : scenario:TimePoint [
+        scenario:occursOn Operator_Lifeline
+    ]
+
+    instance Operator_TP2 : scenario:TimePoint [
+        scenario:occursOn Operator_Lifeline
+    ]
+
+    instance Dashboard_TP1 : scenario:TimePoint [
+        scenario:occursOn Dashboard_Lifeline
+    ]
+
+    instance Dashboard_TP2 : scenario:TimePoint [
+        scenario:occursOn Dashboard_Lifeline
+        scenario:after Dashboard_TP1
+    ]
+
+    instance Dashboard_TP3 : scenario:TimePoint [
+        scenario:occursOn Dashboard_Lifeline
+        scenario:after Dashboard_TP2
+    ]
+
+    instance Dashboard_TP4 : scenario:TimePoint [
+        scenario:occursOn Dashboard_Lifeline
+        scenario:after Dashboard_TP3
+    ]
+
+    instance Dashboard_TP5 : scenario:TimePoint [
+        scenario:occursOn Dashboard_Lifeline
+        scenario:after Dashboard_TP4
+    ]
+
+    instance Dashboard_TP6 : scenario:TimePoint [
+        scenario:occursOn Dashboard_Lifeline
+        scenario:after Dashboard_TP5
+    ]
+
+    instance Dashboard_TP7 : scenario:TimePoint [
+        scenario:occursOn Dashboard_Lifeline
+        scenario:after Dashboard_TP6
+    ]
+
+    instance FireCloud_TP1 : scenario:TimePoint [
+        scenario:occursOn FireCloud_Lifeline
+    ]
+
+    instance FireCloud_TP2 : scenario:TimePoint [
+        scenario:occursOn FireCloud_Lifeline
+        scenario:after FireCloud_TP1
+    ]
+
+    instance M1 : scenario:Message [
+        base:description "Operator requests historical items via dashboard UI"
+        scenario:startsAt Operator_TP1
+        scenario:endsAt Dashboard_TP1
+        scenario:carries items:history_request
+    ]
+
+    instance M2 : scenario:Message [
+        base:description "Dashboard forwards history request to FireCloud"
+        scenario:startsAt Dashboard_TP2
+        scenario:endsAt FireCloud_TP1
+        scenario:carries items:history_request
+    ]
+
+    instance Exec_RequestHistory : scenario:Execution [
+        base:description "NetworkInterface issues history fetch to FireCloud (A1)."
+        scenario:startsAt FireCloud_TP1
+        scenario:endsAt FireCloud_TP2
+        scenario:executes processes:A1
+    ]
+
+    instance M3 : scenario:Message [
+        base:description "FireCloud returns historical telemetry to Dashboard"
+        scenario:startsAt FireCloud_TP2
+        scenario:endsAt Dashboard_TP3
+        scenario:carries items:history_response
+    ]
+
+    instance Exec_RenderHistory : scenario:Execution [
+        base:description "Dashboard parses history and updates the map/historical layer (A2/A3)."
+        scenario:startsAt Dashboard_TP4
+        scenario:endsAt Dashboard_TP5
+        scenario:executes processes:A2
+    ]
+
+    instance M4 : scenario:Message [
+        base:description "Dashboard renders historical items on the map/time-slider"
+        scenario:startsAt Dashboard_TP6
+        scenario:endsAt Operator_TP2
+        scenario:carries items:history_response
+    ]
+
+    instance SF_DashboardHistorical : scenario:StateFragment [
+        base:description "Dashboard is in HistoricalReview while rendering and user inspects past state."
+        scenario:atTime Dashboard_TP7
+        scenario:checks sm1:HistoricalReview
+    ]
+}

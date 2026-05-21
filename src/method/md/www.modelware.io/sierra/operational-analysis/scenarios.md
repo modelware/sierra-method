@@ -11,11 +11,11 @@ template:
       defaultValue: ${context.ontology}
       required: true
 ---
-# Scenarios
+# Scenario
 
-Create scenarios showing how entities interact through activities/exchanges.
+Create scenarios showing lifelines of entities interacting at certain timepoints.
 
-```table-editor
+```tree-editor
 ---
 columns: { focus: { label: "Scenario" } }
 ---
@@ -36,32 +36,17 @@ scenario:ScenarioShape
         sh:maxCount 1 ;
     ] ;
     .
-```
-
-# Lifelines
-
-Create lifelines that represent entities in the scenarios
-
-```table-editor
----
-columns: { focus: { label: "Lifeline" } }
----
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix dash: <http://datashapes.org/dash#> .
-@prefix base: <https://www.modelware.io/sierra/base#> .
-@prefix entity: <https://www.modelware.io/sierra/entity#> .
-@prefix process: <https://www.modelware.io/sierra/process#> .
-@prefix scenario: <https://www.modelware.io/sierra/scenario#> .
 
 scenario:LifelineShape
     a sh:NodeShape ;
     sh:targetClass scenario:Lifeline ;
     sh:property [
         sh:path scenario:lifelineOf ;
-        sh:name "Scenario" ;
+        sh:name "Container" ;
         sh:class scenario:Scenario ;        
         sh:minCount 1 ;
         sh:maxCount 1 ;
+        dash:composite true ;
     ] ;
     sh:property [
         sh:path scenario:represents ;
@@ -69,6 +54,7 @@ scenario:LifelineShape
         sh:class entity:Entity ;        
         sh:minCount 1 ;
         sh:maxCount 1 ;
+        sh:order 1 ;
     ] ;
     sh:property [
         sh:path base:description ;
@@ -77,45 +63,31 @@ scenario:LifelineShape
         sh:maxCount 1 ;
     ] ;
     .
-```
-
-# Time Points
-
-Create time points on lifelines
-
-```table-editor
----
-columns: { focus: { label: "Time Point" } }
----
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix dash: <http://datashapes.org/dash#> .
-@prefix base: <https://www.modelware.io/sierra/base#> .
-@prefix entity: <https://www.modelware.io/sierra/entity#> .
-@prefix process: <https://www.modelware.io/sierra/process#> .
-@prefix scenario: <https://www.modelware.io/sierra/scenario#> .
 
 scenario:TimePointShape
     a sh:NodeShape ;
     sh:targetClass scenario:TimePoint ;
     sh:property [
         sh:path scenario:occursOn ;
-        sh:name "Lifeline" ;
+        sh:name "Container" ;
         sh:class scenario:Lifeline ;        
         sh:minCount 1 ;
         sh:maxCount 1 ;
+        dash:composite true ;
     ] ;
     sh:property [
         sh:path scenario:after ;
         sh:name "After" ;
         sh:class scenario:TimePoint ;        
         sh:maxCount 1 ;
+        sh:order 2 ;        
     ] ;
     .
 ```
 
 # Messages
 
-Create messages between time points
+Create messages sending items between two time points on lifelines.
 
 ```table-editor
 ---
@@ -162,7 +134,7 @@ scenario:MessageShape
 
 # Executions
 
-Create executions on lifelines.
+Create executions of activities between two time points on the same lifelines.
 
 ```table-editor
 ---
@@ -210,7 +182,7 @@ scenario:ExecutionShape
 
 # State Fragments
 
-Create state fragments on lifelines.
+Create state fragments checking states at certain timepoints on lifelines.
 
 ```table-editor
 ---

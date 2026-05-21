@@ -35,22 +35,28 @@
     <td>2. <a href="./Operational%20Analysis/Entities.md">Identify Operational Entities</a></td>
   </tr>
   <tr>
-    <td>4. <a href="./Operational%20Analysis/Activities.md">Define Operational Activities</a></td>
+    <td>3. <a href="./Operational%20Analysis/Items.md">Define Operational Items</a></td>
   </tr>
   <tr>
-    <td>3. <a href="./Operational%20Analysis/Items.md">Define Operational Items</a></td>
+    <td>4. <a href="./Operational%20Analysis/Activities.md">Define Operational Activities</a></td>
   </tr>
   <tr>
     <td>5. <a href="./Operational%20Analysis/Processes.md">Define Operational Processes</a></td>
   </tr>
   <tr>
-    <td>6. <a href="./Operational%20Analysis/Scenarios.md">Define Operational Scenarios</a></td>
-  </tr>
-  <tr>
-    <td>7. <details style="display: inline-block; vertical-align: top;"><summary>Define Operational State Machines</summary>
+    <td>6. <details style="display: inline-block; vertical-align: top;"><summary>Define Operational State Machines</summary>
       <ul>
         <li><a href="./Operational%20Analysis/statemachines/StateMachine1.md">StateMachine1</a></li>
         <li><a href="./Operational%20Analysis/statemachines/StateMachine2.md">StateMachine2</a></li>
+      </ul>
+    </details></td>
+  </tr>
+  <tr>
+    <td>7. <details style="display: inline-block; vertical-align: top;"><summary>Define Operational Scenarios</summary>
+      <ul>
+        <li><a href="./Operational%20Analysis/scenarios/Scenario1.md">Scenario1</a></li>
+        <li><a href="./Operational%20Analysis/scenarios/Scenario2.md">Scenario2</a></li>
+        <li><a href="./Operational%20Analysis/scenarios/Scenario3.md">Scenario3</a></li>
       </ul>
     </details></td>
   </tr>
@@ -72,13 +78,10 @@
     <td>1. <a href="./System%20Analysis/Components.md">Define System Components</a></td>
   </tr>
   <tr>
-    <td>2. <a href="./System%20Analysis/Masses.md">Specify Component Masses</a></td>
+    <td>2. <a href="./System%20Analysis/Masses.md">Manage Component Masses</a></td>
   </tr>
   <tr>
-    <td>3. <a href="./System%20Analysis/Connections.md">Specify Component Connctions</a></td>
-  </tr>
-  <tr>
-    <td>4. <a href="./System%20Analysis/Dashboard.md">View Systems Dashboard</a></td>
+    <td>3. <a href="./System%20Analysis/Connections.md">Specify Component Interfaces</a></td>
   </tr>
 </table>
 

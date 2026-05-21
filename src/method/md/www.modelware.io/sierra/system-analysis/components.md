@@ -13,9 +13,9 @@ template:
 ---
 # Components
 
-Define the components and their physical decomposition (containers).
+Define the components and their topological decomposition (hierarchy).
 
-```table-editor
+```tree-editor
 ---
 columns: { focus: { label: "Component" } }
 ---
@@ -34,6 +34,7 @@ component:ComponentShape
         sh:name "Container" ;
         sh:class component:Component ;
         sh:maxCount 1 ;
+        dash:composite true ;
     ] ;
     sh:property [
         sh:path base:description ;

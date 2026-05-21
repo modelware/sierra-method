@@ -11,11 +11,11 @@ template:
       defaultValue: ${context.ontology}
       required: true
 ---
-# Physical Parts
+# Mass Management
 
-Identify which components are physical parts and specify their leaf mass.
+Identify which components are physical parts and specify their leaf mass to watch the mass rolling up.
 
-```table-editor
+```tree-editor
 ---
 columns: { focus: { label: "Component" } }
 ---
@@ -27,10 +27,43 @@ columns: { focus: { label: "Component" } }
 component:ComponentShape
     a sh:NodeShape ;
     sh:targetClass component:PhysicalPart;
+    sh:rule [
+        a sh:SPARQLRule ;
+        sh:construct """
+            PREFIX base: <https://www.modelware.io/sierra/base#>
+            PREFIX component: <https://www.modelware.io/sierra/component#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            CONSTRUCT { 
+                $this component:totalMass ?total 
+            } WHERE {
+                SELECT $this (SUM(xsd:decimal(?m)) AS ?total)
+                WHERE {
+                    $this a component:PhysicalPart .
+                    OPTIONAL {
+                        $this base:contains* ?child .
+                        ?child component:mass ?m .
+                    }
+                }
+                GROUP BY $this
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path base:isContainedBy ;
+        sh:name "Container" ;
+        sh:class component:Component ;
+        dash:readOnly true ;
+        dash:composite true ;
+    ] ;
     sh:property [
         sh:path component:mass ;
         sh:name "Mass" ;
         sh:maxCount 1 ;
+    ] ;
+    sh:property [ 
+        sh:path component:totalMass ; 
+        sh:name "Total Mass" ; 
+        dash:readOnly true ;
     ] ;
     .
 ```

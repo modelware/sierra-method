@@ -11,6 +11,10 @@ template:
       defaultValue: ${context.ontology}
       required: true
 ---
+# State Machine
+
+Define a state machine representing state-based configurations of an operational entity.
+
 
 ```diagram
 ---
@@ -115,26 +119,11 @@ WHERE {
 }
 ```
 
-## Execution Scenario
-
-```javascript
-include('src/method/js/utils.js');
-const { createActor } = await import("https://esm.sh/xstate");
-const machines = await createMachinesFromModel('${ontology}');
-const [machineName, machine] = Object.entries(machines)[0];
-const actor = createActor(machine);
-actor.start();
-console.log("initial state: "+actor.getSnapshot().value);
-```
-
-## State Machine
-
-Define a state machine representing state-based configurations of an operational entity.
-
-```table-editor
+```tree-editor
 ---
 columns: { focus: { label: "State Machine" } }
 ---
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix base: <https://www.modelware.io/sierra/base#> .
@@ -151,31 +140,16 @@ state:StateMachineShape
         sh:class entity:Entity ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
+        sh:order 1 ;
     ] ;
     sh:property [
         sh:path base:description ;
         sh:name "Description" ;
         dash:editor dash:TextAreaEditor ;
         sh:maxCount 1 ;
+        sh:order 4 ;
     ] ;
     .
-```
-
-## States
-
-Define the states of the state machine.
-
-```table-editor
----
-columns: { focus: { label: "State" } }
----
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix dash: <http://datashapes.org/dash#> .
-@prefix base: <https://www.modelware.io/sierra/base#> .
-@prefix entity: <https://www.modelware.io/sierra/entity#> .
-@prefix process: <https://www.modelware.io/sierra/process#> .
-@prefix state: <https://www.modelware.io/sierra/state#> .
 
 state:StateShape
     a sh:NodeShape ;
@@ -185,25 +159,28 @@ state:StateShape
     sh:property [
         sh:path rdf:type ;
         sh:name "Type" ;
-        dash:readOnly true ;
+        sh:order 2 ;
     ] ;
     sh:property [
         sh:path base:isContainedBy ;
-        sh:name "State Machine" ;
+        sh:name "Container" ;
         sh:class state:StateMachine ;
-        sh:minCount 1 ;
         sh:maxCount 1 ;
+        sh:node state:StateMachineShape ;
+        dash:composite true ;
     ] ;
     sh:property [
         sh:path state:enables ;
         sh:name "Activities" ;
         sh:class process:Activity ;
+        sh:order 3 ;
     ] ;
     sh:property [
         sh:path base:description ;
         sh:name "Description" ;
         dash:editor dash:TextAreaEditor ;
         sh:maxCount 1 ;
+        sh:order 4 ;
     ] ;
     .
 ```
