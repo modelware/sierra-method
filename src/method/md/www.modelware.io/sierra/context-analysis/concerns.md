@@ -17,6 +17,7 @@ Elicit, categorize, and prioritize the concerns and trace them to their stakehol
 
 ```table-editor
 ---
+collapseRepeatedCells: true
 columns: { focus: { label: "Concern" } }
 stylesheet:
   - selector: cell[col === "Priority"  && value]
