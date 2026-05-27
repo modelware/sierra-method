@@ -40,7 +40,7 @@ vocabulary <https://www.modelware.io/sierra/base#> as base {
         forward contains
         reverse isContainedBy
         inverse functional
-    ]
+    ] < Element
 
     @dc:description "A textual description attached to an Element."
     scalar property ^description [

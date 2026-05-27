@@ -1,0 +1,88 @@
+vocabulary <http://opencaesar.io/si/> as si {
+
+	extends <http://opencaesar.io/isq/> as isq
+
+    //
+    // Mass
+    //
+
+    unit kg [
+        measures isq:Mass
+        symbol "kg"
+        multiplier 1.0
+    ]
+
+    unit g [
+        measures isq:Mass
+        symbol "g"
+        multiplier 0.001
+    ]
+
+    unit mg [
+        measures isq:Mass
+        symbol "mg"
+        multiplier 0.000001
+    ]
+
+    unit lb [
+        measures isq:Mass
+        symbol "lb"
+        multiplier 0.45359237
+    ]
+
+    //
+    // Length
+    //
+
+    unit m [
+        measures isq:Length
+        symbol "m"
+        multiplier 1.0
+    ]
+
+    unit mm [
+        measures isq:Length
+        symbol "mm"
+        multiplier 0.001
+    ]
+
+    unit cm [
+        measures isq:Length
+        symbol "cm"
+        multiplier 0.01
+    ]
+
+    unit km [
+        measures isq:Length
+        symbol "km"
+        multiplier 1000.0
+    ]
+
+    unit ft [
+        measures isq:Length
+        symbol "ft"
+        multiplier 0.3048
+    ]
+
+    //
+    // Force
+    //
+
+    unit N [
+        measures isq:Force
+        symbol "N"
+        multiplier 1.0
+    ]
+
+    unit kN [
+        measures isq:Force
+        symbol "kN"
+        multiplier 1000.0
+    ]
+
+    unit lbf [
+        measures isq:Force
+        symbol "lbf"
+        multiplier 4.4482216152605
+    ]
+}

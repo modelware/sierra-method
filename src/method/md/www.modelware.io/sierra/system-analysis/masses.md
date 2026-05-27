@@ -23,28 +23,54 @@ columns: { focus: { label: "Component" } }
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix base: <https://www.modelware.io/sierra/base#> .
 @prefix component: <https://www.modelware.io/sierra/component#> .
+@prefix oml: <http://opencaesar.io/oml#> .
+@prefix si: <http://opencaesar.io/si/> .
 
-component:ComponentShape
+component:PhysicalPartShape
     a sh:NodeShape ;
     sh:targetClass component:PhysicalPart;
     sh:rule [
+        sh:order 0 ;
         a sh:SPARQLRule ;
         sh:construct """
             PREFIX base: <https://www.modelware.io/sierra/base#>
             PREFIX component: <https://www.modelware.io/sierra/component#>
-            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-            CONSTRUCT { 
-                $this component:totalMass ?total 
+            CONSTRUCT {
+                $this base:hasDescendant ?child
             } WHERE {
-                SELECT $this (SUM(xsd:decimal(?m)) AS ?total)
+                $this a component:Component .
+                $this base:contains* ?child .
+            }
+        """ ;
+    ] ;
+    sh:rule [
+        sh:order 1 ;
+        a sh:SPARQLRule ;
+        sh:construct """
+            PREFIX base: <https://www.modelware.io/sierra/base#>
+            PREFIX component: <https://www.modelware.io/sierra/component#>
+            PREFIX oml: <http://opencaesar.io/oml#>
+            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+            CONSTRUCT {
+                $this component:totalMass ?formatted
+            } WHERE {
+                SELECT $this (CONCAT(STR(?total), " kg") AS ?formatted)
                 WHERE {
-                    $this a component:PhysicalPart .
-                    OPTIONAL {
-                        $this base:contains* ?child .
-                        ?child component:mass ?m .
+                    {
+                        SELECT $this (SUM(?valSi) AS ?total)
+                        WHERE {
+                            $this a component:Component .
+                            OPTIONAL {
+                                $this base:hasDescendant ?child .
+                                ?child component:mass ?q .
+                                ?q oml:value ?v ; oml:unit ?u .
+                                ?u oml:multiplier ?m .
+                                BIND(xsd:decimal(?v) * xsd:decimal(?m) AS ?valSi)
+                            }
+                        }
+                        GROUP BY $this
                     }
                 }
-                GROUP BY $this
             }
         """ ;
     ] ;
@@ -60,9 +86,9 @@ component:ComponentShape
         sh:name "Mass" ;
         sh:maxCount 1 ;
     ] ;
-    sh:property [ 
-        sh:path component:totalMass ; 
-        sh:name "Total Mass" ; 
+    sh:property [
+        sh:path component:totalMass ;
+        sh:name "Total Mass" ;
         dash:readOnly true ;
     ] ;
     .

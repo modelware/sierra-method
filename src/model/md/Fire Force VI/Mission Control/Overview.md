@@ -20,9 +20,6 @@
   <tr>
     <td>5. <a href="./Context%20Analysis/Dashboard.md">View Context Dashboard</a></td>
   </tr>
-  <tr>
-    <td>6. <a href="./Context%20Analysis/Dashboard2.ipynb">View Context Dashboard2 (Jupyter Notebook)</a></td>
-  </tr>
 </table>
 
 ## Operational Analysis
@@ -67,7 +64,7 @@
     <td>9. <a href="./Operational%20Analysis/Dashboard.md">View Operations Dashboard</a></td>
   </tr>
   <tr>
-    <td>9. <a href="./Operational%20Analysis/Dashboard2.md">View Operations Dashboard2 (WASM Notebook)</a></td>
+    <td>10. <a href="./Operational%20Analysis/Dashboard2.md">View Operations Dashboard2 (WASM Notebook)</a></td>
   </tr>
 </table>
 

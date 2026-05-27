@@ -2,8 +2,10 @@
 @dc:description "Defines components."
 vocabulary <https://www.modelware.io/sierra/component#> as component {
     extends <http://purl.org/dc/elements/1.1/> as dc
+
     extends <https://www.modelware.io/sierra/base#> as base
-    extends <http://www.w3.org/2001/XMLSchema#> as xsd
+
+	extends <http://opencaesar.io/isq/> as isq
 
     @dc:description "A component is a part of a system."
     concept Component < base:Container, base:Contained, base:Element
@@ -12,9 +14,9 @@ vocabulary <https://www.modelware.io/sierra/component#> as component {
     concept PhysicalPart < Component
 
     @dc:description "The mass of the physical part."
-    scalar property mass [
+    quantity property mass [
         domain PhysicalPart
-        range xsd:decimal
+        quantity isq:Mass
         functional
     ]
 
@@ -46,7 +48,7 @@ vocabulary <https://www.modelware.io/sierra/component#> as component {
         from Port
         to Port
         forward connectedTo
-    ]
+    ] < base:Element
 
     concept Item < base:Element
 

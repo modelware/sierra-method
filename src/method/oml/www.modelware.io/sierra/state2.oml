@@ -1,5 +1,7 @@
 vocabulary <https://www.modelware.io/sierra/state2#> as state2 {
 
+	extends <https://www.modelware.io/sierra/base#> as base
+
     aspect CompositeElement
 
     relation regions [
@@ -8,7 +10,7 @@ vocabulary <https://www.modelware.io/sierra/state2#> as state2 {
         inverse functional
     ]
 
-    concept Region
+    concept Region < base:Element
 
     relation vertices [
         from Region
@@ -33,23 +35,23 @@ vocabulary <https://www.modelware.io/sierra/state2#> as state2 {
         inverse functional
     ]
 
-    concept Transition 
+    concept Transition < base:Element
 
-    aspect Pseudostate < Vertex
+    aspect Pseudostate < Vertex, base:Element
 
-    aspect RegularState < Vertex
+    aspect RegularState < Vertex, base:Element
 
-    concept Entry < Pseudostate
+    concept Entry < Pseudostate, base:Element
 
-    concept Exit < Pseudostate
+    concept Exit < Pseudostate, base:Element
 
-    concept Choice < Pseudostate
+    concept Choice < Pseudostate, base:Element
 
-    concept FinalState < RegularState
+    concept FinalState < RegularState, base:Element
 
     concept State < RegularState, CompositeElement
 
-    concept Statechart < CompositeElement
+    concept Statechart < CompositeElement, base:Element
 
     // Predicates
 
