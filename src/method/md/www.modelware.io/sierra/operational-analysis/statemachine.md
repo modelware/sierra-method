@@ -123,6 +123,7 @@ WHERE {
 ---
 columns: { focus: { label: "State Machine" } }
 ---
+@prefix oml: <http://opencaesar.io/oml#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .
@@ -168,6 +169,7 @@ state:StateShape
         sh:maxCount 1 ;
         sh:node state:StateMachineShape ;
         dash:composite true ;
+        oml:localReference true ;
     ] ;
     sh:property [
         sh:path state:enables ;
@@ -210,6 +212,7 @@ state:TransitionShape
         sh:class state:State ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
+        oml:localReference true ;
     ] ;
     sh:property [
         sh:path oml:hasTarget ;
@@ -217,6 +220,7 @@ state:TransitionShape
         sh:class state:State ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
+        oml:localReference true ;
     ] ;
     sh:property [
         sh:path state:isTriggeredBy ;
