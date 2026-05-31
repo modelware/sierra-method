@@ -1,14 +1,44 @@
+@dc:creator "openCAESAR"
+@dc:rights "Copyright 2026 openCAESAR."
+@dc:source "http://www.opencaesar.io/"
+@dc:description "The ISQ vocabulary defines base physical quantities from the International System of Quantities (ISQ)."
+@dc:title "ISQ"
 vocabulary <http://opencaesar.io/isq/> as isq {
 
+    extends <http://purl.org/dc/elements/1.1/> as dc
+
+    @dc:description "The physical quantity of mass (dimension M)."
     quantity Mass [
         dimension "M1"
     ]
 
+    @dc:description "The physical quantity of length (dimension L)."
     quantity Length [
         dimension "L1"
     ]
 
-    quantity Force [
-        dimension "M1 L1 T-2"
+    @dc:description "The physical quantity of time (dimension T)."
+    quantity Time [
+        dimension "T1"
+    ]
+
+    @dc:description "The physical quantity of electric current (dimension I)."
+    quantity ElectricCurrent [
+        dimension "I1"
+    ]
+
+    @dc:description "The physical quantity of thermodynamic temperature (dimension H)."
+    quantity Temperature [
+        dimension "H1"
+    ]
+
+    @dc:description "The physical quantity of amount of substance (dimension N)."
+    quantity AmountOfSubstance [
+        dimension "N1"
+    ]
+
+    @dc:description "The physical quantity of luminous intensity (dimension J)."
+    quantity LuminousIntensity [
+        dimension "J1"
     ]
 }

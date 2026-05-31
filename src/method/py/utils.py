@@ -16,3 +16,17 @@ def image_html(fig):
     buf.seek(0)
     b64 = base64.b64encode(buf.read()).decode()
     return f'<img src="data:image/png;base64,{b64}" style="max-width:100%;border-radius:4px">'
+
+def convert_unit(value, from_unit, to_unit):
+    """Convert a value between two units that measure the same quantity.
+
+    from_unit/to_unit are dicts {'multiplier': float, 'quantity': str} the caller looks up
+    from the model (oml:multiplier and oml:measures on the unit). Checking the quantity IRI
+    (not just the dimension) correctly rejects conversions between distinct quantities that
+    share a dimension, e.g. frequency (Hz) vs activity (Bq). Works for any quantity. e.g.
+        convert_unit(90, {'multiplier': 60, 'quantity': 'http://opencaesar.io/isq/Time'},
+                         {'multiplier': 3600, 'quantity': 'http://opencaesar.io/isq/Time'}) -> 1.5
+    """
+    if from_unit['quantity'] != to_unit['quantity']:
+        raise ValueError(f"Incompatible quantities: {from_unit['quantity']} vs {to_unit['quantity']}")
+    return value * from_unit['multiplier'] / to_unit['multiplier']

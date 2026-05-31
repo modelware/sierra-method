@@ -1,5 +1,6 @@
 @creator "DCMI Usage Board"
 @rights "Copyright 1995-2019 DCMI."
+@source "https://www.dublincore.org/specifications/dublin-core/dces/"
 @^description "The DC vocabulary is a subset of the vocabulary maintained by the Dublin Core Metadata Initiative."
 @title "DC"
 vocabulary <http://purl.org/dc/elements/1.1/> as dc {

@@ -1,29 +1,40 @@
+@dc:creator "openCAESAR"
+@dc:rights "Copyright 2026 openCAESAR."
+@dc:source "http://www.opencaesar.io/"
+@dc:description "The SI vocabulary defines units of measure from the International System of Units (SI) for the quantities defined in the ISQ vocabulary."
+@dc:title "SI"
 vocabulary <http://opencaesar.io/si/> as si {
 
 	extends <http://opencaesar.io/isq/> as isq
+
+	extends <http://purl.org/dc/elements/1.1/> as dc
 
     //
     // Mass
     //
 
+    @dc:description "The kilogram, the SI base unit of mass."
     unit kg [
         measures isq:Mass
         symbol "kg"
         multiplier 1.0
     ]
 
+    @dc:description "The gram, a metric unit of mass (0.001 kg)."
     unit g [
         measures isq:Mass
         symbol "g"
         multiplier 0.001
     ]
 
+    @dc:description "The milligram, a metric unit of mass (0.000001 kg)."
     unit mg [
         measures isq:Mass
         symbol "mg"
         multiplier 0.000001
     ]
 
+    @dc:description "The pound, an imperial unit of mass (0.45359237 kg)."
     unit lb [
         measures isq:Mass
         symbol "lb"
@@ -34,30 +45,35 @@ vocabulary <http://opencaesar.io/si/> as si {
     // Length
     //
 
+    @dc:description "The metre, the SI base unit of length."
     unit m [
         measures isq:Length
         symbol "m"
         multiplier 1.0
     ]
 
+    @dc:description "The millimetre, a metric unit of length (0.001 m)."
     unit mm [
         measures isq:Length
         symbol "mm"
         multiplier 0.001
     ]
 
+    @dc:description "The centimetre, a metric unit of length (0.01 m)."
     unit cm [
         measures isq:Length
         symbol "cm"
         multiplier 0.01
     ]
 
+    @dc:description "The kilometre, a metric unit of length (1000 m)."
     unit km [
         measures isq:Length
         symbol "km"
         multiplier 1000.0
     ]
 
+    @dc:description "The foot, an imperial unit of length (0.3048 m)."
     unit ft [
         measures isq:Length
         symbol "ft"
@@ -65,24 +81,106 @@ vocabulary <http://opencaesar.io/si/> as si {
     ]
 
     //
-    // Force
+    // Time
     //
 
-    unit N [
-        measures isq:Force
-        symbol "N"
+    @dc:description "The second, the SI base unit of time."
+    unit s [
+        measures isq:Time
+        symbol "s"
         multiplier 1.0
     ]
 
-    unit kN [
-        measures isq:Force
-        symbol "kN"
-        multiplier 1000.0
+    @dc:description "The millisecond, a unit of time (0.001 s)."
+    unit ms [
+        measures isq:Time
+        symbol "ms"
+        multiplier 0.001
     ]
 
-    unit lbf [
-        measures isq:Force
-        symbol "lbf"
-        multiplier 4.4482216152605
+    @dc:description "The minute, a unit of time (60 s)."
+    unit ^min [
+        measures isq:Time
+        symbol "min"
+        multiplier 60.0
+    ]
+
+    @dc:description "The hour, a unit of time (3600 s)."
+    unit h [
+        measures isq:Time
+        symbol "h"
+        multiplier 3600.0
+    ]
+
+    @dc:description "The day, a unit of time (86400 s)."
+    unit d [
+        measures isq:Time
+        symbol "d"
+        multiplier 86400.0
+    ]
+
+    @dc:description "The week, a unit of time (604800 s)."
+    unit wk [
+        measures isq:Time
+        symbol "wk"
+        multiplier 604800.0
+    ]
+
+    //
+    // Electric current
+    //
+
+    @dc:description "The ampere, the SI base unit of electric current."
+    unit A [
+        measures isq:ElectricCurrent
+        symbol "A"
+        multiplier 1.0
+    ]
+
+    @dc:description "The milliampere, a unit of electric current (0.001 A)."
+    unit mA [
+        measures isq:ElectricCurrent
+        symbol "mA"
+        multiplier 0.001
+    ]
+
+    //
+    // Thermodynamic temperature
+    //
+
+    @dc:description "The kelvin, the SI base unit of thermodynamic temperature."
+    unit K [
+        measures isq:Temperature
+        symbol "K"
+        multiplier 1.0
+    ]
+
+    //
+    // Amount of substance
+    //
+
+    @dc:description "The mole, the SI base unit of amount of substance."
+    unit mol [
+        measures isq:AmountOfSubstance
+        symbol "mol"
+        multiplier 1.0
+    ]
+
+    @dc:description "The millimole, a unit of amount of substance (0.001 mol)."
+    unit mmol [
+        measures isq:AmountOfSubstance
+        symbol "mmol"
+        multiplier 0.001
+    ]
+
+    //
+    // Luminous intensity
+    //
+
+    @dc:description "The candela, the SI base unit of luminous intensity."
+    unit cd [
+        measures isq:LuminousIntensity
+        symbol "cd"
+        multiplier 1.0
     ]
 }

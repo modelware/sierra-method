@@ -49,3 +49,16 @@ render_mermaid <- function(code) {
         '`);document.getElementById("', id, '").innerHTML=svg;'
     ))
 }
+
+# Convert a value between two units that measure the same quantity. from_unit/to_unit are
+# lists with $multiplier and $quantity, looked up from the model (oml:multiplier and
+# oml:measures on the unit). Checking the quantity IRI (not just the dimension) correctly
+# rejects conversions between distinct quantities that share a dimension, e.g. frequency
+# (Hz) vs activity (Bq). Works for any quantity. e.g.
+#   convert_unit(90, list(multiplier=60, quantity="http://opencaesar.io/isq/Time"),
+#                    list(multiplier=3600, quantity="http://opencaesar.io/isq/Time")) -> 1.5
+convert_unit <- function(value, from_unit, to_unit) {
+    if (!identical(from_unit$quantity, to_unit$quantity))
+        stop(paste("Incompatible quantities:", from_unit$quantity, "vs", to_unit$quantity))
+    value * from_unit$multiplier / to_unit$multiplier
+}

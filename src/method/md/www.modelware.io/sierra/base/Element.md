@@ -35,6 +35,7 @@ WHERE {
 
 ```table
 ---
+collapseRepeatedCells: true
 stylesheet:
   - selector: header[name === "g"], column[name === "g"]
     style:

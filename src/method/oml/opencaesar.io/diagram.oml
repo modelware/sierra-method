@@ -1,0 +1,77 @@
+@dc:creator "openCAESAR"
+@dc:rights "Copyright 2026 openCAESAR."
+@dc:source "http://www.opencaesar.io/"
+@dc:description "The Diagram vocabulary defines the elements (nodes, ports, compartments, edges) and properties that the diagram renderer recognizes to draw a graph."
+@dc:title "Diagram"
+vocabulary <http://opencaesar.io/diagram#> as diagram {
+
+	extends <http://www.w3.org/2001/XMLSchema#> as xsd
+
+	extends <http://purl.org/dc/elements/1.1/> as dc
+
+	@dc:description "The common supertype of everything the renderer can draw; carries the data properties (text, class) that apply to any element."
+	aspect Element
+
+	@dc:description "A box. May nest inside another Node or a Compartment, may own Ports and Compartments, and may carry one or more text labels."
+	concept Node < Element
+
+	@dc:description "A structural sub-region of a Node (e.g. a list or attribute compartment); always parented by a Node and never dragged on its own."
+	concept Compartment < Element
+
+	@dc:description "A connection point on the boundary of a Node; always parented by a Node."
+	concept Port < Element
+
+	@dc:description "A connection between two elements; requires exactly one source and one target, and may carry begin, center, and end labels."
+	concept Edge < Element
+
+	@dc:description "Deprecated legacy alias: the renderer still accepts diagram:ListItem and treats it as a diagram:Node for backward compatibility."
+	concept ListItem < Node
+
+	@dc:description "Containment link to an element's single parent (Node under Node or Compartment, Compartment under Node, Port under Node); functional because each element has at most one parent."
+	relation parent [
+		from Element
+		to Element
+		functional
+	]
+
+	@dc:description "The element an Edge starts from; exactly one per Edge."
+	relation source [
+		from Edge
+		to Element
+		functional
+	]
+
+	@dc:description "The element an Edge ends at; exactly one per Edge."
+	relation target [
+		from Edge
+		to Element
+		functional
+	]
+
+	@dc:description "A displayed label. On a Node, multiple values stack as multiple labels; on an Edge it is the center label. Non-functional to allow several labels."
+	scalar property text [
+		domain Element
+		range xsd:string
+	]
+
+	@dc:description "The label rendered at the start (source end) of an Edge."
+	scalar property beginText [
+		domain Edge
+		range xsd:string
+		functional
+	]
+
+	@dc:description "The label rendered at the end (target end) of an Edge."
+	scalar property endText [
+		domain Edge
+		range xsd:string
+		functional
+	]
+
+	@dc:description "One or more CSS class tokens used to match diagram stylesheet rules; a single value may also carry whitespace-separated tokens."
+	scalar property class [
+		domain Element
+		range xsd:string
+	]
+
+}

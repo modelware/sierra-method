@@ -1,69 +1,92 @@
+@dc:creator "openCAESAR"
+@dc:rights "Copyright 2026 openCAESAR."
+@dc:source "http://www.opencaesar.io/"
+@dc:description "The Codegen vocabulary defines concepts and relations for configuring template-based code generation from models."
+@dc:title "Codegen"
 vocabulary <http://opencaesar.io/codegen#> as codegen {
 
 	extends <http://www.w3.org/2001/XMLSchema#> as xsd
 
 	extends <http://www.w3.org/2002/07/owl#> as owl
 
+	extends <http://purl.org/dc/elements/1.1/> as dc
+
+    @dc:description "A configuration that binds a code-generation specification to a context."
     concept Config
 
+    @dc:description "Associates a Config with the Spec it configures."
     relation spec [
         from Config
         to Spec
     ]
 
+    @dc:description "The context expression in which the configuration applies."
     scalar property context [
         domain Config
         range xsd:string
     ]
 
+    @dc:description "Associates a Config with a parameter Binding."
     relation binding [
         from Config
         to Binding
     ]
 
+    @dc:description "A key/value binding that supplies a value for a Spec parameter."
     concept Binding
 
+    @dc:description "The name of the parameter being bound."
     scalar property ^key [
         domain Binding
         range xsd:string
     ]
 
+    @dc:description "The value assigned to the bound parameter."
     scalar property value [
         domain Binding
         range xsd:string
     ]
 
+    @dc:description "A specification of how to generate code from a model construct."
     concept Spec
 
+    @dc:description "The model construct that the specification targets."
     scalar property construct [
         domain Spec
         range xsd:string
     ]
 
+    @dc:description "A parameter declared by the specification."
     scalar property parameter [
         domain Spec
         range xsd:string
     ]
 
+    @dc:description "A code template whose body is expanded during generation."
     concept Template
 
+    @dc:description "The textual body of the template."
     scalar property body [
         domain Template
         range xsd:string
     ]
 
+    @dc:description "A generated output file produced from a template."
     concept File
 
+    @dc:description "The output path of the generated file."
     scalar property path [
         domain File
         range xsd:string
     ]
 
+    @dc:description "Associates a File with the Template used to generate it."
     relation template [
         from File
         to Template
     ]
 
+    @dc:description "The root model element from which the file is generated."
     relation root [
         from File
         to owl:Thing
