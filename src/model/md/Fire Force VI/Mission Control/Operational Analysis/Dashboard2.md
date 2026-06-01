@@ -5,31 +5,30 @@ ontology: https://fireforce6.github.io/mission-control/bundle
 # Entities (Python)
 
 ```python
-result = await query("""
-    PREFIX oml: <http://opencaesar.io/oml#>
-    PREFIX component: <https://www.modelware.io/sierra/component#>
-    PREFIX components: <https://fireforce6.github.io/mission-control/system-analysis/components#>
-    SELECT ?value ?unit
-    WHERE {
-        components:PrimaryLens component:mass ?qty .
-        ?qty oml:value ?value .
-        OPTIONAL { ?qty oml:unit ?unit }
-    }
-""")
-row = result['rows'][0]
-current = float(row['value'])
-unit_iri = row.get('unit') or 'http://opencaesar.io/si/kg'
-
-display(interactive(
-    f'<button>Click</button> to increment mass of Primary Lens by 0.1',
-    {
+async def increment_mass(event=None):
+    result = await query("""
+        PREFIX oml: <http://opencaesar.io/oml#>
+        PREFIX component: <https://www.modelware.io/sierra/component#>
+        PREFIX components: <https://fireforce6.github.io/mission-control/system-analysis/components#>
+        SELECT ?value ?unit
+        WHERE {
+            components:PrimaryLens component:mass ?qty .
+            ?qty oml:value ?value .
+            OPTIONAL { ?qty oml:unit ?unit }
+        }
+    """)
+    row = result['rows'][0]
+    current = float(row['value'])
+    unit_iri = row.get('unit') or 'http://opencaesar.io/si/kg'
+    await update({
         'kind': 'updateAssertion',
         'descriptionIri': 'https://fireforce6.github.io/mission-control/system-analysis/masses',
         'subjectIri': 'https://fireforce6.github.io/mission-control/system-analysis/components#PrimaryLens',
         'predicateIri': 'https://www.modelware.io/sierra/component#mass',
         'object': { 'value': round(current + 0.1, 10), 'unitIri': unit_iri }
-    }
-))
+    })
+
+display(interactive('<button>Click</button> to increment mass of Primary Lens by 0.1', increment_mass))
 ```
 
 ```python
@@ -86,9 +85,20 @@ plt.tight_layout()
 display(image_html(fig))
 ```
 
+```python
+def say_hello(event=None):
+  print("Hello from Python")
+  x = 1+2
+  print(x)
+
+display(interactive('<button>Say hello</button>', say_hello))
+```
+
 # Activities (R)
 
 ```r
+# R runs in a worker and can't read live at click time, so read at render and let the
+# callback capture the value; each update re-renders the block, refreshing it for the next click.
 result <- query("
     PREFIX oml: <http://opencaesar.io/oml#>
     PREFIX component: <https://www.modelware.io/sierra/component#>
@@ -103,16 +113,17 @@ result <- query("
 current <- as.numeric(result[["value"]][[1]])
 unit_iri <- if (length(result[["unit"]]) > 0) result[["unit"]][[1]] else 'http://opencaesar.io/si/kg'
 
-display(interactive(
-    '<button>Click</button> to increment mass of Primary Lens by 0.1',
-    list(
+increment_mass <- function(event = NULL) {
+    update(list(
         kind = 'updateAssertion',
         descriptionIri = 'https://fireforce6.github.io/mission-control/system-analysis/masses',
         subjectIri = 'https://fireforce6.github.io/mission-control/system-analysis/components#PrimaryLens',
         predicateIri = 'https://www.modelware.io/sierra/component#mass',
         object = list(value = round(current + 0.1, 10), unitIri = unit_iri)
-    )
-))
+    ))
+}
+
+display(interactive('<button>Click</button> to increment mass of Primary Lens by 0.1', increment_mass))
 ```
 
 ```r
@@ -141,32 +152,31 @@ render_mermaid("graph LR\n  A[Start] --> B[End]")
 # Flows (Javascript)
 
 ```javascript
-const result = await query(`
-  PREFIX oml: <http://opencaesar.io/oml#>
-  PREFIX component: <https://www.modelware.io/sierra/component#>
-  PREFIX components: <https://fireforce6.github.io/mission-control/system-analysis/components#>
-  SELECT ?value ?unit
-  WHERE {
-    components:PrimaryLens component:mass ?qty .
-    ?qty oml:value ?value .
-    OPTIONAL { ?qty oml:unit ?unit }
-  }
-`);
-
-const row = result.rows[0];
-const current = Number(row.value);
-const unitIri = row.unit ?? 'http://opencaesar.io/si/kg';
-
-display(interactive(
-  '<button>Click</button> to increment mass of Primary Lens by 0.1',
-  {
+async function incrementMass() {
+  const result = await query(`
+    PREFIX oml: <http://opencaesar.io/oml#>
+    PREFIX component: <https://www.modelware.io/sierra/component#>
+    PREFIX components: <https://fireforce6.github.io/mission-control/system-analysis/components#>
+    SELECT ?value ?unit
+    WHERE {
+      components:PrimaryLens component:mass ?qty .
+      ?qty oml:value ?value .
+      OPTIONAL { ?qty oml:unit ?unit }
+    }
+  `);
+  const row = result.rows[0];
+  const current = Number(row.value);
+  const unitIri = row.unit ?? 'http://opencaesar.io/si/kg';
+  await update({
     kind: 'updateAssertion',
     descriptionIri: 'https://fireforce6.github.io/mission-control/system-analysis/masses',
     subjectIri: 'https://fireforce6.github.io/mission-control/system-analysis/components#PrimaryLens',
     predicateIri: 'https://www.modelware.io/sierra/component#mass',
     object: { value: Math.round((current + 0.1) * 1e10) / 1e10, unitIri }
-  }
-));
+  });
+}
+
+display(interactive('<button>Click</button> to increment mass of Primary Lens by 0.1', incrementMass));
 ```
 
 
