@@ -51,6 +51,7 @@ stylesheet:
       height: 48
       icon:
         href: ../../../images/capability.svg
+        fill: red
 
   - selector: node.actor
     style:
