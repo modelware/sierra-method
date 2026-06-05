@@ -17,7 +17,7 @@ Identify the activities performed by entities in operations.
 
 ```table-editor
 ---
-columns: { focus: { label: "Activity" } }
+columns: { this: { label: "Activity" } }
 ---
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .
@@ -49,7 +49,7 @@ Identify item flows between activities.
 
 ```table-editor
 ---
-columns: { focus: { label: "Flow" } }
+columns: { this: { label: "Flow" } }
 ---
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .

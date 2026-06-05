@@ -27,9 +27,6 @@ server:
 
 # oml-cli parameter defaults
 defaults:
-  build:
-    owl: build/owl
-  render:
-    md: src/model/md
-    web: build/web
-    context: src/model/oml/fireforce6.github.io/mission-control/bundle.oml
+  export: -o build/owl
+  reason: -o build/owl -t
+  render: -m src/model/md -b build/web -c src/model/oml/fireforce6.github.io/mission-control/bundle.oml

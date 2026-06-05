@@ -13,12 +13,13 @@ template:
 ---
 # Scenario
 
-Create scenarios showing lifelines of entities interacting at certain timepoints.
+Create a scenario, which contains lifelines (representing entities), which contain ordered timepoints.
 
 ```tree-editor
 ---
-columns: { focus: { label: "Scenario" } }
+columns: { this: { label: "Scenario" } }
 ---
+@prefix oml: <http://opencaesar.io/oml#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix base: <https://www.modelware.io/sierra/base#> .
@@ -47,6 +48,7 @@ scenario:LifelineShape
         sh:minCount 1 ;
         sh:maxCount 1 ;
         dash:composite true ;
+        oml:localReference true ;
     ] ;
     sh:property [
         sh:path scenario:represents ;
@@ -74,6 +76,7 @@ scenario:TimePointShape
         sh:minCount 1 ;
         sh:maxCount 1 ;
         dash:composite true ;
+        oml:localReference true ;
     ] ;
     sh:property [
         sh:path scenario:after ;
@@ -81,6 +84,7 @@ scenario:TimePointShape
         sh:class scenario:TimePoint ;        
         sh:maxCount 1 ;
         sh:order 2 ;        
+        oml:localReference true ;
     ] ;
     .
 ```
@@ -91,8 +95,9 @@ Create messages sending items between two time points on lifelines.
 
 ```table-editor
 ---
-columns: { focus: { label: "Message" } }
+columns: { this: { label: "Message" } }
 ---
+@prefix oml: <http://opencaesar.io/oml#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix base: <https://www.modelware.io/sierra/base#> .
@@ -109,6 +114,7 @@ scenario:MessageShape
         sh:class scenario:TimePoint ;        
         sh:minCount 1 ;
         sh:maxCount 1 ;
+        oml:localReference true ;
     ] ;
     sh:property [
         sh:path scenario:endsAt ;
@@ -116,6 +122,7 @@ scenario:MessageShape
         sh:class scenario:TimePoint ;        
         sh:minCount 1 ;
         sh:maxCount 1 ;
+        oml:localReference true ;
     ] ;
     sh:property [
         sh:path scenario:carries ;
@@ -138,8 +145,9 @@ Create executions of activities between two time points on the same lifelines.
 
 ```table-editor
 ---
-columns: { focus: { label: "Execution" } }
+columns: { this: { label: "Execution" } }
 ---
+@prefix oml: <http://opencaesar.io/oml#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix base: <https://www.modelware.io/sierra/base#> .
@@ -157,6 +165,7 @@ scenario:ExecutionShape
         sh:class scenario:TimePoint ;        
         sh:minCount 1 ;
         sh:maxCount 1 ;
+        oml:localReference true ;
     ] ;
     sh:property [
         sh:path scenario:endsAt ;
@@ -164,6 +173,7 @@ scenario:ExecutionShape
         sh:class scenario:TimePoint ;        
         sh:minCount 1 ;
         sh:maxCount 1 ;
+        oml:localReference true ;
     ] ;
     sh:property [
         sh:path scenario:executes ;
@@ -186,8 +196,9 @@ Create state fragments checking states at certain timepoints on lifelines.
 
 ```table-editor
 ---
-columns: { focus: { label: "State Fragment" } }
+columns: { this: { label: "State Fragment" } }
 ---
+@prefix oml: <http://opencaesar.io/oml#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix base: <https://www.modelware.io/sierra/base#> .
@@ -205,6 +216,7 @@ scenario:StateFragmentShape
         sh:class scenario:TimePoint ;        
         sh:minCount 1 ;
         sh:maxCount 1 ;
+        oml:localReference true ;
     ] ;
     sh:property [
         sh:path scenario:checks ;

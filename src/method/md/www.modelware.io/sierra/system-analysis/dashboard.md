@@ -19,7 +19,7 @@ The rollup of the physical system's masses.
 
 ```tree
 ---
-columns: { focus: { label: "Component" }, mass: { label: "Total Mass" } }
+columns: { this: { label: "Component" }, mass: { label: "Total Mass" } }
 containment: [ base:contains ]
 ---
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>

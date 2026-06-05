@@ -17,7 +17,7 @@ Define requirements that constrain the operations.
 
 ```table-editor
 ---
-columns: { focus: { label: "Requirement" } }
+columns: { this: { label: "Requirement" } }
 stylesheet:
   - selector: cell[col === "Priority"  && value]
     target: value

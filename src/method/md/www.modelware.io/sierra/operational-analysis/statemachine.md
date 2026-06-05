@@ -121,7 +121,7 @@ WHERE {
 
 ```tree-editor
 ---
-columns: { focus: { label: "State Machine" } }
+columns: { this: { label: "State Machine" } }
 ---
 @prefix oml: <http://opencaesar.io/oml#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -167,6 +167,7 @@ state:StateShape
         sh:name "Container" ;
         sh:class state:StateMachine ;
         sh:maxCount 1 ;
+        sh:minCount 1 ;
         sh:node state:StateMachineShape ;
         dash:composite true ;
         oml:localReference true ;
@@ -193,7 +194,7 @@ Define the transitions of the state machine.
 
 ```table-editor
 ---
-columns: { focus: { label: "Transition" } }
+columns: { this: { label: "Transition" } }
 ---
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix oml: <http://opencaesar.io/oml#> .

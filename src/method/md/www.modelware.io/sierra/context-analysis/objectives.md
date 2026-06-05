@@ -17,7 +17,7 @@ Define structured, measurable objectives for each mission.
 
 ```table-editor
 ---
-columns: { focus: { label: "Objective" } }
+columns: { this: { label: "Objective" } }
 ---
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .

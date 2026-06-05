@@ -17,7 +17,7 @@ Identify operational processes and allocate flows to them.
 
 ```table-editor
 ---
-columns: { focus: { label: "Process" } }
+columns: { this: { label: "Process" } }
 ---
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .

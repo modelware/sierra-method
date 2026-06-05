@@ -54,7 +54,7 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX oml: <http://opencaesar.io/oml#>
 PREFIX base: <https://www.modelware.io/sierra/base#>
 
-SELECT ?g ?Property (GROUP_CONCAT(?Value; separator=", ") AS ?Values)
+SELECT ?g ?Property (GROUP_CONCAT(STR(?Value); separator=", ") AS ?Values)
 WHERE {
     GRAPH ?g {
         <${member}> ?Property ?Value .

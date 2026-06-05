@@ -17,7 +17,7 @@ Define the operational capabilities and trace each ones back to the mission obje
 
 ```table-editor
 ---
-columns: { focus: { label: "Capability" } }
+columns: { this: { label: "Capability" } }
 ---
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .

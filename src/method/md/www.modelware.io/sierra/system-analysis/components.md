@@ -17,7 +17,7 @@ Define the components and their topological decomposition (hierarchy).
 
 ```tree-editor
 ---
-columns: { focus: { label: "Component" } }
+columns: { this: { label: "Component" } }
 ---
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .

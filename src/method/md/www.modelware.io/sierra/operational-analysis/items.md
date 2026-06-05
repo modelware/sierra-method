@@ -17,7 +17,7 @@ Identify data, material, and energy items that flow in operations.
 
 ```table-editor
 ---
-columns: { focus: { label: "Item" } }
+columns: { this: { label: "Item" } }
 stylesheet:
   - selector: cell[col === "Categories"  && value]
     target: value

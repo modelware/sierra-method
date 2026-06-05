@@ -17,7 +17,7 @@ Identify the actors, organizations, and external systems in the operational worl
 
 ```table-editor
 ---
-columns: { focus: { label: "Entity" } }
+columns: { this: { label: "Entity" } }
 ---
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .

@@ -17,7 +17,7 @@ Identify which components are physical parts and specify their leaf mass to watc
 
 ```tree-editor
 ---
-columns: { focus: { label: "Component" } }
+columns: { this: { label: "Component" } }
 ---
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .
@@ -26,9 +26,10 @@ columns: { focus: { label: "Component" } }
 @prefix oml: <http://opencaesar.io/oml#> .
 @prefix si: <http://opencaesar.io/si/> .
 
-component:PhysicalPartShape
+component:ComponentShape
     a sh:NodeShape ;
-    sh:targetClass component:PhysicalPart;
+    sh:targetClass component:Component;
+    dash:readOnly true ;
     sh:rule [
         sh:order 0 ;
         a sh:SPARQLRule ;
@@ -78,18 +79,24 @@ component:PhysicalPartShape
         sh:path base:isContainedBy ;
         sh:name "Container" ;
         sh:class component:Component ;
-        dash:readOnly true ;
         dash:composite true ;
-    ] ;
-    sh:property [
-        sh:path component:mass ;
-        sh:name "Mass" ;
-        sh:maxCount 1 ;
     ] ;
     sh:property [
         sh:path component:totalMass ;
         sh:name "Total Mass" ;
-        dash:readOnly true ;
+        sh:maxCount 1 ;
+        sh:order 2
+    ] ;
+   .
+
+component:PhysicalPartShape
+    a sh:NodeShape ;
+    sh:targetClass component:PhysicalPart;
+    sh:property [
+        sh:path component:mass ;
+        sh:name "Mass" ;
+        sh:maxCount 1 ;
+        sh:order 1
     ] ;
     .
 ```

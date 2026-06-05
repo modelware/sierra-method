@@ -20,7 +20,7 @@ Identify individuals, groups, or organizations with interests in the missions:
 ```table-editor
 ---
 target: ${target}
-columns: { focus: { label: "Stakeholder" } }
+columns: { this: { label: "Stakeholder" } }
 stylesheet:
   - selector: cell[col === "Categories"  && value]
     target: value

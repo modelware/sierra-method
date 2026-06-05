@@ -17,7 +17,7 @@ Define the mission(s) that will address stakeholder concerns
 
 ```table-editor
 ---
-columns: { focus: { label: "Mission" } }
+columns: { this: { label: "Mission" } }
 ---
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix dash: <http://datashapes.org/dash#> .
