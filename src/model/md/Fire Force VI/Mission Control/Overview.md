@@ -20,6 +20,9 @@
   <tr>
     <td>5. <a href="./Context%20Analysis/Dashboard.md">View Context Dashboard</a></td>
   </tr>
+  <tr>
+    <td>5. <a href="./Context%20Analysis/Dashboard2.canvas">View Context Dashboard2</a></td>
+  </tr>
 </table>
 
 ## Operational Analysis

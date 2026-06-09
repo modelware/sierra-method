@@ -1,0 +1,147 @@
+{
+  "nodes": [
+    {
+      "id": "group-mq5qfnb4-1b0fvj",
+      "type": "group",
+      "x": 23,
+      "y": 450,
+      "width": 740,
+      "height": 145,
+      "label": "Context Analysis",
+      "text": "Context Analysis",
+      "color": "6"
+    },
+    {
+      "id": "file-mq5qfq3v-0vqutf",
+      "type": "file",
+      "x": 250,
+      "y": 44,
+      "width": 877,
+      "height": 394,
+      "file": "Stakeholders.md",
+      "shape": "rectangle",
+      "color": "3"
+    },
+    {
+      "id": "node-mq5qgzy3-b79uj1",
+      "type": "text",
+      "x": 16,
+      "y": 212,
+      "width": 180,
+      "height": 120,
+      "text": "This is an exmaple of following the **Sierra Method**!",
+      "label": "This is an exmaple of following the **Sierra Method**!",
+      "shape": "note",
+      "color": "3"
+    },
+    {
+      "id": "file-mq5qo90a-rcee5f",
+      "type": "file",
+      "x": 18,
+      "y": 64,
+      "width": 212,
+      "height": 111,
+      "file": "src/method/md/images/sierra.png",
+      "shape": "rectangle"
+    },
+    {
+      "id": "node-mq5qshy9-xkrcpl",
+      "type": "text",
+      "x": 52,
+      "y": 492,
+      "width": 152,
+      "height": 54,
+      "text": "[Stakeholders](Stakeholders.md)",
+      "shape": "rounded",
+      "color": "1",
+      "label": "[Stakeholders](Stakeholders.md)",
+      "textAlign": "center",
+      "parent": "group-mq5qfnb4-1b0fvj"
+    },
+    {
+      "id": "link-mq5r0t4s-w1lxy0",
+      "type": "link",
+      "x": 800,
+      "y": 468,
+      "width": 317,
+      "height": 354,
+      "url": "https://modelware.io/",
+      "label": "Modelware | Ontological Modeling & Analysis Framework",
+      "shape": "rectangle",
+      "previewDescription": "Modelware - Ontological Modeling and Analysis framework powered by Formal Methods, DevOps, and Artificial Intelligence.",
+      "previewImage": "https://www.modelware.io/assets/images/oml-code.png"
+    },
+    {
+      "id": "node-mq5rxl6g-njtf2t",
+      "type": "text",
+      "x": 268,
+      "y": 490,
+      "width": 183,
+      "height": 59,
+      "text": "Operational Analysis",
+      "shape": "rounded",
+      "color": "1",
+      "label": "Operational Analysis",
+      "textAlign": "center",
+      "parent": "group-mq5qfnb4-1b0fvj"
+    },
+    {
+      "id": "node-mq5rxuwi-gnm3rw",
+      "type": "text",
+      "x": 495,
+      "y": 490,
+      "width": 183,
+      "height": 59,
+      "text": "Operational Analysis",
+      "shape": "rounded",
+      "color": "1",
+      "label": "Operational Analysis",
+      "textAlign": "center",
+      "parent": "group-mq5qfnb4-1b0fvj"
+    },
+    {
+      "id": "link-mq5s049z-mo5tch",
+      "type": "link",
+      "x": 84,
+      "y": 623,
+      "width": 521,
+      "height": 258,
+      "url": "https://www.youtube.com/watch?v=nbUYrs_wWto&list=PLaa8QYrMzXNnzY-4YVM5507iZuESWVcnU",
+      "label": "youtube.com",
+      "shape": "rectangle"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-mq5qxfep-acwpxo",
+      "fromNode": "file-mq5qfq3v-0vqutf",
+      "fromSide": "left",
+      "toNode": "node-mq5qgzy3-b79uj1",
+      "toSide": "right",
+      "toEnd": "arrow",
+      "color": "3"
+    },
+    {
+      "id": "edge-mq5ry49i-w2fxbm",
+      "fromNode": "node-mq5qshy9-xkrcpl",
+      "fromSide": "right",
+      "toNode": "node-mq5rxl6g-njtf2t",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "color": "1"
+    },
+    {
+      "id": "edge-mq5ry5tg-ypo75r",
+      "fromNode": "node-mq5rxl6g-njtf2t",
+      "fromSide": "right",
+      "toNode": "node-mq5rxuwi-gnm3rw",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "color": "1"
+    }
+  ],
+  "oml": {
+    "showGrid": false,
+    "snapToGrid": false
+  }
+}
