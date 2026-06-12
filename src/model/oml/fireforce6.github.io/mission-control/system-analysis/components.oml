@@ -5,22 +5,17 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
     uses <https://www.modelware.io/sierra/base#> as base
     uses <https://www.modelware.io/sierra/component#> as component
     uses <http://opencaesar.io/oml#> as oml
-    uses <http://www.w3.org/2000/01/rdf-schema#> as rdfschema
-    uses <http://www.w3.org/2001/XMLSchema#> as xmlschema
 
-    @rdfschema:seeAlso "https://www.google.com/"^^xmlschema:anyURI
     instance Payload : component:Component [
         base:description "Wildfire Detection Payload"
         base:isContainedBy FireSat
     ]
 
-    @rdfschema:seeAlso "https://www.yahoo.com/"^^xmlschema:anyURI
     instance Platform : component:Component [
         base:description "Spacecraft Bus"
         base:isContainedBy FireSat
     ]
 
-    @rdfschema:seeAlso "https://www.cnn.com/"^^xmlschema:anyURI
     instance PropulsionSegment : component:Component [
         base:description "Propulsion Segment"
         base:isContainedBy FireSat
@@ -891,5 +886,4 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
     instance FireSat : component:Component [
         base:description "FireSat Spacecraft"
     ]
-
 }
