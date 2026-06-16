@@ -11,7 +11,7 @@ template:
       defaultValue: ${context.ontology}
       required: true
 ---
-# Mass Management
+# Mass Rollup
 
 Identify which components are physical parts and specify their leaf mass to watch the mass rolling up.
 

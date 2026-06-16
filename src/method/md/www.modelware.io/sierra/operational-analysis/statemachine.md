@@ -79,7 +79,7 @@ stylesheet:
 PREFIX oml: <http://opencaesar.io/oml#>
 PREFIX base: <https://www.modelware.io/sierra/base#>
 PREFIX state: <https://www.modelware.io/sierra/state#>
-PREFIX : <http://opencaesar.io/oml/diagram#>
+PREFIX : <http://opencaesar.io/diagram#>
 
 CONSTRUCT {
     ?sm a :Node ;

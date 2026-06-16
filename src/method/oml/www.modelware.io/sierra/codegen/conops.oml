@@ -4,7 +4,7 @@ description <https://www.modelware.io/sierra/codegen/conops#> as conops {
 
     instance ConOpsSpec : codegen:Spec [
         codegen:construct """
-            PREFIX oml: <http://opencaesar.io/oml#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             PREFIX codegen: <http://opencaesar.io/codegen#>
             PREFIX base: <https://www.modelware.io/sierra/base#>
             PREFIX stakeholder: <https://www.modelware.io/sierra/stakeholder#>
@@ -18,12 +18,12 @@ description <https://www.modelware.io/sierra/codegen/conops#> as conops {
 
                 ?stakeholder a stakeholder:Stakeholder ;
                     base:description ?stakeholderDesc ;
-                    oml:label ?stakeholderLabel ;
+                    rdfs:label ?stakeholderLabel ;
                     stakeholder:expresses ?concern .
 
                 ?concern a stakeholder:Concern ;
                     base:description ?concernDesc ;
-                    oml:label ?concernLabel .
+                    rdfs:label ?concernLabel .
             }
             WHERE {
                 BIND(IRI("urn:file") AS ?file)
@@ -31,9 +31,9 @@ description <https://www.modelware.io/sierra/codegen/conops#> as conops {
                 ?stakeholder a stakeholder:Stakeholder ;
                     stakeholder:expresses ?concern .
 
-                OPTIONAL { ?stakeholder oml:label ?stakeholderLabel }
+                OPTIONAL { ?stakeholder rdfs:label ?stakeholderLabel }
                 OPTIONAL { ?stakeholder base:description ?stakeholderDesc }
-                OPTIONAL { ?concern oml:label ?concernLabel }
+                OPTIONAL { ?concern rdfs:label ?concernLabel }
                 OPTIONAL { ?concern base:description ?concernDesc }
             }
         """
@@ -45,12 +45,12 @@ description <https://www.modelware.io/sierra/codegen/conops#> as conops {
             # Stakeholders and Concerns
 
             {% for stakeholder in objects(file, "codegen:root") %}
-            ## {{ object(stakeholder, "oml:label") }}
+            ## {{ object(stakeholder, "rdfs:label") }}
             {{ object(stakeholder, "base:description")}}
             
             **Concerns:**
                 {% for concern in objects(stakeholder, "stakeholder:expresses") %}
-            - <u>{{ object(concern, "oml:label") }}:</u> {{ object(concern, "base:description") }}
+            - <u>{{ object(concern, "rdfs:label") }}:</u> {{ object(concern, "base:description") }}
                 {% endfor %}
             {% endfor %}
         """ 

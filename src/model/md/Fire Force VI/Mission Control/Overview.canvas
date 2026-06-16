@@ -24,19 +24,6 @@
       "color": "3"
     },
     {
-      "id": "modelware",
-      "type": "link",
-      "x": -589,
-      "y": 526,
-      "width": 366,
-      "height": 380,
-      "url": "https://modelware.io/",
-      "label": "Modelware | Ontological Modeling & Analysis Framework",
-      "shape": "rectangle",
-      "previewDescription": "Modelware - Ontological Modeling and Analysis framework powered by Formal Methods, DevOps, and Artificial Intelligence.",
-      "previewImage": "https://www.modelware.io/assets/images/oml-code.png"
-    },
-    {
       "id": "group-context",
       "type": "group",
       "x": -560,

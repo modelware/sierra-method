@@ -60,7 +60,7 @@ stylesheet:
 PREFIX base: <https://www.modelware.io/sierra/base#>
 PREFIX component: <https://www.modelware.io/sierra/component#>
 PREFIX oml: <http://opencaesar.io/oml#>
-PREFIX : <http://opencaesar.io/oml/diagram#>
+PREFIX : <http://opencaesar.io/diagram#>
 
 CONSTRUCT {
   ?component a :Node ;

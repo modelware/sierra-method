@@ -69,7 +69,7 @@ stylesheet:
 ---
 PREFIX mission: <https://www.modelware.io/sierra/mission#>
 PREFIX entity: <https://www.modelware.io/sierra/entity#>
-PREFIX : <http://opencaesar.io/oml/diagram#>
+PREFIX : <http://opencaesar.io/diagram#>
 
 CONSTRUCT {
   ?objective a :Node ;

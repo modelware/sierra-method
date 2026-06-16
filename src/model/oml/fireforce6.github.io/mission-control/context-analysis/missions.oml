@@ -4,7 +4,9 @@ description <https://fireforce6.github.io/mission-control/context-analysis/missi
     uses <http://purl.org/dc/elements/1.1/> as dc
     uses <https://www.modelware.io/sierra/base#> as base
     uses <https://www.modelware.io/sierra/mission#> as mission
+    uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
+    @rdfs:label "Mission Control"
     instance MissionControl : mission:Mission [
         base:description "Allow Analysis of **Wild Fires** any where in CA."
     ]

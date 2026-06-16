@@ -4,7 +4,7 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
     uses <http://purl.org/dc/elements/1.1/> as dc
     uses <https://www.modelware.io/sierra/base#> as base
     uses <https://www.modelware.io/sierra/component#> as component
-    uses <http://opencaesar.io/oml#> as oml
+    uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
     instance Payload : component:Component [
         base:description "Wildfire Detection Payload"
@@ -71,13 +71,13 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
         base:isContainedBy PowerSubsystem
     ]
 
-    @oml:label "Solar Panel 1"
+    @rdfs:label "Solar Panel 1"
     instance SolarPanel1 : component:Component [
         base:description "Triple Junction GaAs Solar Panel - Port"
         base:isContainedBy SolarArray
     ]
 
-    @oml:label "Solar Panel 2"
+    @rdfs:label "Solar Panel 2"
     instance SolarPanel2 : component:Component [
         base:description "Triple Junction GaAs Solar Panel - Starboard"
         base:isContainedBy SolarArray

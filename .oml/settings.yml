@@ -13,14 +13,6 @@ project:
 sources:
   - src
 
-# npm registries
-registries:
-  - url: https://www.npmjs.com/
-
-# npm dependencies
-dependencies:
-  "@oml/core": "^1.0.0"
-
 # oml server settings
 server:
   port: 8080

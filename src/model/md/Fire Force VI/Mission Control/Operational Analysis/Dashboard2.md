@@ -33,13 +33,14 @@ import pandas as pd
 
 result = await query("""
   PREFIX oml: <http://opencaesar.io/oml#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
   PREFIX entity: <https://www.modelware.io/sierra/entity#>
   SELECT ?entity ?entityLabel ?capability ?capabilityLabel
   WHERE {
     ?entity a entity:Entity ;
             entity:hasCapability ?capability .
-    OPTIONAL { ?entity     oml:label ?entityLabel     }
-    OPTIONAL { ?capability oml:label ?capabilityLabel }
+    OPTIONAL { ?entity     rdfs:label ?entityLabel     }
+    OPTIONAL { ?capability rdfs:label ?capabilityLabel }
   }
   ORDER BY ?entityLabel ?capabilityLabel
 """)
@@ -111,13 +112,14 @@ include('src/method/r/utils.r')
 
 result <- query("
   PREFIX oml: <http://opencaesar.io/oml#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
   PREFIX process: <https://www.modelware.io/sierra/process#>
   SELECT ?activity ?activityLabel ?entity ?entityLabel
   WHERE {
     ?activity a process:Activity ;
               process:isAllocatedTo ?entity .
-    OPTIONAL { ?activity oml:label ?activityLabel }
-    OPTIONAL { ?entity   oml:label ?entityLabel   }
+    OPTIONAL { ?activity rdfs:label ?activityLabel }
+    OPTIONAL { ?entity   rdfs:label ?entityLabel   }
   }
   ORDER BY ?entityLabel ?activityLabel
 ")
@@ -135,17 +137,18 @@ await load('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js');
 
 const result = await query(`
   PREFIX oml: <http://opencaesar.io/oml#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
   PREFIX process: <https://www.modelware.io/sierra/process#>
   SELECT ?source ?sourceLabel ?target ?targetLabel ?item ?itemLabel
   WHERE {
     ?flow a process:Flow ;
           oml:hasSource ?source ;
           oml:hasTarget ?target .
-    OPTIONAL { ?source oml:label ?sourceLabel }
-    OPTIONAL { ?target oml:label ?targetLabel }
+    OPTIONAL { ?source rdfs:label ?sourceLabel }
+    OPTIONAL { ?target rdfs:label ?targetLabel }
     OPTIONAL {
       ?flow process:flows ?item .
-      OPTIONAL { ?item oml:label ?itemLabel }
+      OPTIONAL { ?item rdfs:label ?itemLabel }
     }
   }
   ORDER BY ?source ?target ?item
@@ -180,13 +183,13 @@ await renderMermaid(def);
 
 ```python
 result = await query("""
-PREFIX oml: <http://opencaesar.io/oml#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX base: <https://www.modelware.io/sierra/base#>
 PREFIX stakeholder: <https://www.modelware.io/sierra/stakeholder#>
 SELECT ?label ?category ?description WHERE {
   ?s a stakeholder:Stakeholder ;
      base:category ?category .
-  OPTIONAL { ?s oml:label ?label }
+  OPTIONAL { ?s rdfs:label ?label }
   OPTIONAL { ?s base:description ?description }
 } ORDER BY ?category ?label
 """)
