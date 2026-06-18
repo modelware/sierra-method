@@ -75,6 +75,15 @@ component:ComponentShape
             }
         """ ;
     ] ;
+    sh:sparql [
+        sh:message "A component that contains children must not assert its own mass — composites roll up their leaves' masses." ;
+        sh:select """
+            SELECT $this WHERE {
+                ?child base:isContainedBy $this .
+                $this component:mass ?m .
+            }
+        """ ;
+    ] ;
     sh:property [
         sh:path base:isContainedBy ;
         sh:name "Container" ;
