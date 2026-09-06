@@ -71,9 +71,9 @@
       "width": 482,
       "height": 162,
       "url": "https://modelware.io/",
-      "label": "Modelware | Intelligence-Centric Engineering",
+      "label": "Modelware | Neurosymbolic Systems Engineering",
       "shape": "rectangle",
-      "previewDescription": "OML Code is an intelligence-centric engineering platform built on Logic, AI, and DevOps. Author formal models you can reason on and compute over.",
+      "previewDescription": "OML Code is a Neurosymbolic Systems Engineering platform built on Logic, AI, and DevOps. Author formal models you can reason on and compute over.",
       "previewImage": "https://www.modelware.io/assets/images/oml-code-social.png",
       "z": 8
     },
