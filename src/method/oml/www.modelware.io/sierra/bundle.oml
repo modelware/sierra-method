@@ -9,4 +9,5 @@ vocabulary bundle <https://www.modelware.io/sierra/bundle#> as v-bundle {
     includes <https://www.modelware.io/sierra/stakeholder#>
     includes <https://www.modelware.io/sierra/scenario#>
     includes <https://www.modelware.io/sierra/state#>
+    includes <https://www.modelware.io/sierra/component#>
 }

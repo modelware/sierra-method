@@ -50,17 +50,15 @@ vocabulary <https://www.modelware.io/sierra/component#> as component {
         forward connectedTo
     ] < base:Element
 
-    concept Item < base:Element
+    concept Signal < base:Item
 
-    concept Signal < Item
+    concept Material < base:Item
 
-    concept Material < Item
-
-    concept Energy < Item
+    concept Energy < base:Item
 
     relation transfers [
         from Connection
-        to Item
+        to base:Item
         reverse isTransferedBy
     ]
 
