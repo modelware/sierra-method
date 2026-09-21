@@ -1,26 +1,42 @@
 description <https://fireforce6.github.io/mission-control/system-analysis/connections#> as connections {
-
-	extends <https://fireforce6.github.io/mission-control/system-analysis/components#> as components
-
-	uses <https://www.modelware.io/sierra/component#> as component
+    extends <https://fireforce6.github.io/mission-control/system-analysis/components#> as components
+    uses <https://www.modelware.io/sierra/component#> as component
 
     ref instance components:FireSat [
         component:hasPort FireSat.Command_In
         component:hasPort FireSat.Telemetry_Out
         component:hasPort FireSat.Light_In
     ]
-    instance FireSat.Command_In : component:Port [ component:direction "In" ]
-    instance FireSat.Telemetry_Out : component:Port [ component:direction "Out" ]
-    instance FireSat.Light_In : component:Port [ component:direction "In" ]
+
+    instance FireSat.Command_In : component:Port [
+        component:direction "In"
+    ]
+
+    instance FireSat.Telemetry_Out : component:Port [
+        component:direction "Out"
+    ]
+
+    instance FireSat.Light_In : component:Port [
+        component:direction "In"
+    ]
 
     ref instance components:Payload [
         component:hasPort Payload.Data_Out
         component:hasPort Payload.Power_In
         component:hasPort Payload.Light_In
     ]
-    instance Payload.Data_Out : component:Port [ component:direction "Out" ]
-    instance Payload.Power_In : component:Port [ component:direction "In" ]
-    instance Payload.Light_In : component:Port [ component:direction "In" ]
+
+    instance Payload.Data_Out : component:Port [
+        component:direction "Out"
+    ]
+
+    instance Payload.Power_In : component:Port [
+        component:direction "In"
+    ]
+
+    instance Payload.Light_In : component:Port [
+        component:direction "In"
+    ]
 
     ref instance components:Platform [
         component:hasPort Platform.Data_In
@@ -28,52 +44,96 @@ description <https://fireforce6.github.io/mission-control/system-analysis/connec
         component:hasPort Platform.Power_Out
         component:hasPort Platform.Command_In
     ]
-    instance Platform.Data_In : component:Port [ component:direction "In" ]
-    instance Platform.Data_Out : component:Port [ component:direction "Out" ]
-    instance Platform.Power_Out : component:Port [ component:direction "Out" ]
-    instance Platform.Command_In : component:Port [ component:direction "In" ]
 
-   ref instance components:VisualCamera [
+    instance Platform.Data_In : component:Port [
+        component:direction "In"
+    ]
+
+    instance Platform.Data_Out : component:Port [
+        component:direction "Out"
+    ]
+
+    instance Platform.Power_Out : component:Port [
+        component:direction "Out"
+    ]
+
+    instance Platform.Command_In : component:Port [
+        component:direction "In"
+    ]
+
+    ref instance components:VisualCamera [
         component:hasPort VisualCamera.Light_In
     ]
-    instance VisualCamera.Light_In : component:Port [ component:direction "In" ]
+
+    instance VisualCamera.Light_In : component:Port [
+        component:direction "In"
+    ]
 
     ref instance components:VisualOptics [
         component:hasPort VisualOptics.Light_In
     ]
-    instance VisualOptics.Light_In : component:Port [ component:direction "In" ]
-   
-   ref instance components:FilterWheel [
+
+    instance VisualOptics.Light_In : component:Port [
+        component:direction "In"
+    ]
+
+    ref instance components:FilterWheel [
         component:hasPort FilterWheel.Light_In
     ]
-    instance FilterWheel.Light_In : component:Port [ component:direction "In" ]
-    
+
+    instance FilterWheel.Light_In : component:Port [
+        component:direction "In"
+    ]
+
     instance Short-WaveInfraredFilter : component:Component [
         component:hasPort Short-WaveInfraredFilter.Light_In
     ]
-    instance Short-WaveInfraredFilter.Light_In : component:Port [ component:direction "In" ]
-    instance Short-WaveInfraredFilter.SWIRLight_Out : component:Port [ component:direction "Out" ]
+
+    instance Short-WaveInfraredFilter.Light_In : component:Port [
+        component:direction "In"
+    ]
+
+    instance Short-WaveInfraredFilter.SWIRLight_Out : component:Port [
+        component:direction "Out"
+    ]
 
     ref instance components:ThermalInfraredFilter [
         component:hasPort ThermalInfraredFilter.Light_In
         component:hasPort ThermalInfraredFilter.TIRLight_Out
     ]
-    instance ThermalInfraredFilter.Light_In : component:Port [ component:direction "In" ]
-    instance ThermalInfraredFilter.TIRLight_Out : component:Port [ component:direction "Out" ]
+
+    instance ThermalInfraredFilter.Light_In : component:Port [
+        component:direction "In"
+    ]
+
+    instance ThermalInfraredFilter.TIRLight_Out : component:Port [
+        component:direction "Out"
+    ]
 
     ref instance components:PropulsionSegment [
         component:hasPort Propulsion.Command_In
         component:hasPort Propulsion.Power_In
     ]
-    instance Propulsion.Command_In : component:Port [ component:direction "In" ]
-    instance Propulsion.Power_In : component:Port [ component:direction "In" ]
 
-    instance TelemetrySignal : component:Signal []
-    instance CommandSignal : component:Signal []
-    instance ElectricalPower : component:Energy []
-    instance Light: component:Energy []
-    instance SWIRLight: component:Energy []
-    instance TIRLight: component:Energy []
+    instance Propulsion.Command_In : component:Port [
+        component:direction "In"
+    ]
+
+    instance Propulsion.Power_In : component:Port [
+        component:direction "In"
+    ]
+
+    instance TelemetrySignal : component:Signal
+
+    instance CommandSignal : component:Signal
+
+    instance ElectricalPower : component:Energy
+
+    instance Light : component:Energy
+
+    instance SWIRLight : component:Energy
+
+    instance TIRLight : component:Energy
 
     relation instance Conn_FireSatCmd_to_Platform : component:Connection [
         from FireSat.Command_In
@@ -110,31 +170,53 @@ description <https://fireforce6.github.io/mission-control/system-analysis/connec
         to Payload.Light_In
         component:transfers Light
     ]
+
     relation instance Conn_PayloadLight_to_VisualCamera : component:Connection [
         from Payload.Light_In
         to VisualCamera.Light_In
         component:transfers Light
     ]
+
     relation instance Conn_VisualCameraLight_to_VisualOptics : component:Connection [
         from VisualCamera.Light_In
         to VisualOptics.Light_In
         component:transfers Light
     ]
+
     relation instance Conn_VisualOpticsLight_to_FilterWheel : component:Connection [
         from VisualOptics.Light_In
         to FilterWheel.Light_In
         component:transfers Light
     ]
+
     relation instance Conn_FilterWheelLight_to_SWIRFilter : component:Connection [
         from FilterWheel.Light_In
         to Short-WaveInfraredFilter.Light_In
         component:transfers Light
     ]
-    
+
     relation instance Conn_FilterWheelLight_to_TIIRFilter : component:Connection [
         from FilterWheel.Light_In
         to ThermalInfraredFilter.Light_In
         component:transfers Light
+    ]
+
+    relation instance SWIR_Filter_to_Payload : component:Connection [
+        from Short-WaveInfraredFilter.SWIRLight_Out
+        to Payload.Light_In
+        component:transfers SWIRLight
+    ]
+
+    relation instance TIR_Filter_to_Payload : component:Connection [
+        from ThermalInfraredFilter.TIRLight_Out
+        to Payload.Light_In
+        component:transfers TIRLight
+    ]
+
+    relation instance Propulsion_Command : component:Connection [
+        from Platform.Command_In
+        to Propulsion.Command_In
+        component:transfers CommandSignal
     ]
 
 }
