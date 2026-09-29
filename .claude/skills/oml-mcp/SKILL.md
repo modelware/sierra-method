@@ -8,7 +8,7 @@ description: 'Use when working with OML ontologies, models, validation, reasonin
 If OML MCP tool schemas are not yet loaded, batch-load "all" of them in a single ToolSearch call before any other action:
 
 ```
-ToolSearch("select:oml_workspace,oml_ontologies,oml_search,oml_about,oml_members,oml_paths,oml_sparql,oml_shapes,oml_update,oml_validate")
+ToolSearch("select:oml_workspace,oml_ontologies,oml_search,oml_about,oml_members,oml_paths,oml_sparql,oml_shapes,oml_update,oml_validate,oml_reason")
 ```
 
 ## Planning discipline
@@ -74,4 +74,8 @@ Hint: Only if a query you *expected* to return data comes back empty, run one di
 
 5. If `oml_update` reports lint problems, call a new `oml_update` to address the reported problems.
 
-6. If lint free, call `oml_validate` to validate the changes.
+6. If lint free, check the changes. `oml_update` has just linted them, so pass `only: true` to skip repeating lint. Issue both calls in a single message:
+   - `oml_validate` with `only: true` — SHACL validation.
+   - `oml_reason` with `only: true` and `explanation: false` — logical consistency check.
+
+7. If `oml_reason` returns `status: "inconsistent"`, call it again with `only: true` and `explanation: true` to read the explanation (the `highlight` evidence names the conflicting axioms), then fix the cause with a new `oml_update`.
