@@ -81,7 +81,7 @@ stakeholder:RequirementShape
     ] ;
     sh:property [
         sh:path base:expression ;
-        sh:name "Expressiom" ;
+        sh:name "Expression" ;
         dash:editor dash:TextAreaEditor ;
         sh:maxCount 1 ;
     ] ;

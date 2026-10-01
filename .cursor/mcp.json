@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "oml": {
+      "command": "npx",
+      "args": ["-y", "@oml/mcp"],
+      "env": {
+        "NPM_CONFIG_PREFIX": "/usr"
+      }
+    }
+  }
+}

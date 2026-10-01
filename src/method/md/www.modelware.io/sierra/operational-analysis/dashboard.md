@@ -141,10 +141,8 @@ PREFIX stakeholder: <https://www.modelware.io/sierra/stakeholder#>
 
 SELECT ?category (COUNT(?req) AS ?count)
 WHERE {
-  GRAPH ?g1 {
     ?req a stakeholder:Requirement ;
         base:category ?category .
-  }
 }
 GROUP BY ?category
 ORDER BY DESC(?count)
@@ -174,10 +172,8 @@ PREFIX stakeholder: <https://www.modelware.io/sierra/stakeholder#>
 
 SELECT ?priority (COUNT(?req) AS ?count)
 WHERE {
-  GRAPH ?g1 {
     ?req a stakeholder:Requirement ;
         base:priority ?priority .
-  }
 }
 GROUP BY ?priority
 ORDER BY DESC(?count)

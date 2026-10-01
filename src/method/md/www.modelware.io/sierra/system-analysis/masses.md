@@ -55,23 +55,20 @@ component:ComponentShape
             CONSTRUCT {
                 $this component:totalMass ?formatted
             } WHERE {
-                SELECT $this (CONCAT(STR(?total), " kg") AS ?formatted)
-                WHERE {
-                    {
-                        SELECT $this (SUM(?valSi) AS ?total)
-                        WHERE {
-                            $this a component:Component .
-                            OPTIONAL {
-                                $this base:hasDescendant ?child .
-                                ?child component:mass ?q .
-                                ?q oml:value ?v ; oml:unit ?u .
-                                ?u oml:multiplier ?m .
-                                BIND(xsd:decimal(?v) * xsd:decimal(?m) AS ?valSi)
-                            }
+                {
+                    SELECT $this (SUM(xsd:decimal(?v) * xsd:decimal(?m)) AS ?total)
+                    WHERE {
+                        $this a component:Component .
+                        OPTIONAL {
+                            $this base:hasDescendant ?child .
+                            ?child component:mass ?q .
+                            ?q oml:value ?v ;
+                                oml:unit/oml:multiplier ?m .
                         }
-                        GROUP BY $this
                     }
+                    GROUP BY $this
                 }
+                BIND(CONCAT(STR(?total), " kg") AS ?formatted)
             }
         """ ;
     ] ;
