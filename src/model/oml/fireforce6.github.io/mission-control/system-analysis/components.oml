@@ -807,6 +807,16 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
         base:description "Blue Bandpass Filter"
         base:isContainedBy FilterWheel
     ]
+    
+    instance Short-WaveInfraredFilter : component:Component [
+        base:description "Short-Wave Infrared Bandpass Filter"
+        base:isContainedBy FilterWheel
+    ]
+
+    instance ThermalInfraredFilter : component:Component [
+        base:description "Thermal Infrared Bandpass Filter"
+        base:isContainedBy FilterWheel
+    ]
 
     instance FilterMotor : component:Component [
         base:description "Stepper Motor - Filter Wheel"
