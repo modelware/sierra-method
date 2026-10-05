@@ -4,24 +4,6 @@ ontology: https://fireforce6.github.io/mission-control/bundle
 
 # Entities (Python)
 
-```r
-display("Initializing clicks to 0")
-store_set("n", "0")
-```
-
-```python
-def refresh():
-    display(f"<b>{store.get('n')}</b> clicks", id="count")
-
-def bump(v=None):
-    store.set("n", str(int(store.get("n","0")) + 1))
-    refresh()
-
-display(clientWidget('<button>+1</button>', bump))
-display('<div id="count"></div>')
-refresh()
-```
-
 ```python
 include('src/method/py/utils.py')
 import micropip
@@ -78,34 +60,6 @@ display(image_html(fig))
 ```
 
 # Activities (R)
-
-```r
-result <- query("
-    PREFIX oml: <http://opencaesar.io/oml#>
-    PREFIX component: <https://www.modelware.io/sierra/component#>
-    PREFIX components: <https://fireforce6.github.io/mission-control/system-analysis/components#>
-    SELECT ?value ?unit
-    WHERE {
-        components:PrimaryLens component:mass ?qty .
-        ?qty oml:value ?value .
-        OPTIONAL { ?qty oml:unit ?unit }
-    }
-")
-current <- as.numeric(result[["value"]][[1]])
-unit_iri <- if (length(result[["unit"]]) > 0) result[["unit"]][[1]] else 'http://opencaesar.io/si/kg'
-
-increment_mass <- function(event = NULL) {
-    update(list(
-        kind = 'updateAssertion',
-        descriptionIri = 'https://fireforce6.github.io/mission-control/system-analysis/masses',
-        subjectIri = 'https://fireforce6.github.io/mission-control/system-analysis/components#PrimaryLens',
-        predicateIri = 'https://www.modelware.io/sierra/component#mass',
-        object = list(value = round(current + 0.1, 10), unitIri = unit_iri)
-    ))
-}
-
-display(serverWidget('<button>Click</button> to increment mass of Primary Lens by 0.1', increment_mass))
-```
 
 ```r
 include('src/method/r/utils.r')
@@ -179,45 +133,4 @@ for (const { srcId, srcLabel, tgtId, tgtLabel, items } of edges.values()) {
 }
 
 await renderMermaid(def);
-```
-
-```python
-result = await query("""
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX base: <https://www.modelware.io/sierra/base#>
-PREFIX stakeholder: <https://www.modelware.io/sierra/stakeholder#>
-SELECT ?label ?category ?description WHERE {
-  ?s a stakeholder:Stakeholder ;
-     base:category ?category .
-  OPTIONAL { ?s rdfs:label ?label }
-  OPTIONAL { ?s base:description ?description }
-} ORDER BY ?category ?label
-""")
-rows = result["rows"]
-categories = sorted({r.get("category", "") for r in rows if r.get("category")})
-
-def render(sel):
-    visible = [r for r in rows if not sel or r.get("category") == sel]
-    if not visible:
-        display("<p><em>No stakeholders in this category.</em></p>", id="stk-table")
-        return
-    body = "".join(
-        f"<tr><td>{r.get('label','')}</td>"
-        f"<td>{r.get('category','')}</td>"
-        f"<td>{r.get('description','')}</td></tr>"
-        for r in visible
-    )
-    display(
-        '<table class="oml-md-table">'
-        '<thead><tr><th>Stakeholder</th><th>Category</th><th>Description</th></tr></thead>'
-        f'<tbody>{body}</tbody></table>',
-        id="stk-table",
-    )
-
-options = '<option value="">All categories</option>' + "".join(
-    f"<option>{c}</option>" for c in categories
-)
-display(clientWidget(f'<label>Category: <select>{options}</select></label>', render))
-display('<div id="stk-table"></div>')
-render("")
 ```
