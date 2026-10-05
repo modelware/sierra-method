@@ -62,4 +62,12 @@ description <https://fireforce6.github.io/mission-control/context-analysis/conce
         base:category "Need"
         base:priority "High"
     ]
+
+    @rdfs:label "Forestry Department Needs"
+    instance ForestryDepartmentNeeds : stakeholder:Concern [
+        base:category "Need"
+        base:priority "Medium"
+        base:description "Early wildfire detection and timely situational data to protect forest resources and support prevention planning."
+        stakeholder:isExpressedBy stakeholders:ForestryDepartment
+    ]
 }
