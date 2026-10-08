@@ -49,13 +49,15 @@ The reusable method (`src/method`) is packaged as `@modelware/sierra-method`.
 
 Use a local test registry, which runs on your machine:
 
-1. Start the registry and leave it running:
+1. Start the local registry from the [`verdaccio`](https://github.com/modelware/verdaccio) repository (clone it next to this one) and leave it running:
    ```bash
-   node scripts/registry.mjs
+   cd ../verdaccio
+   node registry.mjs
    ```
-   It serves http://localhost:4873, keeps its data in `.verdaccio/` (git-ignored), creates `build/dist`, and logs npm in to the registry as a local user.
-2. In another terminal, pack the method into `build/dist`:
+   It serves http://localhost:4873 and logs npm in to the registry as a local user.
+2. In another terminal, in this repository, pack the method into `build/dist`:
    ```bash
+   mkdir -p build/dist
    oml pack
    ```
 3. Preview, then publish to the local registry:
