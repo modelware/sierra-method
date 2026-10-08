@@ -41,6 +41,37 @@ Replace GITHUB, YOUR_ORGANIZATION, and YOUR_FORKED_REPOSITORY with the actual va
 1. In Vs Code, choose File -> Open Folder ... -> Navigate to the clone folder
 2. Click on the README (this document) then on the green **Start** button above.
 
+## 📦 Publishing the Method
+
+The reusable method (`src/method`) is packaged as `@modelware/sierra-method`.
+
+### Test locally
+
+Use a local test registry, which runs on your machine:
+
+1. Start the registry and leave it running:
+   ```bash
+   node scripts/registry.mjs
+   ```
+   It serves http://localhost:4873, keeps its data in `.verdaccio/` (git-ignored), creates `build/dist`, and logs npm in to the registry as a local user.
+2. In another terminal, pack the method into `build/dist`:
+   ```bash
+   oml pack
+   ```
+3. Preview, then publish to the local registry:
+   ```bash
+   oml publish -r http://localhost:4873 --dry-run
+   oml publish -r http://localhost:4873
+   ```
+   Browse the result at http://localhost:4873.
+4. Remove a version (e.g., 0.1.0):
+   ```bash
+   oml unpublish 0.1.0 -r http://localhost:4873
+   ```
+   npm refuses to remove a package's only version unless you also add `--force`.
+
+A version can be published only once. To publish changes, unpublish then publish.
+
 # Copyrights and Licenses
 
 This content is copyrighted to. Modelware Solutions LLC. To obtain a license, contact [Modelware](emailto:info@modelware.io).

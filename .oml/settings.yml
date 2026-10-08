@@ -4,10 +4,10 @@ oml-code:
 
 # project npm settings
 project:
-  name: "@oml/fireforce6"
+  name: "@modelware/sierra-method"
   version: 0.1.0
-  title: Fire Force VI
-  description: The Fire Force VI architecture
+  title: Sierra Method
+  description: The Sierra modeling method
 
 # source folders
 sources:
@@ -17,8 +17,12 @@ sources:
 #server:
 #  port: 8080
 
+# packing settings
+pack:
+  - include: [src/method]
+
 # oml-cli parameter defaults
 defaults:
   export: -o build/owl
-  reason: -o build/owl -t
   render: -m src/model/md -b build/web -c src/model/oml/fireforce6.github.io/mission-control/bundle.oml
+  pack: -o build/dist
