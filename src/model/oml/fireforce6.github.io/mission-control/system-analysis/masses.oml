@@ -418,10 +418,18 @@ description <https://fireforce6.github.io/mission-control/system-analysis/masses
         component:mass 0.1^^si:kg
     ]
 
-    ref instance components:BlueFilter : component:PhysicalPart [
+    ref instance components:Short-WaveInfraredFilter : component:PhysicalPart [
         component:mass 0.1^^si:kg
     ]
 
+     ref instance components:ThermalInfraredFilter : component:PhysicalPart [
+        component:mass 0.1^^si:kg
+    ]
+
+    ref instance components:BlueFilter : component:PhysicalPart [
+        component:mass 0.1^^si:kg
+    ]
+    
     ref instance components:FilterMotor : component:PhysicalPart [
         component:mass 0.5^^si:kg
     ]

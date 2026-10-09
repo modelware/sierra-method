@@ -85,6 +85,17 @@
   </tr>
 </table>
 
+## Analysis
+
+<table style="width: 100%; background-color: rgba(255, 190, 50, 0.1);">
+  <tr>
+    <td>1. <a href="./Analysis/Analysis%20Dashboard.md">View Analysis Dashboard</a></td>
+  </tr>
+  <tr>
+    <td>2. <a href="./Analysis/Allocation%20Review.md">Review Allocations</a></td>
+  </tr>
+</table>
+
 ## Logical Architecture
 
 ## Physical Architecture
