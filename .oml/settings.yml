@@ -24,5 +24,6 @@ pack:
 # oml-cli parameter defaults
 defaults:
   export: -o build/owl
+  reason: -o build/owl -t
   render: -m src/model/md -b build/web -c src/model/oml/fireforce6.github.io/mission-control/bundle.oml
   pack: -o build/dist
