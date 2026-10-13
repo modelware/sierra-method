@@ -10,7 +10,7 @@ description <https://fireforce6.github.io/mission-control/context-analysis/conce
     @rdfs:label "Fire Fighter Needs"
     instance FireFighterNeeds : stakeholder:Concern [
         base:description "Rapid situational awareness and robust field usability."
-        stakeholder:isExpressedBy stakeholders:FireFighter
+        stakeholder:isExpressedBy stakeholders:FireFighterr
         base:category "Need"
         base:priority "Low"
     ]
