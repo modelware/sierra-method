@@ -1,6 +1,8 @@
 # Sierra Method
 
-![Release](https://img.shields.io/badge/Release-v0.1.0-blue)
+[![Release](https://img.shields.io/github/v/release/modelware/sierra-method)](https://github.com/modelware/sierra-method/releases/latest)
+
+**Live site:** https://www.modelware.io/sierra-method/
 
 This repository provides an [OML Code](https://www.modelware.io/) template for modeling and analyzing systems using the **Sierra Method**.
 
