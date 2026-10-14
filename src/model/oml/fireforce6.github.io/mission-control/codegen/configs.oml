@@ -4,6 +4,7 @@ description <https://fireforce6.github.io/mission-control/codegen/configs#> as c
     
 	extends <https://www.modelware.io/sierra/codegen/conops#> as conops
 	extends <https://www.modelware.io/sierra/codegen/statemachine#> as statemachine
+	extends <https://www.modelware.io/sierra/codegen/transitions#> as transitions
 
     instance conops : codegen:Config [
         codegen:spec conops:ConOpsSpec
@@ -20,6 +21,12 @@ description <https://fireforce6.github.io/mission-control/codegen/configs#> as c
     instance sm2 : codegen:Config [
         codegen:spec statemachine:StateMachineSpec
         codegen:context "https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm2"
+        codegen:binding [codegen:key "path" codegen:value "build/docs"]
+    ]
+
+    instance sm1transitions : codegen:Config [
+        codegen:spec transitions:TransitionTableSpec
+        codegen:context "https://fireforce6.github.io/mission-control/operational-analysis/statemachines/sm1"
         codegen:binding [codegen:key "path" codegen:value "build/docs"]
     ]
 
