@@ -5,7 +5,7 @@ oml-code:
 # project npm settings
 project:
   name: "@modelware/sierra-method"
-  version: 1.0.0
+  version: 1.1.0
   title: Sierra Method
   description: The Sierra modeling method
 

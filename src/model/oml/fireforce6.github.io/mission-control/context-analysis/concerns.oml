@@ -46,4 +46,28 @@ description <https://fireforce6.github.io/mission-control/context-analysis/conce
         base:priority "High"
         base:category "Need"
     ]
+
+    @rdfs:label "Governor Needs"
+    instance GovernorNeeds : stakeholder:Concern [
+        base:description "Public safety assurance and resource allocation oversight."
+        stakeholder:isExpressedBy stakeholders:Governor
+        base:category "Need"
+        base:priority "High"
+    ]
+
+    @rdfs:label "Public Needs"
+    instance PublicNeeds : stakeholder:Concern [
+        base:description "Access to timely information and safety updates."
+        stakeholder:isExpressedBy stakeholders:Public
+        base:category "Need"
+        base:priority "High"
+    ]
+
+    @rdfs:label "Forestry Department Needs"
+    instance ForestryDepartmentNeeds : stakeholder:Concern [
+        base:category "Need"
+        base:priority "Medium"
+        base:description "Early wildfire detection and timely situational data to protect forest resources and support prevention planning."
+        stakeholder:isExpressedBy stakeholders:ForestryDepartment
+    ]
 }

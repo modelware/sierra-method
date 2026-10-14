@@ -1,0 +1,74 @@
+description <https://www.modelware.io/sierra/codegen/transitions#> as transitions {
+
+	uses <http://opencaesar.io/codegen#> as codegen
+
+    instance TransitionTableSpec : codegen:Spec [
+        codegen:construct """
+            PREFIX oml:       <http://opencaesar.io/oml#>
+            PREFIX codegen:   <http://opencaesar.io/codegen#>
+            PREFIX base:      <https://www.modelware.io/sierra/base#>
+            PREFIX state:    <https://www.modelware.io/sierra/state#>
+            PREFIX tt:        <https://www.modelware.io/sierra/codegen/transitions/table#>
+            PREFIX templates: <https://www.modelware.io/sierra/codegen/transitions#>
+
+            CONSTRUCT {
+                ?file a codegen:File ;
+                    codegen:path ?path ;
+                    codegen:template templates:TransitionTableTemplate ;
+                    codegen:root ?machine .
+
+                ?machine a tt:Machine ;
+                    tt:name ?machineName ;
+                    tt:transition ?transition .
+
+                ?transition a tt:Transition ;
+                    tt:source ?sourceName ;
+                    tt:target ?targetName ;
+                    tt:event ?eventName .
+            }
+            WHERE {
+                ?machine a state:StateMachine .
+
+                BIND(REPLACE(STR(?machine), "^.*[/#]", "") AS ?machineName)
+                BIND(IRI(CONCAT("urn:file:transitions:", ?machineName)) AS ?file)
+                BIND(CONCAT("${path}/", ?machineName, "-transitions.md") AS ?path)
+
+                # Each transition is its own node, keyed by its IRI, so it appears once
+                # no matter how many patterns match it. The source state must belong to
+                # this machine; that ties the transition to the machine without a cross-join.
+                OPTIONAL {
+                    ?transition a state:Transition ;
+                                oml:hasSource ?source ;
+                                oml:hasTarget ?target .
+                    ?source base:isContainedBy ?machine .
+                    BIND(REPLACE(STR(?source), "^.*[/#]", "") AS ?sourceName)
+                    BIND(REPLACE(STR(?target), "^.*[/#]", "") AS ?targetName)
+
+                    # Optional, so transitions without a triggering event are kept
+                    OPTIONAL {
+                        ?transition state:isTriggeredBy ?event .
+                        BIND(REPLACE(STR(?event), "^.*[/#]", "") AS ?eventName)
+                    }
+                }
+            }
+        """
+        codegen:parameter "path"
+    ]
+
+    instance TransitionTableTemplate : codegen:Template [
+        codegen:body """
+            {%- set machine = object(file, "codegen:root") -%}
+            {%- set rows = [] -%}
+            {%- for t in objects(machine, "tt:transition") -%}
+            {%- set _ = rows.push("| " + object(t, "tt:source") + " | " + (object(t, "tt:event") or "(unspecified)") + " | " + object(t, "tt:target") + " |") -%}
+            {%- endfor -%}
+            # {{ object(machine, "tt:name") }} Transitions
+
+            | Source state | Event | Target state |
+            |---|---|---|
+            {%- for row in rows | sort %}
+            {{ row }}
+            {%- endfor %}
+        """
+    ]
+}

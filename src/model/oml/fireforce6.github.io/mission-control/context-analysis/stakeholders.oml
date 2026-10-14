@@ -35,4 +35,19 @@ description <https://fireforce6.github.io/mission-control/context-analysis/stake
         base:description "Ensures alerts, communications, and responses comply with safety protocols."
         base:category "Support"
     ]
+    @rdfs:label "Governor"
+    instance Governor : stakeholder:Stakeholder [
+        base:description "Government official overseeing public safety and resource allocation."
+        base:category "Beneficiary"
+    ]
+    @rdfs:label "Public"
+    instance Public : stakeholder:Stakeholder [
+        base:description "General public affected by fire incidents, interested in safety and information."
+        base:category "Beneficiary"
+    ]
+    @rdfs:label "Forestry Department"
+    instance ForestryDepartment : stakeholder:Stakeholder [
+        base:description "Government agency responsible for forest management and wildfire prevention."
+        base:category "Beneficiary"
+    ]
 }

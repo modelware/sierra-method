@@ -61,4 +61,20 @@ description <https://fireforce6.github.io/mission-control/operational-analysis/r
         base:category "L2"
         base:priority "Medium"
     ]
+
+    instance R8 : stakeholder:Requirement [
+        base:description "Public Information Portal"
+        base:expression "The system shall provide a public-facing portal for fire updates and safety information."
+        stakeholder:isStatedBy stakeholders:Public
+        base:category "L1"
+        base:priority "High"
+    ]
+
+    instance R9 : stakeholder:Requirement [
+        base:description "Resource Allocation Dashboard"
+        base:expression "The system shall provide a dashboard for resource allocation and management."
+        stakeholder:isStatedBy stakeholders:Governor
+        base:category "L2"
+        base:priority "High"
+    ]
 }
