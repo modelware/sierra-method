@@ -7,13 +7,13 @@ description <https://fireforce6.github.io/mission-control/context-analysis/objec
     extends <https://fireforce6.github.io/mission-control/context-analysis/concerns#> as concerns
     extends <https://fireforce6.github.io/mission-control/context-analysis/missions#> as missions
 
-    instance O1 : mission:Objective [
+    instance HistoricalFireAnalysis : mission:Objective [
         base:description "Allow Analysis of Fire at Any Point in Time."
         mission:isPursuedBy missions:MissionControl
         mission:isDerivedFrom concerns:OperatorNeeds
     ]
 
-    instance O2 : mission:Objective [
+    instance RealTimeAwareness : mission:Objective [
         base:description "Enable Real-Time Data Stream and Awareness."
         mission:isPursuedBy missions:MissionControl
         mission:isDerivedFrom concerns:OperatorNeeds
@@ -22,14 +22,14 @@ description <https://fireforce6.github.io/mission-control/context-analysis/objec
         mission:isDerivedFrom concerns:CommandCenterNeeds
     ]
 
-    instance O3 : mission:Objective [
+    instance UsableInterface : mission:Objective [
         base:description "Provide Responsive, Easy-to-Use Interface."
         mission:isPursuedBy missions:MissionControl
         mission:isDerivedFrom concerns:OperatorNeeds
         mission:isDerivedFrom concerns:FireFighterNeeds
     ]
 
-    instance O4 : mission:Objective [
+    instance SafeDecisionSupport : mission:Objective [
         base:description "Ensure Safe and Controlled Decision Support."
         mission:isPursuedBy missions:MissionControl
         mission:isDerivedFrom concerns:SafetyOfficerNeeds

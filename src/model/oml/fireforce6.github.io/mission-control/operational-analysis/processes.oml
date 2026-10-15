@@ -65,14 +65,14 @@ description <https://fireforce6.github.io/mission-control/operational-analysis/p
 
     instance P1 : process:Process [
         base:description "Process for Real-Time Fire Data Streaming."
-        process:describes capabilities:C2
+        process:describes capabilities:LiveFireUpdates
         process:includes F1
         process:includes F2
     ]
 
     instance P2 : process:Process [
         base:description "Process for Operator-Warden Communication and Task Approval."
-        process:describes capabilities:C5
+        process:describes capabilities:AIWardenChat
         process:includes F3
         process:includes F4
     ]
