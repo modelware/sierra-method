@@ -98,10 +98,10 @@ description <https://fireforce6.github.io/mission-control/operational-analysis/s
     ]
 
     instance Exec.RequestHistory : scenario:Execution [
-        base:description "NetworkInterface issues history fetch to FireCloud (A1)."
+        base:description "NetworkInterface issues history fetch to FireCloud (RequestLiveTelemetry)."
         scenario:startsAt FireCloud.TP1
         scenario:endsAt FireCloud.TP2
-        scenario:executes processes:A1
+        scenario:executes processes:RequestLiveTelemetry
     ]
 
     instance M3 : scenario:Message [
@@ -112,10 +112,10 @@ description <https://fireforce6.github.io/mission-control/operational-analysis/s
     ]
 
     instance Exec.RenderHistory : scenario:Execution [
-        base:description "Dashboard parses history and updates the map/historical layer (A2/A3)."
+        base:description "Dashboard parses history and updates the map/historical layer (ParseItemsStream/UpdateMapLayer)."
         scenario:startsAt Dashboard.TP4
         scenario:endsAt Dashboard.TP5
-        scenario:executes processes:A2
+        scenario:executes processes:ParseItemsStream
     ]
 
     instance M4 : scenario:Message [
