@@ -91,7 +91,7 @@ description <https://fireforce6.github.io/mission-control/operational-analysis/s
         base:description "Dashboard displays AI proposal in chat interface (and shows Approve button)"
         scenario:startsAt Dashboard.TP1
         scenario:endsAt Dashboard.TP4
-        scenario:executes processes:A4
+        scenario:executes processes:SendOperatorMessage
     ]
 
     instance M3 : scenario:Message [
@@ -105,7 +105,7 @@ description <https://fireforce6.github.io/mission-control/operational-analysis/s
         base:description "Dashboard processes approval"
         scenario:startsAt Dashboard.TP2
         scenario:endsAt Dashboard.TP3
-        scenario:executes processes:A6
+        scenario:executes processes:DisplayAIMessage
     ]
 
     instance M4 : scenario:Message [

@@ -21,31 +21,31 @@ description <https://fireforce6.github.io/mission-control/operational-analysis/s
     instance Idle : state:State [
         base:description "Dashboard is idle or on standby; not actively streaming."
         base:isContainedBy MissionControlDashboard
-        state:enables processes:A1
+        state:enables processes:RequestLiveTelemetry
     ]
 
     instance Monitoring : state:State [
         base:description "Dashboard is actively monitoring live items and updating the map."
         base:isContainedBy MissionControlDashboard
-        state:enables processes:A2, processes:A3
+        state:enables processes:ParseItemsStream, processes:UpdateMapLayer
     ]
 
     instance AlertHandling : state:State [
         base:description "Dashboard is handling a critical alert; displaying pop-up and workflow."
         base:isContainedBy MissionControlDashboard
-        state:enables processes:A3, processes:A6
+        state:enables processes:UpdateMapLayer, processes:DisplayAIMessage
     ]
 
     instance DecisionPending : state:State [
         base:description "Dashboard is awaiting human approval for an AI-suggested task."
         base:isContainedBy MissionControlDashboard
-        state:enables processes:A6
+        state:enables processes:DisplayAIMessage
     ]
 
     instance HistoricalReview : state:State [
         base:description "Dashboard is in historical/time-travel view mode (slider engaged)."
         base:isContainedBy MissionControlDashboard
-        state:enables processes:A2
+        state:enables processes:ParseItemsStream
     ]
 
     instance DashboardFinal : state:Final [

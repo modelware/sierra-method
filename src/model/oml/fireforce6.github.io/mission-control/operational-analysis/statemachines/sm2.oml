@@ -20,25 +20,25 @@ description <https://fireforce6.github.io/mission-control/operational-analysis/s
 
     instance Observing : state:State [
         base:description "Warden monitors telemetry and looks for anomalies."
-        state:enables processes:A5
+        state:enables processes:ReceiveWardenResponse
         base:isContainedBy AIFireWardenStateMachine
     ]
 
     instance Advising : state:State [
         base:description "Warden formulates a recommendation or task (advisory mode)."
-        state:enables processes:A5
+        state:enables processes:ReceiveWardenResponse
         base:isContainedBy AIFireWardenStateMachine
     ]
 
     instance AwaitingApproval : state:State [
         base:description "Warden has proposed an action and is awaiting human approval."
-        state:enables processes:A6
+        state:enables processes:DisplayAIMessage
         base:isContainedBy AIFireWardenStateMachine
     ]
 
     instance ExecutingAction : state:State [
         base:description "Warden is executing an approved mitigation task (autonomous actions)."
-        state:enables processes:A3
+        state:enables processes:UpdateMapLayer
         base:isContainedBy AIFireWardenStateMachine
     ]
 

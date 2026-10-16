@@ -123,7 +123,7 @@ description <https://fireforce6.github.io/mission-control/operational-analysis/s
         base:description "Dashboard updates map visualization after receiving alert"
         scenario:startsAt Dashboard.TP2
         scenario:endsAt Dashboard.TP3
-        scenario:executes processes:A3
+        scenario:executes processes:UpdateMapLayer
     ]
 
     instance M2 : scenario:Message [
