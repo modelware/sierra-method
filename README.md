@@ -1,4 +1,4 @@
-# Sierra Method
+# Sierra Method Team 2
 
 [![Release](https://img.shields.io/github/v/release/modelware/sierra-method)](https://github.com/modelware/sierra-method/releases/latest)
 [![Live Site](https://img.shields.io/badge/Live-Site-brightgreen)](https://www.modelware.io/sierra-method/)
