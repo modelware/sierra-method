@@ -1,7 +1,7 @@
 # Sierra Method
 
-[![Release](https://img.shields.io/github/v/release/modelware/sierra-method)](https://github.com/modelware/sierra-method/releases/latest)
-[![Live Site](https://img.shields.io/badge/Live-Site-brightgreen)](https://www.modelware.io/sierra-method/)
+[![Release](https://img.shields.io/github/v/release/ulaleya/sierra-method)](https://github.com/ulaleya/sierra-method/releases/tag/v1.0.0)
+[![Live Site](https://img.shields.io/badge/Live-Site-brightgreen)](https://ulaleya.github.io/sierra-method/)
 
 This repository provides an [OML Code](https://www.modelware.io/) template for modeling and analyzing systems using the **Sierra Method**.
 
@@ -74,6 +74,23 @@ Use a local test registry, which runs on your machine:
    npm refuses to remove a package's only version unless you also add `--force`.
 
 A version can be published only once. To publish changes, unpublish then publish.
+
+## SIE 502 Capstone Release v1.0.0
+
+The Waterline Construction Capstone Release v1.0.0 represents the
+completion of the project's automated CI/CD workflow.
+
+The release demonstrates OML linting, SHACL validation, and logical
+reasoning through GitHub Actions. Intentional failures were introduced
+and corrected to verify that each quality check works as expected.
+
+The main branch is protected by required pull request checks, and
+versioned releases automatically deploy the generated documentation
+to GitHub Pages.
+
+- [Official GitHub Release v1.0.0](https://github.com/ulaleya/sierra-method/releases/tag/v1.0.0)
+- [Published Documentation](https://ulaleya.github.io/sierra-method/)
+- [Capstone Release Pull Request #2](https://github.com/ulaleya/sierra-method/pull/2)
 
 # Waterline Construction Project
 
