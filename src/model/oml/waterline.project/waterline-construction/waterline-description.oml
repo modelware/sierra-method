@@ -30,7 +30,7 @@ description <https://waterline.project/waterline-construction/waterline-descript
     instance BeddingRequirement_01 : waterline:CriticalWaterlineRequirement [
         base:description "Pipe Bedding Requirement"
         base:expression "Waterline pipe shall be installed on bedding meeting the project requirements."
-        base:priority "Low"
+        base:priority "High"
         waterline:appliesToComponent PipeSegment_01
         waterline:appliesToActivity PipeInstallation_01
     ]
