@@ -7,7 +7,7 @@ description <https://waterline.project/waterline-construction/waterline-descript
     uses <https://waterline.project/waterline-construction/waterline#> as waterline
     uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
-    instance PipeSegment_01 : waterline:Pipe [ INVALID_SYNTAX
+    instance PipeSegment_01 : waterline:Pipe [
         base:description "Representative installed waterline pipe segment"
         waterline:verificationStatus "Pending"
         waterline:requiresInspection BeddingInspection_01
@@ -30,7 +30,7 @@ description <https://waterline.project/waterline-construction/waterline-descript
     instance BeddingRequirement_01 : stakeholder:Requirement [
         base:description "Pipe Bedding Requirement"
         base:expression "Waterline pipe shall be installed on bedding meeting the project requirements."
-        base:priority "High"
+        base:priority "High", "Low"
         waterline:appliesToComponent PipeSegment_01
         waterline:appliesToActivity PipeInstallation_01
     ]
