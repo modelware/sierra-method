@@ -7,7 +7,7 @@ description <https://waterline.project/waterline-construction/waterline-descript
     uses <https://waterline.project/waterline-construction/waterline#> as waterline
     uses <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
-    instance PipeSegment_01 : waterline:Pipe [
+    instance PipeSegment_01 : waterline:Pipe [ INVALID_SYNTAX
         base:description "Representative installed waterline pipe segment"
         waterline:verificationStatus "Pending"
         waterline:requiresInspection BeddingInspection_01
