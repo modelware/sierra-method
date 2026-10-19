@@ -87,18 +87,34 @@ The project was developed to support the business questions established for the 
 
 ## Model Organization
 
-The Waterline Construction OML files are located in:
+The reusable Waterline Construction vocabulary is located in: src/method/oml/waterline.project/waterline-construction/
 
-`src/model/oml/waterline.project/waterline-construction/`
+The project-specific descriptions and code generation configuration are located in: src/model/oml/waterline.project/waterline-construction/
 
 The project contains the following files:
 
-- `waterline.oml` — Defines the Waterline Construction vocabulary, including waterline components, construction activities, relationships, property characteristics, a defined concept, and a reasoning rule.
+- `waterline.oml` — Defines the reusable Waterline Construction vocabulary, including components, activities, relationships, property characteristics, a defined concept, and a reasoning rule.
 - `vocabulary-bundle.oml` — Bundles the Waterline Construction vocabulary with the Sierra vocabularies used by the model.
-- `waterline-description.oml` — Contains representative instances, including a pipe segment, installation activity, bedding inspection, pressure test, and construction requirement.
+- `waterline-description.oml` — Contains representative waterline components, installation activities, inspections, testing, and construction requirements.
 - `description-bundle.oml` — Bundles the Waterline Construction descriptions for reasoning.
+- `src/method/oml/waterline.project/waterline-construction/codegen/verification-report.oml` — Defines the reuseable verification report generator.
+- `src/model/oml/waterline.project/waterline-construction/codegen/configs.oml` — Configures verification report generation for the Waterline Construction model. 
 
 The Waterline Construction model reuses Sierra concepts for components, processes, stakeholders, and requirements while adding terminology specific to municipal waterline construction.
+
+## Project 4: Methodology Packaging and Reuse
+
+For Project 4, the Waterline Construction methodology was packaged as part of Sierra Method version 1.0.2. The reusable package includes the Waterline Construction vocabulary, five Markdown editor templates, and an OML verification report generator.
+
+The methodology was packaged using oml pack and published to a local Verdaccio npm registry as @modelware/sierra-method@1.0.2.
+
+To demonstrate reuse, a separate Waterline Consumer project was created. This independent project installs the published Sierra Method package, defines its own waterline components and requirements, and uses the reusable verification report generator to produce a Markdown verification report.
+
+The consumer project demonstrates that the Waterline Construction methodology can be installed and used outside the original Sierra Method repository.
+
+Independent consumer repository: https://github.com/ulaleya/waterline-consumer
+
+Note: The package was published to a local Verdaccio registry, not the public npm registry.
 
 ## Reasoning Features
 

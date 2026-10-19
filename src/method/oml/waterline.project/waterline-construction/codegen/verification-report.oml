@@ -1,0 +1,65 @@
+description <https://waterline.project/waterline-construction/codegen/verification-report#> as report {
+    uses <http://opencaesar.io/codegen#> as codegen
+
+    instance VerificationReportSpec : codegen:Spec [
+        codegen:construct """
+            PREFIX codegen: <http://opencaesar.io/codegen#>
+            PREFIX waterline: <https://waterline.project/waterline-construction/waterline#>
+            PREFIX stakeholder: <https://www.modelware.io/sierra/stakeholder#>
+            PREFIX rpt: <https://waterline.project/waterline-construction/codegen/verification-report#>
+
+            CONSTRUCT {
+                ?file a codegen:File ;
+                    codegen:path ?path ;
+                    codegen:template rpt:VerificationReportTemplate ;
+                    codegen:root ?component .
+
+                ?component rpt:name ?componentName ;
+                    rpt:status ?status ;
+                    rpt:requirement ?requirement .
+
+                ?requirement rpt:requirementName ?requirementName ;
+                    rpt:inspection ?inspectionName .
+            }
+            WHERE {
+                ?component a waterline:WaterlineComponent .
+
+                BIND(REPLACE(STR(?component), "^.*[/#]", "") AS ?componentName)
+                BIND(IRI(CONCAT("urn:file:verification:", ?componentName)) AS ?file)
+                BIND(CONCAT("${path}/", ?componentName, "-verification.md") AS ?path)
+
+                OPTIONAL {
+                    ?component waterline:verificationStatus ?status .
+                }
+
+                OPTIONAL {
+                    ?requirement waterline:appliesToComponent ?component .
+                    BIND(REPLACE(STR(?requirement), "^.*[/#]", "") AS ?requirementName)
+
+                    OPTIONAL {
+                        ?requirement waterline:requiresVerification ?inspection .
+                        BIND(REPLACE(STR(?inspection), "^.*[/#]", "") AS ?inspectionName)
+                    }
+                }
+            }
+        """
+        codegen:parameter "path"
+    ]
+
+    instance VerificationReportTemplate : codegen:Template [
+        codegen:body """
+            {%- set component = object(file, "codegen:root") %}
+            # Waterline Verification Report: {{ object(component, "rpt:name") }}
+
+            **Verification Status:** {{ object(component, "rpt:status") or "Not specified" }}
+
+            ## Requirements and Inspections
+
+            | Requirement | Required Inspection |
+            |---|---|
+            {%- for requirement in objects(component, "rpt:requirement") %}
+            | {{ object(requirement, "rpt:requirementName") }} | {{ object(requirement, "rpt:inspection") or "Not specified" }} |
+            {%- endfor %}
+        """
+    ]
+}

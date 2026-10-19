@@ -1,0 +1,15 @@
+description <https://waterline.project/waterline-construction/codegen/configs#> as configs {
+
+    uses <http://opencaesar.io/codegen#> as codegen
+
+    extends <https://waterline.project/waterline-construction/codegen/verification-report#> as report
+
+    instance WaterlineVerificationReport : codegen:Config [
+        codegen:spec report:VerificationReportSpec
+        codegen:context "https://waterline.project/waterline-construction/description-bundle"
+        codegen:binding [
+            codegen:key "path"
+            codegen:value "build/docs"
+        ]
+    ]
+}
