@@ -27,7 +27,7 @@ description <https://waterline.project/waterline-construction/waterline-descript
         base:description "Pressure testing of the installed waterline pipe"
     ]
 
-    instance BeddingRequirement_01 : stakeholder:Requirement [
+    instance BeddingRequirement_01 : waterline:CriticalWaterlineRequirement [
         base:description "Pipe Bedding Requirement"
         base:expression "Waterline pipe shall be installed on bedding meeting the project requirements."
         base:priority "High"
