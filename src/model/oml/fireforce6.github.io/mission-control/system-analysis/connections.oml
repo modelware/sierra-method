@@ -39,9 +39,13 @@ instance PayloadStorage.Data_Out : component:Port [ component:direction "Out" ]
     ref instance components:PropulsionSegment [
         component:hasPort Propulsion.Command_In
         component:hasPort Propulsion.Power_In
+        component:hasPort Propulsion.Enable
+        component:hasPort Propulsion.Power_Out
     ]
     instance Propulsion.Command_In : component:Port [ component:direction "In" ]
     instance Propulsion.Power_In : component:Port [ component:direction "In" ]
+    instance Propulsion.Enable : component:Port [ component:direction "In" ]
+    instance Propulsion.Power_Out : component:Port [ component:direction "Out" ]
 
     instance TelemetrySignal : component:Signal []
     instance CommandSignal : component:Signal []
@@ -67,6 +71,18 @@ instance PayloadStorage.Data_Out : component:Port [ component:direction "Out" ]
 
     relation instance Conn_Payload_to_Platform : component:Connection [
         from Payload.Data_Out
+        to Platform.Data_In
+        component:transfers TelemetrySignal
+    ]
+
+    relation instance Conn_Payload_to_PayloadStorage : component:Connection [
+        from Payload.Data_Out
+        to PayloadStorage.Data_In
+        component:transfers TelemetrySignal
+    ]
+
+    relation instance Conn_PayloadStorage_to_Platform : component:Connection [
+        from PayloadStorage.Data_Out
         to Platform.Data_In
         component:transfers TelemetrySignal
     ]
