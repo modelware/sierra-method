@@ -46,4 +46,20 @@ description <https://fireforce6.github.io/mission-control/context-analysis/conce
         base:priority "High"
         base:category "Need"
     ]
+
+    @rdfs:label "System Engineer Needs 2"
+    instance SystemEngineerNeeds2 : stakeholder:Concern [
+        base:description "Design Documentation Verified"
+        base:category "Need"
+        base:priority "Medium"
+        stakeholder:isExpressedBy stakeholders:SystemsEngineer
+    ]
+
+    @rdfs:label "Operator Needs2"
+    instance OperatorNeeds2 : stakeholder:Concern [
+        base:description "Rapid Technical Support"
+        stakeholder:isExpressedBy stakeholders:Operator
+        base:category "Need"
+        base:priority "High"
+    ]
 }

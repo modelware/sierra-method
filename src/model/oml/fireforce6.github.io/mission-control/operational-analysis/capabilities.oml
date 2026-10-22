@@ -45,4 +45,14 @@ description <https://fireforce6.github.io/mission-control/operational-analysis/c
         base:description "Integrate Fire Cloud telemetry for environment and drone data."
         mission:isRequiredBy objectives:RealTimeAwareness
     ]
+
+    instance DesignDocumentationVerification : mission:Capability [
+        base:description "Review design documentation for completeness and correctness."
+        mission:isRequiredBy objectives:VerifiedDesignDocumentation
+    ]
+
+    instance TechnicalSupportProvision : mission:Capability [
+        base:description "Provide operators with timely technical assistance."
+        mission:isRequiredBy objectives:RapidTechnicalSupport
+    ]
 }
