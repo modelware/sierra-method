@@ -465,4 +465,24 @@ description <https://fireforce6.github.io/mission-control/system-analysis/masses
     ref instance components:GPSProcessor : component:PhysicalPart [
         component:mass 0.2^^si:kg
     ]
+
+    ref instance components:PayloadElectronics : component:PhysicalPart [
+        component:mass 1^^si:kg
+    ]
+
+    ref instance components:PayloadStorage : component:PhysicalPart [
+        component:mass 1^^si:kg
+    ]
+
+    ref instance components:TXDSPunit : component:PhysicalPart [
+        component:mass 1^^si:kg
+    ]
+
+    ref instance components:RXDSPunit : component:PhysicalPart [
+        component:mass 1^^si:kg
+    ]
+
+    ref instance components:ADCS : component:PhysicalPart [
+        component:mass 1^^si:kg
+    ]
 }
