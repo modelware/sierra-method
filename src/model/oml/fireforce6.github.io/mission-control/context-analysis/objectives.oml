@@ -35,4 +35,17 @@ description <https://fireforce6.github.io/mission-control/context-analysis/objec
         mission:isDerivedFrom concerns:SafetyOfficerNeeds
         mission:isDerivedFrom concerns:CommandCenterNeeds
     ]
+
+    instance VerifiedDesignDocumentation : mission:Objective [
+        base:description "Ensure design documentation is reviewed and verified."
+        mission:isPursuedBy missions:MissionControl
+        mission:isDerivedFrom concerns:SystemEngineerNeeds2
+    ]
+
+    instance RapidTechnicalSupport : mission:Objective [
+        base:description "Provide operators with rapid technical support."
+        mission:isPursuedBy missions:MissionControl
+        mission:isDerivedFrom concerns:OperatorNeeds2
+    ]
+
 }
