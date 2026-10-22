@@ -11,6 +11,31 @@ description <https://fireforce6.github.io/mission-control/system-analysis/compon
         base:isContainedBy FireSat
     ]
 
+    instance PayloadElectronics :component:Component [
+        base:description "PCB for Payload System"
+        base:isContainedBy Payload
+    ]
+
+    instance PayloadStorage : component:Component [
+        base:description "Payload Storage"
+        base:isContainedBy Payload
+    ]
+
+    instance TXDSPunit : component:Component [
+        base:description "Transmit Digital Signal Processing Unit"
+        base:isContainedBy SBandTransmitter
+    ]
+
+    instance RXDSPunit : component:Component [
+        base:description "Receive Digital Signal Processing Unit"
+        base:isContainedBy SBandReceiver
+    ]
+
+    instance ADCS : component:Component [
+        base:description "Control Electronics for Attitude Determination and Control System"
+        base:isContainedBy FireSat
+    ]
+
     instance Platform : component:Component [
         base:description "Spacecraft Bus"
         base:isContainedBy FireSat

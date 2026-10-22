@@ -18,6 +18,13 @@ description <https://fireforce6.github.io/mission-control/system-analysis/connec
     instance Payload.Data_Out : component:Port [ component:direction "Out" ]
     instance Payload.Power_In : component:Port [ component:direction "In" ]
 
+ref instance components:PayloadStorage [
+    component:hasPort PayloadStorage.Data_In
+    component:hasPort PayloadStorage.Data_Out
+]
+instance PayloadStorage.Data_In : component:Port [ component:direction "In" ]
+instance PayloadStorage.Data_Out : component:Port [ component:direction "Out" ]
+
     ref instance components:Platform [
         component:hasPort Platform.Data_In
         component:hasPort Platform.Data_Out
