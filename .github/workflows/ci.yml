@@ -36,11 +36,11 @@ jobs:
       - name: Linting
         run: oml lint
 
-      - name: Validating
-        run: oml validate --only
-
       - name: Reasoning
         run: oml reason --only
+
+      - name: Validating
+        run: oml validate --only
 
       - name: Stopping server
         run: oml stop
