@@ -7,8 +7,8 @@
       "y": 468,
       "width": 740,
       "height": 145,
-      "label": "Context Analysis",
       "text": "Context Analysis",
+      "label": "Context Analysis",
       "color": "6",
       "z": 0
     },
@@ -55,12 +55,12 @@
       "y": 510,
       "width": 152,
       "height": 54,
+      "parent": "group-mq5qfnb4-1b0fvj",
       "text": "[Stakeholders](Stakeholders.md)",
+      "label": "[Stakeholders](Stakeholders.md)",
       "shape": "rounded",
       "color": "1",
-      "label": "[Stakeholders](Stakeholders.md)",
       "textAlign": "center",
-      "parent": "group-mq5qfnb4-1b0fvj",
       "z": 7
     },
     {
@@ -72,10 +72,10 @@
       "height": 162,
       "url": "https://modelware.io/",
       "label": "Modelware | Neurosymbolic Systems Engineering",
-      "shape": "rectangle",
-      "z": 8,
       "previewImage": "https://www.modelware.io/assets/images/oml-code-social.png",
-      "previewDescription": "OML Code is a Neurosymbolic Systems Engineering platform built on Logic, AI, and DevOps. Author formal models you can reason on and compute over."
+      "previewDescription": "OML Code is a Neurosymbolic Systems Engineering platform built on Logic, AI, and DevOps. Author formal models you can reason on and compute over.",
+      "shape": "rectangle",
+      "z": 8
     },
     {
       "id": "node-mq5rxl6g-njtf2t",
@@ -84,12 +84,12 @@
       "y": 508,
       "width": 183,
       "height": 59,
+      "parent": "group-mq5qfnb4-1b0fvj",
       "text": "Operational Analysis",
+      "label": "Operational Analysis",
       "shape": "rounded",
       "color": "1",
-      "label": "Operational Analysis",
       "textAlign": "center",
-      "parent": "group-mq5qfnb4-1b0fvj",
       "z": 9
     },
     {
@@ -99,12 +99,12 @@
       "y": 508,
       "width": 183,
       "height": 59,
+      "parent": "group-mq5qfnb4-1b0fvj",
       "text": "Operational Analysis",
+      "label": "Operational Analysis",
       "shape": "rounded",
       "color": "1",
-      "label": "Operational Analysis",
       "textAlign": "center",
-      "parent": "group-mq5qfnb4-1b0fvj",
       "z": 10
     },
     {
