@@ -6,38 +6,39 @@
 vocabulary <http://opencaesar.io/isq/> as isq {
 
     extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
-    @dc:description "The physical quantity of mass (dimension M)."
+    @rdfs:comment "The physical quantity of mass (dimension M)."
     quantity Mass [
         dimension "M1"
     ]
 
-    @dc:description "The physical quantity of length (dimension L)."
+    @rdfs:comment "The physical quantity of length (dimension L)."
     quantity Length [
         dimension "L1"
     ]
 
-    @dc:description "The physical quantity of time (dimension T)."
+    @rdfs:comment "The physical quantity of time (dimension T)."
     quantity Time [
         dimension "T1"
     ]
 
-    @dc:description "The physical quantity of electric current (dimension I)."
+    @rdfs:comment "The physical quantity of electric current (dimension I)."
     quantity ElectricCurrent [
         dimension "I1"
     ]
 
-    @dc:description "The physical quantity of thermodynamic temperature (dimension H)."
+    @rdfs:comment "The physical quantity of thermodynamic temperature (dimension H)."
     quantity Temperature [
         dimension "H1"
     ]
 
-    @dc:description "The physical quantity of amount of substance (dimension N)."
+    @rdfs:comment "The physical quantity of amount of substance (dimension N)."
     quantity AmountOfSubstance [
         dimension "N1"
     ]
 
-    @dc:description "The physical quantity of luminous intensity (dimension J)."
+    @rdfs:comment "The physical quantity of luminous intensity (dimension J)."
     quantity LuminousIntensity [
         dimension "J1"
     ]

@@ -2,28 +2,29 @@
 @dc:description "Defines components."
 vocabulary <https://www.modelware.io/sierra/component#> as component {
     extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <http://www.w3.org/2000/01/rdf-schema#> as rdfs
 
     extends <https://www.modelware.io/sierra/base#> as base
 
 	extends <http://opencaesar.io/isq/> as isq
 
-    @dc:description "A component is a part of a system."
+    @rdfs:comment "A component is a part of a system."
     concept Component < base:Container, base:Contained, base:Element
 
-    @dc:description "A physical part of the system."
+    @rdfs:comment "A physical part of the system."
     concept PhysicalPart < Component
 
-    @dc:description "The mass of the physical part."
+    @rdfs:comment "The mass of the physical part."
     quantity property mass [
         domain PhysicalPart
         quantity isq:Mass
         functional
     ]
 
-    @dc:description "The interface of a component."
+    @rdfs:comment "The interface of a component."
     concept Port < base:Contained, base:Element
 
-    @dc:description "The port of a component."
+    @rdfs:comment "The port of a component."
     relation hasPort [
         from Component
         to Port
@@ -31,19 +32,19 @@ vocabulary <https://www.modelware.io/sierra/component#> as component {
         inverse functional
     ]
 
-    @dc:description "Port Direction."
+    @rdfs:comment "Port Direction."
     scalar Direction [
         oneOf "In", "Out"
     ]
 
-    @dc:description "The direction of the port."
+    @rdfs:comment "The direction of the port."
     scalar property direction [
         domain Port
         range Direction
         functional
     ]
 
-    @dc:description "Indicates that two ports are connected."
+    @rdfs:comment "Indicates that two ports are connected."
     relation entity Connection [
         from Port
         to Port
