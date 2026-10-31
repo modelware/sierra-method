@@ -13,6 +13,9 @@ vocabulary <https://www.modelware.io/sierra/stakeholder#> as stakeholder {
     @dc:description "A Requirement is an expressible statement describing a needed property or behavior of a system."
     concept Requirement < base:Categorized, base:Prioritized, base:Expressible, base:Element
 
+    @dc:description "A CriticalRequirement is a Requirement that must be assigned the highest priority."
+    concept CriticalRequirement = Requirement [ restricts base:priority to "High" ]
+
     @dc:description "Indicates that a Stakeholder states a Need."
     relation expresses [
         from Stakeholder

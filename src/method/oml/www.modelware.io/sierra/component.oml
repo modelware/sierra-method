@@ -62,4 +62,16 @@ vocabulary <https://www.modelware.io/sierra/component#> as component {
         reverse isTransferedBy
     ]
 
+    relation dependsOnPower [
+        from Component
+        to Component
+    ]
+
+    rule PowerDependency [
+        Connection (p1, c, p2) &
+        portOf (p1, src) & portOf(p2,tgt) &
+        transfers (c,i) & Energy (i)
+        -> dependsOnPower (tgt, src)
+    ]
+
 }

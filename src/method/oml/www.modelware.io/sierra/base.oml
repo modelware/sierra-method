@@ -3,6 +3,7 @@
 vocabulary <https://www.modelware.io/sierra/base#> as base {
     extends <http://purl.org/dc/elements/1.1/> as dc
     extends <http://www.w3.org/2001/XMLSchema#> as xsd
+    extends <https://www.modelware.io/sierra/component#> as component
 
     @dc:description "A general model element; the root of the Sierra type hierarchy."
     aspect Element
@@ -56,7 +57,7 @@ vocabulary <https://www.modelware.io/sierra/base#> as base {
     ]
 
     scalar property priority [
-        domain Prioritized
+        domain component:Port, component:Component
         range Priority
         functional
     ]

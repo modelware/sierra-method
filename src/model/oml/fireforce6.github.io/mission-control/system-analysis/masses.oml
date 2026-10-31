@@ -8,6 +8,7 @@ description <https://fireforce6.github.io/mission-control/system-analysis/masses
 
     ref instance components:BatteryCell1 : component:PhysicalPart [
         component:mass 14.5^^si:kg
+        component:mass 12^^si:kg
     ]
 
     ref instance components:BatteryCell2 : component:PhysicalPart [
